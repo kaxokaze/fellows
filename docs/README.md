@@ -8,6 +8,11 @@ This section contains the design material for Fellows. All architecture document
 - [Coordination protocol](architecture/COORDINATION.md) — message envelope, message types, task state machine, claims, decision records, delivery semantics, and failure handling.
 - [ADR 0001: Peer-first collaboration](decisions/0001-peer-first-collaboration.md) — rationale for separating peer reasoning from deterministic runtime coordination.
 
+## Project site and distribution
+
+- [Project landing page](index.html) — static site source for GitHub Pages.
+- [Distribution notes](launch/DISTRIBUTION.md) — launch copy and suitable channels for the current research stage.
+
 ## Evaluation
 
 - [Evaluation plan](evaluation/PLAN.md) — proposed comparison against single-agent and orchestrated multi-agent baselines.
