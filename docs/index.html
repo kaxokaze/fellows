@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Fellows is an open-source systems research project exploring peer-first collaboration between independent AI agents.">
-  <meta name="theme-color" content="#1768cf">
+  <meta name="theme-color" content="#145ca6">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Fellows — Peer-first AI collaboration">
   <meta property="og:description" content="Independent agents. Shared project state. Coordinated execution.">
@@ -14,802 +14,695 @@
   <title>Fellows — Peer-first AI collaboration</title>
   <style>
     :root {
-      --xp-blue: #0054e3;
-      --xp-blue-mid: #2f8cf4;
-      --xp-blue-light: #81bdff;
-      --xp-navy: #003b9a;
-      --xp-border: #7f9db9;
-      --xp-window: #ece9d8;
-      --xp-panel: #fff;
-      --wiki-link: #0645ad;
-      --wiki-visited: #5a3696;
-      --wiki-rule: #a2a9b1;
-      --text: #202122;
-      --muted: #54595d;
-      --green: #28733e;
-      --content-width: 1420px;
+      --blue: #145ca6;
+      --blue-dark: #0b3f79;
+      --blue-mid: #287ac4;
+      --blue-pale: #eaf3fc;
+      --link: #0645ad;
+      --visited: #5a3696;
+      --ink: #20252b;
+      --body: #3c4650;
+      --muted: #687582;
+      --line: #c7d1dc;
+      --line-dark: #9eafbf;
+      --paper: #fff;
+      --paper-alt: #f7f9fb;
+      --green: #2d7748;
+      --content: 1260px;
     }
     * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; background: #227ec5; }
+    html { scroll-behavior: smooth; background: #e7edf3; }
     body {
       margin: 0;
       min-width: 320px;
-      color: var(--text);
-      font: 13px/1.55 Tahoma, Verdana, Arial, sans-serif;
-      background: linear-gradient(180deg,#76b9ec 0%,#b5d9f2 48%,#9bc75c 48.2%,#528c37 100%);
-    }
-    a { color: var(--wiki-link); text-decoration: none; }
-    a:visited { color: var(--wiki-visited); }
-    a:hover { text-decoration: underline; }
-    a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid #f28c00; outline-offset: 2px; }
-    ::selection { background: #316ac5; color: white; }
-    .desktop {
-      min-height: 100vh;
-      padding: 22px 22px 56px;
-      position: relative;
-      isolation: isolate;
-      overflow: hidden;
+      color: var(--ink);
       background:
-        radial-gradient(ellipse at 76% 58%, rgba(255,255,255,.32), transparent 32%),
-        linear-gradient(180deg, #4ca0e3 0%, #b4d8ef 53%, #9dc45c 53.2%, #467e33 100%);
+        linear-gradient(90deg,rgba(18,74,126,.025) 1px,transparent 1px),
+        linear-gradient(rgba(18,74,126,.025) 1px,transparent 1px),
+        #e7edf3;
+      background-size: 18px 18px;
+      font: 13px/1.58 Tahoma, Verdana, Arial, sans-serif;
     }
-    .desktop::before {
-      content: "";
-      position: absolute;
-      z-index: -1;
-      width: 130vw;
-      height: 38vw;
-      min-height: 250px;
-      right: -35vw;
-      bottom: -23vw;
-      border-radius: 50% 50% 0 0;
-      background: linear-gradient(165deg,#8dbb4a 0%,#46843a 64%,#2b652e 100%);
-      transform: rotate(-7deg);
-      box-shadow: inset 0 18px 32px rgba(255,255,255,.13);
+    a { color: var(--link); text-decoration: none; }
+    a:visited { color: var(--visited); }
+    a:hover { text-decoration: underline; }
+    a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid #e58c22; outline-offset: 2px; }
+    ::selection { color: white; background: #216bb1; }
+    .site {
+      width: min(var(--content), calc(100% - 36px));
+      margin: 22px auto 30px;
+      border: 1px solid #b5c3d0;
+      background: var(--paper);
+      box-shadow: 0 2px 12px rgba(28,57,83,.12);
     }
-    .desktop::after {
-      content: "";
-      position: absolute;
-      z-index: -1;
-      width: 100vw;
-      height: 28vw;
-      min-height: 190px;
-      left: -45vw;
-      bottom: -22vw;
-      border-radius: 50% 50% 0 0;
-      background: linear-gradient(170deg,#a6ce59,#4d8c36 72%);
-      transform: rotate(8deg);
-    }
-    .window {
-      width: min(var(--content-width), 100%);
-      margin: 0 auto;
-      overflow: hidden;
-      border: 1px solid #003c8f;
-      border-radius: 8px 8px 2px 2px;
-      background: var(--xp-window);
-      box-shadow: 0 16px 44px rgba(0,28,71,.42), 0 2px 4px rgba(0,0,0,.25);
-    }
-    .titlebar {
-      min-height: 34px;
+    .masthead {
+      min-height: 84px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
-      padding: 4px 7px 4px 10px;
-      color: #fff;
-      background: linear-gradient(180deg,#3d91ff 0%,#1674ee 10%,#0864df 52%,#0054ce 53%,#176de0 100%);
-      text-shadow: 1px 1px 1px #16458b;
-      font-size: 13px;
-      font-weight: bold;
+      gap: 24px;
+      padding: 13px 22px;
+      border-top: 4px solid #1c69b6;
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(180deg,#fff 0%,#f6f9fc 100%);
     }
-    .window-title { display: flex; align-items: center; gap: 8px; min-width: 0; }
-    .window-title img { width: 20px; height: 20px; border-radius: 4px; flex: 0 0 auto; }
-    .window-title span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-    .window-controls { display: flex; gap: 3px; flex: 0 0 auto; }
-    .window-control {
-      width: 21px; height: 20px; display: grid; place-items: center;
-      border: 1px solid rgba(255,255,255,.6); border-radius: 3px;
-      background: linear-gradient(#8bc5ff,#1765d5 52%,#0751be);
-      box-shadow: inset 0 1px rgba(255,255,255,.75), 0 1px 1px rgba(0,0,0,.25);
-      color: white; font: bold 12px Arial,sans-serif; line-height: 1;
+    .identity { display: flex; align-items: center; gap: 13px; min-width: 0; }
+    .logo {
+      width: 50px; height: 50px; display: block; object-fit: cover;
+      border: 1px solid #9aa9b8; box-shadow: 0 1px 2px rgba(0,0,0,.12);
     }
-    .window-control.close { background: linear-gradient(#ffb6a4,#e44c25 48%,#b81908); }
-    .menubar {
-      height: 25px; display: flex; align-items: center; gap: 18px;
-      padding: 0 13px; border-bottom: 1px solid #c5c2b8;
-      color: #222; background: linear-gradient(#faf9f4,#e9e6da);
-      font-size: 12px;
+    .wordmark { margin: 0; font: 29px/1 Georgia,"Times New Roman",serif; font-weight: normal; letter-spacing: -.7px; }
+    .tagline { margin-top: 5px; color: #5b6671; font-size: 11px; }
+    .masthead-tools { display: flex; align-items: center; justify-content: flex-end; gap: 13px; }
+    .masthead-tools a { font-size: 11px; white-space: nowrap; }
+    .search { display: flex; gap: 4px; }
+    .search input {
+      width: 190px; height: 27px; padding: 4px 7px;
+      border: 1px solid #8a9baa; border-radius: 0; background: white;
+      box-shadow: inset 1px 1px 2px rgba(0,0,0,.08);
+      color: var(--ink); font: 11px Tahoma,Verdana,sans-serif;
     }
-    .menubar span:first-child::first-letter { text-decoration: underline; }
-    .toolbar {
-      min-height: 42px; display: flex; align-items: center; gap: 7px;
-      padding: 5px 10px; border-bottom: 1px solid #b7b5ab;
-      background: linear-gradient(#fbfaf6,#e7e4d8);
+    .button {
+      min-height: 27px; display: inline-flex; align-items: center; justify-content: center;
+      padding: 3px 11px; border: 1px solid #285d91; border-radius: 2px;
+      color: #123b62 !important; background: linear-gradient(#fff 0%,#f1f7fd 48%,#d4e5f5 49%,#eaf3fb 100%);
+      box-shadow: inset 0 1px 0 white, 0 1px 1px rgba(0,0,0,.1);
+      font: bold 11px Tahoma,Verdana,sans-serif; text-decoration: none !important; cursor: pointer;
+      white-space: nowrap;
     }
-    .tool-button {
-      min-height: 27px; display: inline-flex; align-items: center; gap: 5px;
-      padding: 2px 9px; border: 1px solid transparent; border-radius: 3px;
-      color: #222; background: transparent; font: 12px Tahoma,Verdana,sans-serif;
+    .button:hover { border-color: #164a7f; background: linear-gradient(#fff,#dcecff 48%,#b8d3ee 49%,#e0effc); }
+    .button:active { background: linear-gradient(#c6dcef,#eff7ff); box-shadow: inset 1px 1px 2px rgba(0,0,0,.17); }
+    .button.primary {
+      border-color: #164b82; color: #fff !important;
+      background: linear-gradient(#4d9ee7 0%,#2778c2 48%,#145a9c 49%,#1c68ad 100%);
+      text-shadow: 0 1px #164b82;
     }
-    .tool-button:hover { border-color: #8ba9cf; background: linear-gradient(#fff,#dceaff); }
-    .tool-icon { font-size: 15px; }
-    .address-row {
-      display: flex; align-items: center; gap: 8px;
-      padding: 5px 10px; border-bottom: 1px solid #b6b6ad;
-      background: linear-gradient(#f7f6f0,#e8e5da); font-size: 11px;
+    .button.primary:hover { background: linear-gradient(#65b2f7,#3787ce 48%,#1a67ad 49%,#2877bd); }
+    .main-nav {
+      min-height: 35px; display: flex; align-items: stretch; gap: 0;
+      padding: 0 16px;
+      border-top: 1px solid #8fb4d7;
+      border-bottom: 1px solid #073e72;
+      background: linear-gradient(#3f8ed0 0%,#236eaf 48%,#155b9b 49%,#0e4d88 100%);
+      box-shadow: inset 0 1px rgba(255,255,255,.45);
     }
-    .address-label { color: #5e5b53; }
-    .address-box {
-      flex: 1; min-width: 0; padding: 3px 8px; border: 1px solid #9b9b91;
-      background: #fff; box-shadow: inset 1px 1px 2px rgba(0,0,0,.14);
-      color: #454545; font: 11px "Courier New",monospace;
+    .main-nav a {
+      display: inline-flex; align-items: center; padding: 0 14px;
+      border-right: 1px solid rgba(0,39,79,.3);
+      color: white !important; text-shadow: 0 1px #174b7b;
+      font-size: 11px; text-decoration: none;
     }
-    .page { background: #fff; }
-    .site-masthead {
-      display: flex; align-items: center; justify-content: space-between;
-      gap: 20px; padding: 18px 22px 15px;
-      border-bottom: 1px solid #c8ccd1; background: linear-gradient(#fff,#f8f9fa);
+    .main-nav a:first-child { border-left: 1px solid rgba(0,39,79,.3); }
+    .main-nav a:hover, .main-nav a[aria-current="page"] {
+      background: linear-gradient(#1760a0,#0c437a);
+      text-decoration: none;
     }
-    .site-identity { display: flex; align-items: center; gap: 12px; min-width: 0; }
-    .site-logo { width: 54px; height: 54px; object-fit: cover; border: 1px solid #a7a7a7; box-shadow: 1px 1px 2px rgba(0,0,0,.16); }
-    .site-title { margin: 0; font: 25px/1.15 Georgia,"Times New Roman",serif; color: #202122; letter-spacing: -.45px; }
-    .site-subtitle { margin-top: 3px; color: #54595d; font: 11px Tahoma,Verdana,sans-serif; }
-    .site-search { display: flex; width: min(330px,42%); gap: 4px; }
-    .site-search input {
-      width: 100%; min-width: 0; height: 27px; padding: 3px 7px;
-      border: 1px solid #72777d; border-radius: 0; background: #fff;
-      box-shadow: inset 1px 1px 2px rgba(0,0,0,.12); font: 12px Tahoma,Verdana,sans-serif;
-    }
-    .xp-button {
-      min-height: 27px; padding: 3px 12px; border: 1px solid #003c74; border-radius: 3px;
-      color: #102d52; background: linear-gradient(#fff 0%,#f2f8ff 45%,#c9ddf5 46%,#e7f1fc 100%);
-      box-shadow: inset 0 1px 0 white, 0 1px 1px rgba(0,0,0,.15);
-      font: bold 11px Tahoma,Verdana,sans-serif; cursor: pointer;
-    }
-    .xp-button:hover { background: linear-gradient(#fff,#d5eaff 46%,#a9c9ed); border-color: #2863a6; }
-    .xp-button:active { background: linear-gradient(#bcd5ef,#eef6ff); box-shadow: inset 1px 1px 2px rgba(0,0,0,.2); }
-    .page-tabs {
-      height: 34px; display: flex; align-items: end; justify-content: space-between;
-      gap: 12px; padding: 0 22px; background: #f8f9fa; border-bottom: 1px solid #a7a9ac;
-    }
-    .tab-list { display: flex; align-items: end; gap: 2px; height: 100%; }
-    .page-tab {
-      min-height: 29px; display: inline-flex; align-items: center; padding: 0 13px;
-      border: 1px solid #a7a9ac; border-bottom: 0; background: #eaecf0;
-      color: #202122; font-size: 12px;
-    }
-    .page-tab.active { position: relative; top: 1px; border-top: 2px solid #2a6ebb; background: #fff; font-weight: bold; }
-    .page-tab:not(.active) { color: #54595d; }
-    .tab-tools { display: flex; align-items: center; gap: 13px; padding-bottom: 7px; font-size: 11px; }
-    .article-layout { display: grid; grid-template-columns: 190px minmax(0,1fr); }
+    .page-frame { display: grid; grid-template-columns: 202px minmax(0,1fr); }
     .sidebar {
-      padding: 19px 15px 30px 17px; border-right: 1px solid #eaecf0;
-      background: linear-gradient(90deg,#f8f9fa,#fff);
+      padding: 19px 14px 24px 17px;
+      border-right: 1px solid #d8dfe6;
+      background: linear-gradient(90deg,#f2f6fa,#f9fbfd);
     }
-    .sidebar-logo { display: flex; align-items: center; gap: 8px; margin-bottom: 20px; }
-    .sidebar-logo img { width: 28px; height: 28px; object-fit: cover; }
-    .sidebar-logo strong { font: 17px Georgia,"Times New Roman",serif; }
-    .side-group { margin-bottom: 19px; }
-    .side-heading {
-      margin: 0 0 6px; padding-bottom: 4px; border-bottom: 1px solid #c8ccd1;
-      color: #54595d; font: bold 11px Tahoma,Verdana,sans-serif;
+    .side-block { margin-bottom: 16px; }
+    .side-title {
+      margin: 0 0 6px; padding: 0 0 4px;
+      border-bottom: 1px solid #b9c8d6;
+      color: #465c70; font: bold 11px Tahoma,Verdana,sans-serif;
     }
-    .side-list { list-style: none; padding: 0; margin: 0; }
-    .side-list li { margin: 4px 0; font-size: 11px; line-height: 1.45; }
+    .side-list { margin: 0; padding: 0; list-style: none; }
+    .side-list li { margin: 3px 0; font-size: 11px; line-height: 1.42; }
     .side-list a { color: #0645ad; }
-    .side-note {
-      padding: 8px; border: 1px solid #c8ccd1; background: #f8f9fa;
-      color: #54595d; font-size: 10px; line-height: 1.5;
+    .side-status {
+      padding: 8px 9px; border: 1px solid #b9c9d8;
+      background: linear-gradient(#fff,#eef4fa); color: #4d5b68;
+      font-size: 10px; line-height: 1.55;
     }
-    .article { min-width: 0; padding: 22px clamp(18px,3vw,42px) 36px; }
-    .article-heading {
-      display: flex; justify-content: space-between; align-items: flex-start;
-      gap: 18px; border-bottom: 1px solid #a2a9b1; padding-bottom: 7px; margin-bottom: 10px;
+    .side-status strong { color: #214c73; }
+    .content { min-width: 0; padding: 18px 22px 24px; }
+    .breadcrumbs { margin: 0 0 9px; color: #6b7782; font-size: 10px; }
+    .breadcrumbs a { color: #315f8b; }
+    .article-title {
+      display: flex; justify-content: space-between; align-items: flex-end;
+      gap: 14px; margin-bottom: 12px; padding-bottom: 7px;
+      border-bottom: 1px solid #8ea5ba;
     }
-    .article-heading h1 {
-      margin: 0; color: #202122; font: 32px/1.15 Georgia,"Times New Roman",serif;
-      letter-spacing: -.4px; font-weight: normal;
+    .article-title h1 { margin: 0; font: normal 30px/1.1 Georgia,"Times New Roman",serif; letter-spacing: -.45px; }
+    .article-title p { margin: 4px 0 0; color: #5f6d79; font-size: 11px; }
+    .title-actions { display: flex; flex-wrap: wrap; gap: 6px; }
+    .intro {
+      display: grid; grid-template-columns: minmax(0,1fr) minmax(330px,.94fr);
+      gap: 18px; align-items: center;
+      padding: 13px; border: 1px solid #b6c6d5;
+      background: linear-gradient(110deg,#f7fbff 0%,#eaf3fc 56%,#e2eef9 100%);
+      box-shadow: inset 0 1px white;
     }
-    .article-kicker { margin-top: 5px; color: #54595d; font-size: 11px; }
-    .article-actions { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; padding-top: 4px; }
-    .article-actions .xp-button { font-weight: normal; }
-    .intro-grid { display: grid; grid-template-columns: minmax(0,1fr) minmax(310px,.88fr); gap: 22px; align-items: center; }
-    .lead { margin: 7px 0 10px; font-size: 14px; line-height: 1.7; color: #202122; }
-    .intro-copy p:not(.lead) { margin: 7px 0; color: #54595d; font-size: 12px; line-height: 1.65; }
-    .project-notice {
-      display: flex; gap: 10px; align-items: flex-start; margin: 12px 0 0;
-      padding: 9px 11px; border: 1px solid #a3b9ce; background: #f1f7fc;
-      box-shadow: inset 0 1px #fff; font-size: 11px;
+    .lead { margin: 0 0 8px; color: #243c52; font: 18px/1.4 Georgia,"Times New Roman",serif; }
+    .intro-copy > p:not(.lead) { margin: 0 0 9px; color: #4e5d6a; font-size: 11px; line-height: 1.65; }
+    .status-note {
+      display: flex; align-items: flex-start; gap: 8px;
+      padding: 7px 9px; border: 1px solid #a9c1d5;
+      background: rgba(255,255,255,.75); color: #445969; font-size: 10px; line-height: 1.5;
     }
-    .notice-icon { color: #205e99; font-size: 16px; line-height: 1.2; }
-    .project-notice strong { color: #1b4267; }
+    .status-icon { color: #1d649f; font-size: 14px; font-weight: bold; }
+    .status-note strong { color: #174b79; }
+    /* Contemporary 3D visual: glass-like network core, dimensional orbital planes and agent satellites. */
     .hero-scene {
-      position: relative; min-width: 0; height: 300px; overflow: hidden;
-      border: 1px solid #7e9fbe; background:
-        radial-gradient(ellipse at 50% 45%,rgba(255,255,255,.95),rgba(226,239,251,.8) 45%,rgba(182,207,232,.75) 100%),
-        linear-gradient(#eef7ff,#c3d9ee);
-      box-shadow: inset 0 1px 0 white, inset 0 -14px 24px rgba(63,109,153,.13), 0 2px 4px rgba(0,0,0,.1);
-      perspective: 900px;
+      position: relative; height: 286px; min-width: 0; overflow: hidden;
+      border: 1px solid #173f66;
+      background:
+        radial-gradient(ellipse at 50% 48%,rgba(50,131,204,.27),transparent 42%),
+        radial-gradient(ellipse at 50% 100%,rgba(14,78,136,.35),transparent 54%),
+        linear-gradient(145deg,#07182c 0%,#0c2c4c 52%,#06172a 100%);
+      box-shadow: inset 0 1px rgba(255,255,255,.18), inset 0 -30px 50px rgba(0,0,0,.2), 0 2px 6px rgba(25,55,84,.18);
+      perspective: 1150px;
+      isolation: isolate;
     }
-    .scene-topline {
-      position: absolute; z-index: 5; top: 9px; left: 11px; right: 11px;
-      display: flex; justify-content: space-between; gap: 10px;
-      color: #4d6984; font: 9px "Courier New",monospace; letter-spacing: .7px;
+    .hero-scene::before {
+      content: ""; position: absolute; inset: 0; opacity: .32; z-index: -1;
+      background-image: linear-gradient(rgba(132,184,225,.15) 1px,transparent 1px),linear-gradient(90deg,rgba(132,184,225,.15) 1px,transparent 1px);
+      background-size: 32px 32px;
+      transform: perspective(500px) rotateX(62deg) scale(1.8) translateY(33%);
+      transform-origin: bottom center;
+      mask-image: linear-gradient(transparent 5%,#000 70%);
     }
-    .scene-grid {
-      position: absolute; left: -15%; right: -15%; bottom: -45px; height: 160px;
-      transform: rotateX(67deg); transform-origin: center top;
-      background-image: linear-gradient(rgba(69,112,153,.18) 1px,transparent 1px),linear-gradient(90deg,rgba(69,112,153,.18) 1px,transparent 1px);
-      background-size: 26px 26px; mask-image: linear-gradient(transparent,#000 28%,#000);
+    .hero-scene::after {
+      content: ""; position: absolute; inset: 0; pointer-events: none;
+      background: radial-gradient(ellipse at center,transparent 45%,rgba(0,7,17,.35) 100%);
     }
-    .scene-stage {
+    .scene-labels {
+      position: absolute; z-index: 8; top: 9px; left: 12px; right: 12px;
+      display: flex; justify-content: space-between; gap: 8px;
+      color: #8eacc8; font: 9px "Courier New",monospace; letter-spacing: 1px;
+    }
+    .scene-world {
       position: absolute; inset: 0; transform-style: preserve-3d;
-      animation: stage-drift 8s ease-in-out infinite;
+      animation: world-hover 9s ease-in-out infinite;
     }
     .orbit {
-      position: absolute; top: 50%; left: 50%; width: 218px; height: 218px;
-      margin: -109px 0 0 -109px; border: 1px solid rgba(42,99,158,.38);
-      border-radius: 50%; transform-style: preserve-3d; pointer-events: none;
+      position: absolute; top: 50%; left: 50%;
+      border: 1px solid rgba(120,191,242,.48);
+      border-radius: 50%; transform-style: preserve-3d;
+      box-shadow: 0 0 12px rgba(57,156,230,.08),inset 0 0 12px rgba(57,156,230,.06);
     }
-    .orbit.one { animation: orbit-one 25s linear infinite; }
-    .orbit.two { width: 180px; height: 180px; margin: -90px 0 0 -90px; border-style: dashed; animation: orbit-two 21s linear infinite; }
-    .orbit.three { width: 254px; height: 120px; margin: -60px 0 0 -127px; border-color: rgba(42,99,158,.25); animation: orbit-three 28s linear infinite; }
+    .orbit::before {
+      content: ""; position: absolute; width: 7px; height: 7px; top: 50%; left: -4px;
+      margin-top: -3.5px; border-radius: 50%; background: #b9e6ff;
+      box-shadow: 0 0 8px 2px rgba(92,188,255,.8),0 0 20px rgba(92,188,255,.55);
+    }
+    .orbit-a {
+      width: 310px; height: 132px; margin: -66px 0 0 -155px;
+      transform: rotateX(66deg) rotateZ(-24deg);
+      animation: orbit-a 23s linear infinite;
+    }
+    .orbit-b {
+      width: 252px; height: 174px; margin: -87px 0 0 -126px;
+      border-color: rgba(104,163,213,.45);
+      transform: rotateY(62deg) rotateX(18deg) rotateZ(18deg);
+      animation: orbit-b 29s linear infinite;
+    }
+    .orbit-c {
+      width: 215px; height: 215px; margin: -107px 0 0 -107px;
+      border-style: dashed; border-color: rgba(108,174,226,.26);
+      transform: rotateX(78deg) rotateZ(0);
+      animation: orbit-c 36s linear infinite;
+    }
     .core {
-      position: absolute; top: 50%; left: 50%; width: 78px; height: 78px;
-      margin: -39px 0 0 -39px; transform-style: preserve-3d;
-      animation: cube-turn 26s linear infinite;
+      position: absolute; top: 50%; left: 50%; width: 116px; height: 116px;
+      margin: -58px 0 0 -58px; transform-style: preserve-3d;
+      animation: core-turn 24s linear infinite;
     }
-    .cube-face {
-      position: absolute; inset: 0; display: grid; place-items: center;
-      border: 1px solid #174b89; color: #fff; font: bold 38px Georgia,serif;
-      text-shadow: 0 1px 2px #00316c; backface-visibility: hidden;
-      background: linear-gradient(145deg,#5eaeff 0%,#1767c8 56%,#0b478f 100%);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,.55), inset 0 -10px 15px rgba(0,21,66,.18);
+    .core-sphere {
+      position: absolute; inset: 0; overflow: hidden; border-radius: 50%;
+      border: 1px solid rgba(184,224,255,.82);
+      background:
+        radial-gradient(circle at 31% 25%,rgba(255,255,255,.98) 0%,rgba(165,224,255,.82) 4%,rgba(58,151,222,.72) 16%,transparent 34%),
+        radial-gradient(circle at 38% 34%,#2e8bd0 0%,#12518b 44%,#062543 74%,#041426 100%);
+      box-shadow:
+        inset -18px -17px 26px rgba(0,7,20,.75),
+        inset 7px 8px 17px rgba(202,239,255,.35),
+        0 0 18px rgba(70,171,244,.4),
+        0 0 60px rgba(40,130,215,.22);
+      transform: translateZ(9px);
     }
-    .face-front { transform: translateZ(39px); }
-    .face-back { transform: rotateY(180deg) translateZ(39px); }
-    .face-right { transform: rotateY(90deg) translateZ(39px); background: linear-gradient(145deg,#82c0ff,#276fc5); }
-    .face-left { transform: rotateY(-90deg) translateZ(39px); background: linear-gradient(145deg,#377fce,#0c3f83); }
-    .face-top { transform: rotateX(90deg) translateZ(39px); background: linear-gradient(145deg,#a4d3ff,#337dc9); }
-    .face-bottom { transform: rotateX(-90deg) translateZ(39px); background: linear-gradient(145deg,#194f91,#082d62); }
-    .agent-node {
-      position: absolute; z-index: 4; min-width: 84px; padding: 6px 8px;
-      border: 1px solid #678caf; border-radius: 3px; color: #183c63;
-      background: linear-gradient(#fff,#dceafa); box-shadow: 0 3px 8px rgba(20,68,112,.2),inset 0 1px #fff;
-      font-size: 9px; text-align: center; transform-style: preserve-3d;
+    .core-sphere::before {
+      content: ""; position: absolute; inset: 0; border-radius: 50%;
+      background:
+        repeating-linear-gradient(0deg,transparent 0 16px,rgba(194,231,255,.2) 17px,transparent 18px),
+        repeating-linear-gradient(90deg,transparent 0 16px,rgba(194,231,255,.18) 17px,transparent 18px);
+      mask-image: radial-gradient(circle at 50% 50%,#000 38%,transparent 75%);
+      animation: mesh-roll 16s linear infinite;
     }
-    .agent-node b { display: block; color: #174f8e; font-size: 10px; }
-    .agent-node small { display: block; color: #637d98; font: 8px "Courier New",monospace; }
-    .agent-node.research { top: 45px; left: 14%; animation: node-float-a 6s ease-in-out infinite; }
-    .agent-node.review { top: 80px; right: 10%; animation: node-float-b 7s ease-in-out infinite; }
-    .agent-node.build { bottom: 35px; left: 38%; animation: node-float-c 6.5s ease-in-out infinite; }
-    .scene-link {
-      position: absolute; top: 50%; left: 50%; width: 125px; height: 1px;
-      background: linear-gradient(90deg,transparent,rgba(29,91,153,.56),transparent);
-      transform-origin: left center; pointer-events: none;
+    .core-sphere::after {
+      content: ""; position: absolute; inset: 8px 13px auto; height: 29px; border-radius: 50%;
+      background: linear-gradient(180deg,rgba(255,255,255,.45),rgba(255,255,255,0));
+      filter: blur(6px); transform: rotate(-28deg);
     }
-    .scene-link.a { transform: rotate(24deg) translateX(36px); }
-    .scene-link.b { transform: rotate(148deg) translateX(36px); }
-    .scene-link.c { transform: rotate(265deg) translateX(36px); }
-    .scene-caption {
-      position: absolute; z-index: 5; bottom: 9px; left: 11px; right: 11px;
+    .core-mark {
+      position: absolute; z-index: 2; top: 50%; left: 50%;
+      transform: translate(-50%,-52%) translateZ(24px);
+      color: rgba(255,255,255,.95); font: 46px/1 Georgia,"Times New Roman",serif;
+      text-shadow: 0 2px 7px rgba(0,18,43,.65);
+    }
+    .core-ring {
+      position: absolute; inset: -12px; border: 1px solid rgba(136,213,255,.76);
+      border-radius: 50%; transform: rotateX(72deg) rotateZ(17deg);
+      box-shadow: 0 0 12px rgba(59,168,243,.22);
+    }
+    .core-ring.ring-2 { inset: -21px; border-color: rgba(117,172,220,.36); transform: rotateY(70deg) rotateX(12deg); }
+    .satellite {
+      position: absolute; z-index: 5; width: 98px; padding: 7px 8px;
+      border: 1px solid rgba(151,202,241,.65); border-radius: 4px;
+      color: #e8f5ff; text-align: left;
+      background: linear-gradient(145deg,rgba(39,91,135,.94),rgba(7,29,52,.94));
+      box-shadow: 0 7px 18px rgba(0,0,0,.25),inset 0 1px rgba(255,255,255,.17);
+      backdrop-filter: blur(7px);
+      transform-style: preserve-3d;
+    }
+    .satellite::before { content: ""; position: absolute; width: 5px; height: 5px; top: 9px; right: 9px; border-radius: 50%; background: #86d7ff; box-shadow: 0 0 8px #50baff; }
+    .satellite strong { display: block; font-size: 10px; font-weight: bold; }
+    .satellite small { display: block; margin-top: 3px; color: #a7c5df; font: 8px "Courier New",monospace; }
+    .satellite.s1 { top: 42px; left: 10%; transform: translateZ(65px); animation: satellite-1 7s ease-in-out infinite; }
+    .satellite.s2 { top: 75px; right: 8%; transform: translateZ(35px); animation: satellite-2 8s ease-in-out infinite; }
+    .satellite.s3 { bottom: 34px; left: 39%; transform: translateZ(80px); animation: satellite-3 7.5s ease-in-out infinite; }
+    .scene-base {
+      position: absolute; width: 182px; height: 35px; left: 50%; bottom: 23px;
+      margin-left: -91px; border-radius: 50%;
+      background: radial-gradient(ellipse,rgba(30,131,209,.35),rgba(10,40,70,.06) 68%,transparent 72%);
+      transform: rotateX(67deg); filter: blur(3px);
+    }
+    .scene-foot {
+      position: absolute; z-index: 8; bottom: 8px; left: 12px; right: 12px;
       display: flex; justify-content: space-between; gap: 8px;
-      color: #536e88; font: 9px "Courier New",monospace;
+      color: #829fba; font: 8px "Courier New",monospace; letter-spacing: .55px;
     }
-    @keyframes stage-drift { 0%,100% { transform: rotateX(6deg) rotateY(-7deg) translateY(0); } 50% { transform: rotateX(10deg) rotateY(7deg) translateY(-5px); } }
-    @keyframes orbit-one { from { transform: rotateX(66deg) rotateZ(0); } to { transform: rotateX(66deg) rotateZ(360deg); } }
-    @keyframes orbit-two { from { transform: rotateY(68deg) rotateZ(0); } to { transform: rotateY(68deg) rotateZ(-360deg); } }
-    @keyframes orbit-three { from { transform: rotateX(76deg) rotateZ(0); } to { transform: rotateX(76deg) rotateZ(360deg); } }
-    @keyframes cube-turn { from { transform: rotateX(-14deg) rotateY(0); } to { transform: rotateX(-14deg) rotateY(360deg); } }
-    @keyframes node-float-a { 0%,100% { transform: translate3d(0,0,30px); } 50% { transform: translate3d(0,-7px,44px); } }
-    @keyframes node-float-b { 0%,100% { transform: translate3d(0,0,15px); } 50% { transform: translate3d(0,8px,31px); } }
-    @keyframes node-float-c { 0%,100% { transform: translate3d(0,0,22px); } 50% { transform: translate3d(0,-9px,37px); } }
-    .hero-caption { margin: 5px 0 0; color: #72777d; font-size: 10px; text-align: right; }
-    .toc {
-      width: min(100%,340px); margin: 20px 0 25px; padding: 10px 13px;
-      border: 1px solid #a2a9b1; background: #f8f9fa; box-shadow: inset 0 1px white;
-      font-size: 11px;
+    @keyframes world-hover { 0%,100% { transform: rotateX(4deg) rotateY(-5deg) translateY(0); } 50% { transform: rotateX(8deg) rotateY(5deg) translateY(-4px); } }
+    @keyframes orbit-a { from { transform: rotateX(66deg) rotateZ(-24deg); } to { transform: rotateX(66deg) rotateZ(336deg); } }
+    @keyframes orbit-b { from { transform: rotateY(62deg) rotateX(18deg) rotateZ(18deg); } to { transform: rotateY(62deg) rotateX(18deg) rotateZ(-342deg); } }
+    @keyframes orbit-c { from { transform: rotateX(78deg) rotateZ(0); } to { transform: rotateX(78deg) rotateZ(360deg); } }
+    @keyframes core-turn { 0%,100% { transform: rotateY(-10deg) rotateX(4deg); } 50% { transform: rotateY(10deg) rotateX(-4deg); } }
+    @keyframes mesh-roll { from { transform: rotate(0) scale(1.08); } to { transform: rotate(360deg) scale(1.08); } }
+    @keyframes satellite-1 { 0%,100% { translate: 0 0; } 50% { translate: 0 -7px; } }
+    @keyframes satellite-2 { 0%,100% { translate: 0 0; } 50% { translate: 0 7px; } }
+    @keyframes satellite-3 { 0%,100% { translate: 0 0; } 50% { translate: 0 -6px; } }
+    .hero-caption { margin: 4px 0 0; color: #74818d; font-size: 9px; text-align: right; }
+    .contents {
+      display: flex; align-items: center; flex-wrap: wrap; gap: 5px 17px;
+      margin: 12px 0 14px; padding: 7px 9px;
+      border-top: 1px solid #d2dbe3; border-bottom: 1px solid #d2dbe3;
+      background: #fafbfd; color: #566777; font-size: 10px;
     }
-    .toc-title { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin: 0 0 5px; font-weight: bold; }
-    .toc ol { margin: 4px 0 0; padding-left: 22px; }
-    .toc li { padding: 1px 0; }
-    .article-section { margin-top: 28px; scroll-margin-top: 12px; }
-    .article-section h2 {
-      margin: 0 0 9px; padding-bottom: 4px; border-bottom: 1px solid #a2a9b1;
-      color: #202122; font: 22px/1.25 Georgia,"Times New Roman",serif; font-weight: normal;
+    .contents strong { color: #394f63; }
+    .contents a { white-space: nowrap; }
+    .section-grid {
+      display: grid; grid-template-columns: repeat(2,minmax(0,1fr));
+      gap: 11px; align-items: stretch;
     }
-    .article-section h3 { margin: 16px 0 5px; font: bold 15px Georgia,"Times New Roman",serif; }
-    .article-section p { margin: 7px 0 11px; line-height: 1.7; }
-    .article-section ul { padding-left: 22px; margin: 8px 0 14px; }
-    .article-section li { margin: 4px 0; }
-    .section-lead { max-width: 950px; color: #444; }
+    .section-card {
+      min-width: 0; padding: 13px 14px 12px;
+      border: 1px solid #c5d0da;
+      background: linear-gradient(180deg,#fff 0%,#fbfcfd 100%);
+      box-shadow: inset 0 1px white,0 1px 2px rgba(18,52,81,.045);
+      scroll-margin-top: 12px;
+    }
+    .section-card.wide { grid-column: 1 / -1; }
+    .section-card h2 {
+      margin: 0 0 8px; padding: 0 0 5px;
+      border-bottom: 1px solid #a9bbcb;
+      color: #20384e; font: normal 19px/1.2 Georgia,"Times New Roman",serif;
+    }
+    .section-card h3 { margin: 11px 0 4px; color: #29465f; font: bold 12px Tahoma,Verdana,sans-serif; }
+    .section-card p { margin: 5px 0 8px; color: #46535f; font-size: 11px; line-height: 1.62; }
+    .section-card ul { margin: 5px 0 6px; padding-left: 19px; color: #46535f; font-size: 11px; }
+    .section-card li { margin: 3px 0; }
     .callout {
-      margin: 14px 0; padding: 11px 13px; border: 1px solid #a7b7c7;
-      background: #f5f9fd; box-shadow: inset 0 1px #fff;
+      margin: 8px 0; padding: 7px 9px; border: 1px solid #bfd0df;
+      background: #f1f7fc; color: #435b70; font-size: 10px; line-height: 1.55;
     }
-    .callout-title { margin-bottom: 3px; color: #244c73; font-weight: bold; }
-    .three-planes { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin: 16px 0; }
+    .callout strong { color: #194d7d; }
+    .planes { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; margin: 9px 0; }
     .plane {
-      border: 1px solid #8ea7bf; background: linear-gradient(#fafdff,#e7f0f8);
-      box-shadow: inset 0 1px white, 0 1px 2px rgba(0,0,0,.08);
-    }
-    .plane-head { padding: 8px 10px; color: #fff; background: linear-gradient(#5e9fdb,#2866a8); font-weight: bold; }
-    .plane-body { padding: 10px; color: #404a54; font-size: 11px; line-height: 1.6; }
-    .plane-body strong { display: block; margin-bottom: 3px; color: #213e5b; font-size: 12px; }
-    .component-table, .roadmap-table {
-      width: 100%; border-collapse: collapse; margin: 12px 0 16px; font-size: 11px;
-    }
-    .component-table th, .component-table td, .roadmap-table th, .roadmap-table td {
-      padding: 7px 9px; border: 1px solid #a2a9b1; text-align: left; vertical-align: top;
-    }
-    .component-table th, .roadmap-table th { background: #eaecf0; color: #202122; }
-    .component-table tr:nth-child(even) td, .roadmap-table tr:nth-child(even) td { background: #f8f9fa; }
-    .step-list { counter-reset: steps; list-style: none; display: grid; grid-template-columns: repeat(5,1fr); gap: 7px; padding: 0 !important; }
-    .step-list li {
-      counter-increment: steps; min-height: 112px; margin: 0 !important; padding: 9px;
-      border: 1px solid #a2b8cc; background: linear-gradient(#fbfdff,#eaf2fa);
+      overflow: hidden; border: 1px solid #a9bfd3;
+      background: linear-gradient(#fafdff,#eaf3fb);
       box-shadow: inset 0 1px white;
     }
-    .step-list li::before { content: "0" counter(steps); display: block; margin-bottom: 9px; color: #27649d; font: bold 10px "Courier New",monospace; }
-    .step-list strong { display: block; margin-bottom: 4px; color: #203c57; font-size: 12px; }
-    .step-list span { color: #54595d; font-size: 10px; line-height: 1.45; }
-    .protocol-table td:first-child { width: 115px; white-space: nowrap; font-weight: bold; color: #254a6c; }
-    .status-tag {
-      display: inline-block; padding: 2px 7px; border: 1px solid #8ca9c1; border-radius: 2px;
-      background: #eaf2f9; color: #254d72; font: 10px Tahoma,Verdana,sans-serif; white-space: nowrap;
+    .plane-title {
+      padding: 6px 8px; color: white;
+      background: linear-gradient(#4c91cd,#1b609f);
+      font: bold 10px Tahoma,Verdana,sans-serif;
+      text-shadow: 0 1px #184e7e;
     }
-    .status-tag.current { border-color: #8cb29a; background: #eaf5ed; color: #24623a; }
-    .status-tag.not-started { border-color: #c3b69a; background: #f8f3e8; color: #76602d; }
-    .evaluation-cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin: 14px 0; }
-    .evaluation-card {
-      padding: 12px; border: 1px solid #a2a9b1; background: #f8f9fa;
-      box-shadow: inset 0 1px white;
+    .plane-body { padding: 7px 8px; color: #506171; font-size: 10px; line-height: 1.5; }
+    .plane-body strong { display: block; margin-bottom: 2px; color: #234968; font-size: 11px; }
+    .mini-table { width: 100%; border-collapse: collapse; margin: 8px 0 2px; font-size: 10px; }
+    .mini-table th,.mini-table td { padding: 5px 7px; border: 1px solid #c4ced8; text-align: left; vertical-align: top; }
+    .mini-table th { color: #314b63; background: #eaf0f5; font-weight: bold; }
+    .mini-table tr:nth-child(even) td { background: #f8fafc; }
+    .steps { display: grid; grid-template-columns: repeat(5,1fr); gap: 6px; margin: 9px 0 2px; }
+    .step {
+      min-height: 83px; padding: 7px; border: 1px solid #b7c8d8;
+      background: linear-gradient(#fff,#eff5fb); box-shadow: inset 0 1px white;
     }
-    .evaluation-card.featured { border-color: #678bb1; background: #edf5fc; }
-    .evaluation-card .card-label { color: #5c6f82; font: 10px "Courier New",monospace; }
-    .evaluation-card h3 { margin: 6px 0 5px; font: bold 15px Georgia,"Times New Roman",serif; }
-    .evaluation-card p { margin: 0; color: #54595d; font-size: 11px; line-height: 1.6; }
-    .infobox {
-      float: right; width: min(280px,38%); margin: 0 0 14px 18px;
-      border: 1px solid #a2a9b1; background: #f8f9fa; font-size: 11px;
+    .step-no { color: #2b6da8; font: bold 9px "Courier New",monospace; }
+    .step strong { display: block; margin: 4px 0 3px; color: #25445f; font-size: 10px; }
+    .step span { display: block; color: #586775; font-size: 9px; line-height: 1.4; }
+    .comparison { display: grid; grid-template-columns: repeat(3,1fr); gap: 7px; margin: 8px 0; }
+    .comparison-item { padding: 8px; border: 1px solid #c2ced9; background: #f8fafc; }
+    .comparison-item.featured { border-color: #8eacc7; background: #edf5fc; }
+    .comparison-item small { color: #5d7488; font: 9px "Courier New",monospace; }
+    .comparison-item strong { display: block; margin: 4px 0 3px; color: #29445c; font: bold 11px Georgia,"Times New Roman",serif; }
+    .comparison-item span { display: block; color: #5c6873; font-size: 9px; line-height: 1.45; }
+    .status {
+      display: inline-block; padding: 2px 6px; border: 1px solid #aac0d3;
+      background: #edf4fa; color: #315879; font-size: 9px; white-space: nowrap;
     }
-    .infobox-title { padding: 7px 9px; color: #fff; text-align: center; background: linear-gradient(#5594cf,#2866a8); font-weight: bold; }
-    .infobox-row { display: grid; grid-template-columns: 86px 1fr; border-top: 1px solid #c8ccd1; }
-    .infobox-row strong, .infobox-row span { padding: 6px 7px; }
-    .infobox-row strong { background: #eaecf0; font-weight: bold; }
-    .reference-list { padding-left: 22px; font-size: 11px; }
-    .reference-list li { margin: 6px 0; overflow-wrap: anywhere; }
-    .contribute-box {
-      display: flex; align-items: center; justify-content: space-between; gap: 20px;
-      padding: 15px; border: 1px solid #9cb2c8; background: linear-gradient(#f8fcff,#eaf3fb);
-      box-shadow: inset 0 1px white, 0 1px 2px rgba(0,0,0,.08);
+    .status.current { border-color: #9dbda7; background: #edf6ef; color: #28633c; }
+    .status.planned { border-color: #c8c3aa; background: #f7f5eb; color: #746438; }
+    .milestones { display: grid; grid-template-columns: repeat(6,1fr); gap: 6px; margin: 9px 0 2px; }
+    .milestone { padding: 7px; border: 1px solid #c1ccd6; background: #f9fbfd; }
+    .milestone strong { display: block; color: #245b8b; font: bold 10px "Courier New",monospace; }
+    .milestone span { display: block; margin-top: 4px; color: #4f5d69; font-size: 9px; line-height: 1.4; }
+    .references { columns: 2; column-gap: 28px; margin: 6px 0 0; padding-left: 18px; font-size: 10px; }
+    .references li { margin: 4px 0; break-inside: avoid; }
+    .contribute-row { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+    .contribute-row p { margin: 2px 0 0; }
+    .contribute-actions { display: flex; flex-wrap: wrap; gap: 6px; }
+    .footer {
+      display: flex; justify-content: space-between; align-items: center; gap: 12px;
+      margin-top: 12px; padding: 10px 2px 0; border-top: 1px solid #b8c6d3;
+      color: #65727e; font-size: 9px;
     }
-    .contribute-box p { margin: 4px 0 0; color: #4d5964; font-size: 11px; }
-    .contribute-actions { display: flex; flex-wrap: wrap; gap: 7px; flex: 0 0 auto; }
-    .article-footer {
-      margin-top: 36px; padding: 12px 0 0; border-top: 1px solid #a2a9b1;
-      color: #54595d; font-size: 10px; line-height: 1.7;
-    }
-    .article-footer-links { display: flex; flex-wrap: wrap; gap: 7px 16px; margin-top: 7px; }
-    .taskbar {
-      position: fixed; z-index: 20; left: 0; right: 0; bottom: 0; height: 36px;
-      display: flex; align-items: center; gap: 9px; padding: 3px 7px;
-      border-top: 1px solid #7eb5ff;
-      background: linear-gradient(180deg,#287be7 0%,#1265d6 45%,#0750bd 100%);
-      box-shadow: 0 -1px 4px rgba(0,0,0,.22);
-    }
-    .start-button {
-      height: 29px; display: inline-flex; align-items: center; gap: 6px; padding: 0 15px 0 9px;
-      border: 1px solid #26762c; border-radius: 0 9px 9px 0; color: white;
-      background: linear-gradient(#83d35a,#43a12f 50%,#267a20);
-      box-shadow: inset 0 1px 1px rgba(255,255,255,.8), 1px 0 2px rgba(0,0,0,.3);
-      font: italic bold 15px Tahoma,Verdana,sans-serif; text-shadow: 1px 1px #245d18;
-    }
-    .start-orb { width: 15px; height: 15px; border-radius: 50%; background: radial-gradient(circle at 35% 30%,#fff 0 10%,#9ce55c 25%,#258d2f 70%); box-shadow: 0 0 2px #164d16; }
-    .task-item {
-      height: 25px; min-width: 170px; display: flex; align-items: center; gap: 7px;
-      padding: 0 10px; border: 1px solid #0c4aa6; border-radius: 2px;
-      color: white; background: linear-gradient(#135dc2,#0a4eaa);
-      box-shadow: inset 1px 1px rgba(255,255,255,.18); font-size: 11px;
-    }
-    .task-item img { width: 15px; height: 15px; }
-    .tray {
-      height: 100%; margin-left: auto; display: flex; align-items: center; gap: 10px;
-      padding: 0 13px; border-left: 1px solid #07429f; color: #fff;
-      background: linear-gradient(#1480ed,#0b5bc2); font-size: 11px; text-shadow: 1px 1px #174c95;
-    }
-    .tray-icon { font-size: 13px; }
-    @media (max-width: 1040px) {
-      .intro-grid { grid-template-columns: 1fr; }
-      .hero-scene { max-width: 620px; width: 100%; margin: 0 auto; }
-      .article-layout { grid-template-columns: 165px minmax(0,1fr); }
-      .sidebar { padding-inline: 12px; }
-      .step-list { grid-template-columns: repeat(3,1fr); }
+    .footer-links { display: flex; flex-wrap: wrap; gap: 6px 13px; }
+    .footer-links a { white-space: nowrap; }
+    @media (max-width: 930px) {
+      .page-frame { grid-template-columns: 170px minmax(0,1fr); }
+      .content { padding-inline: 15px; }
+      .intro { grid-template-columns: 1fr; }
+      .hero-scene { max-width: 600px; width: 100%; margin: 0 auto; }
+      .milestones { grid-template-columns: repeat(3,1fr); }
     }
     @media (max-width: 700px) {
-      .desktop { padding: 8px 7px 48px; }
-      .window { border-radius: 6px 6px 0 0; }
-      .menubar { gap: 12px; padding-inline: 10px; }
-      .toolbar { overflow-x: auto; }
-      .address-row { display: none; }
-      .site-masthead { align-items: flex-start; flex-direction: column; padding: 13px; }
-      .site-logo { width: 44px; height: 44px; }
-      .site-title { font-size: 22px; }
-      .site-search { width: 100%; }
-      .page-tabs { padding-inline: 10px; }
-      .tab-tools { display: none; }
-      .article-layout { grid-template-columns: 1fr; }
-      .sidebar { order: 2; border-right: 0; border-top: 1px solid #eaecf0; padding: 13px; }
-      .sidebar-logo { display: none; }
-      .side-group { display: inline-block; vertical-align: top; width: 48%; margin: 0 1% 12px 0; }
-      .article { padding: 17px 14px 28px; }
-      .article-heading { flex-direction: column; gap: 7px; }
-      .article-heading h1 { font-size: 28px; }
-      .hero-scene { height: 260px; }
-      .three-planes, .evaluation-cards { grid-template-columns: 1fr; }
-      .step-list { grid-template-columns: repeat(2,1fr); }
-      .infobox { float: none; width: 100%; margin: 0 0 14px; }
-      .contribute-box { align-items: flex-start; flex-direction: column; }
-      .task-item { min-width: 0; flex: 1; }
-      .task-item span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-      .tray { padding-inline: 9px; }
+      .site { width: calc(100% - 14px); margin: 7px auto 14px; }
+      .masthead { align-items: flex-start; flex-direction: column; gap: 10px; padding: 12px; }
+      .logo { width: 42px; height: 42px; }
+      .wordmark { font-size: 25px; }
+      .masthead-tools { width: 100%; justify-content: space-between; }
+      .search { flex: 1; }
+      .search input { width: 100%; }
+      .main-nav { padding-inline: 5px; overflow-x: auto; }
+      .main-nav a { flex: 0 0 auto; padding-inline: 10px; min-height: 34px; }
+      .page-frame { grid-template-columns: 1fr; }
+      .sidebar { order: 0; padding: 8px 10px; border-right: 0; border-bottom: 1px solid #ccd7e0; }
+      .side-block { margin: 0; }
+      .side-block:not(.contents-nav) { display: none; }
+      .side-list { display: flex; flex-wrap: wrap; gap: 4px 13px; }
+      .side-list li { margin: 0; }
+      .side-title { display: none; }
+      .side-status { display: none; }
+      .content { padding: 13px 11px 17px; }
+      .article-title { align-items: flex-start; flex-direction: column; }
+      .article-title h1 { font-size: 27px; }
+      .intro { padding: 10px; }
+      .hero-scene { height: 255px; }
+      .section-grid { grid-template-columns: 1fr; gap: 8px; }
+      .section-card.wide { grid-column: auto; }
+      .planes { grid-template-columns: 1fr; }
+      .plane-body { padding: 6px 8px; }
+      .steps { grid-template-columns: repeat(2,1fr); }
+      .step:last-child { grid-column: 1 / -1; }
+      .comparison { grid-template-columns: 1fr; }
+      .milestones { grid-template-columns: repeat(2,1fr); }
+      .contribute-row { align-items: flex-start; flex-direction: column; }
+      .footer { align-items: flex-start; flex-direction: column; }
     }
     @media (max-width: 420px) {
-      .desktop { padding-inline: 4px; }
-      .window-title { font-size: 11px; }
-      .window-control { width: 18px; }
-      .menubar { gap: 9px; font-size: 11px; }
-      .site-identity { gap: 9px; }
-      .site-title { font-size: 20px; }
-      .page-tab { padding-inline: 9px; }
-      .hero-scene { height: 230px; }
-      .agent-node { min-width: 70px; padding: 5px; }
-      .agent-node.research { left: 5%; }
-      .agent-node.review { right: 5%; }
-      .agent-node.build { left: 34%; }
-      .step-list { grid-template-columns: 1fr 1fr; }
-      .tray { gap: 5px; font-size: 10px; }
+      .site { width: calc(100% - 8px); margin-top: 4px; }
+      .masthead-tools { align-items: flex-start; flex-direction: column; }
+      .search { width: 100%; }
+      .hero-scene { height: 225px; }
+      .satellite { width: 84px; padding: 6px; }
+      .satellite.s1 { left: 4%; }
+      .satellite.s2 { right: 3%; }
+      .satellite.s3 { left: 35%; }
+      .orbit-a { width: 270px; margin-left: -135px; }
+      .references { columns: 1; }
+      .milestones { grid-template-columns: repeat(2,1fr); }
     }
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
-      *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+      *,*::before,*::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
     }
   </style>
 </head>
 <body>
-  <div class="desktop">
-    <div class="window" id="top">
-      <div class="titlebar">
-        <div class="window-title">
-          <img src="./favicon.svg" alt="">
-          <span>Fellows — Peer-first AI collaboration</span>
-        </div>
-        <div class="window-controls" aria-hidden="true">
-          <span class="window-control">_</span><span class="window-control">□</span><span class="window-control close">×</span>
+  <div class="site" id="top">
+    <header class="masthead">
+      <div class="identity">
+        <img class="logo" src="./favicon.svg" alt="Fellows logo" width="50" height="50">
+        <div>
+          <h1 class="wordmark">Fellows</h1>
+          <div class="tagline">An open-source exploration of peer-first AI collaboration</div>
         </div>
       </div>
-      <div class="menubar" aria-label="Application menu">
-        <span>File</span><span>Edit</span><span>View</span><span>Favorites</span><span>Tools</span><span>Help</span>
+      <div class="masthead-tools">
+        <a href="https://github.com/kaxokaze/fellows">Repository home</a>
+        <form class="search" action="https://github.com/kaxokaze/fellows/search" method="get">
+          <input type="search" name="q" aria-label="Search Fellows on GitHub" placeholder="Search project…">
+          <button class="button" type="submit">Search</button>
+        </form>
       </div>
-      <div class="toolbar" aria-label="Browser toolbar">
-        <span class="tool-button"><span class="tool-icon">←</span> Back</span>
-        <span class="tool-button"><span class="tool-icon">→</span> Forward</span>
-        <span class="tool-button"><span class="tool-icon">↻</span> Refresh</span>
-        <span class="tool-button"><span class="tool-icon">⌂</span> Home</span>
-      </div>
-      <div class="address-row">
-        <span class="address-label">Address</span>
-        <div class="address-box">https://kaxokaze.github.io/fellows/</div>
-        <span class="address-label">Go</span>
-      </div>
-      <div class="page">
-        <header class="site-masthead">
-          <div class="site-identity">
-            <img class="site-logo" src="./favicon.svg" alt="Fellows logo">
-            <div>
-              <h1 class="site-title">Fellows</h1>
-              <div class="site-subtitle">An open-source exploration of peer-first AI collaboration</div>
+    </header>
+
+    <nav class="main-nav" aria-label="Main navigation">
+      <a href="#overview" aria-current="page">Home</a>
+      <a href="#architecture">Architecture</a>
+      <a href="#operation">How it works</a>
+      <a href="#evaluation">Research</a>
+      <a href="#roadmap">Roadmap</a>
+      <a href="https://github.com/kaxokaze/fellows/issues">Community</a>
+      <a href="https://github.com/kaxokaze/fellows">Source code</a>
+    </nav>
+
+    <div class="page-frame">
+      <aside class="sidebar" aria-label="Page navigation">
+        <nav class="side-block contents-nav">
+          <h2 class="side-title">In this article</h2>
+          <ul class="side-list">
+            <li><a href="#approach">The problem</a></li>
+            <li><a href="#architecture">Architecture</a></li>
+            <li><a href="#operation">Operating model</a></li>
+            <li><a href="#protocol">Protocol</a></li>
+            <li><a href="#evaluation">Evaluation</a></li>
+            <li><a href="#roadmap">Development status</a></li>
+            <li><a href="#references">Documentation</a></li>
+          </ul>
+        </nav>
+        <nav class="side-block">
+          <h2 class="side-title">Project resources</h2>
+          <ul class="side-list">
+            <li><a href="https://github.com/kaxokaze/fellows/blob/main/README.md">README</a></li>
+            <li><a href="https://github.com/kaxokaze/fellows/blob/main/ROADMAP.md">Full roadmap</a></li>
+            <li><a href="https://github.com/kaxokaze/fellows/blob/main/CONTRIBUTING.md">Contributing guide</a></li>
+            <li><a href="https://github.com/kaxokaze/fellows/blob/main/LICENSE">MIT License</a></li>
+          </ul>
+        </nav>
+        <div class="side-status">
+          <strong>Project status</strong><br>
+          Design and research<br>
+          Runtime not started<br>
+          Open source · MIT
+        </div>
+      </aside>
+
+      <main class="content">
+        <div class="breadcrumbs"><a href="#top">Fellows</a> &nbsp;›&nbsp; Project overview</div>
+        <div class="article-title">
+          <div>
+            <h1 id="overview">Independent agents. Shared direction.</h1>
+            <p>Peer-first collaboration for autonomous AI agents</p>
+          </div>
+          <div class="title-actions">
+            <a class="button primary" href="https://github.com/kaxokaze/fellows">Explore the repository ↗</a>
+            <a class="button" href="https://github.com/kaxokaze/fellows/issues">Discuss</a>
+          </div>
+        </div>
+
+        <section class="intro" aria-label="Project introduction">
+          <div class="intro-copy">
+            <p class="lead">A different way for AI agents to work together: independent reasoning, shared project state and coordination without a permanent lead model.</p>
+            <p>Fellows explores how autonomous agents can exchange evidence, negotiate work, resolve conflicts and deliver verified results as peers. A deterministic control plane keeps project state, permissions and execution accountable.</p>
+            <div class="status-note">
+              <span class="status-icon" aria-hidden="true">●</span>
+              <div><strong>Research-stage project.</strong> The repository currently contains specifications and planning documents. There is no runnable runtime, SDK, CLI or benchmark implementation yet.</div>
             </div>
           </div>
-          <form class="site-search" action="https://github.com/kaxokaze/fellows/search" method="get">
-            <input type="search" name="q" aria-label="Search the Fellows repository" placeholder="Search the project repository…">
-            <button class="xp-button" type="submit">Search</button>
-          </form>
-        </header>
-        <div class="page-tabs">
-          <div class="tab-list" aria-label="Page tabs">
-            <span class="page-tab active">Article</span>
-            <a class="page-tab" href="https://github.com/kaxokaze/fellows/discussions">Discussion</a>
+          <div>
+            <div class="hero-scene" role="img" aria-label="Three-dimensional glass network core with three agent satellites connected through orbital planes.">
+              <div class="scene-labels"><span>FELLOWS / PEER NETWORK</span><span>SYSTEM STUDY 001</span></div>
+              <div class="scene-world">
+                <div class="orbit orbit-a"></div>
+                <div class="orbit orbit-b"></div>
+                <div class="orbit orbit-c"></div>
+                <div class="scene-base"></div>
+                <div class="core">
+                  <div class="core-sphere"></div>
+                  <div class="core-ring"></div>
+                  <div class="core-ring ring-2"></div>
+                  <div class="core-mark">F</div>
+                </div>
+                <div class="satellite s1"><strong>Research</strong><small>AGENT / 01</small></div>
+                <div class="satellite s2"><strong>Review</strong><small>AGENT / 02</small></div>
+                <div class="satellite s3"><strong>Execution</strong><small>AGENT / 03</small></div>
+              </div>
+              <div class="scene-foot"><span>INDEPENDENT SESSIONS</span><span>SHARED STATE</span></div>
+            </div>
+            <div class="hero-caption">Conceptual system illustration · not a running product interface</div>
           </div>
-          <div class="tab-tools"><a href="https://github.com/kaxokaze/fellows">View source</a><a href="https://github.com/kaxokaze/fellows/issues">Report an issue</a></div>
-        </div>
-        <div class="article-layout">
-          <aside class="sidebar" aria-label="Site navigation">
-            <div class="sidebar-logo"><img src="./favicon.svg" alt=""><strong>Fellows</strong></div>
-            <nav class="side-group">
-              <h2 class="side-heading">Navigation</h2>
-              <ul class="side-list">
-                <li><a href="#overview">Main page</a></li>
-                <li><a href="#approach">About the project</a></li>
-                <li><a href="#architecture">System architecture</a></li>
-                <li><a href="#roadmap">Current activity</a></li>
-              </ul>
-            </nav>
-            <nav class="side-group">
-              <h2 class="side-heading">Contents</h2>
-              <ul class="side-list">
-                <li><a href="#approach">1. Problem statement</a></li>
-                <li><a href="#architecture">2. Architecture</a></li>
-                <li><a href="#operation">3. Operating model</a></li>
-                <li><a href="#protocol">4. Protocol</a></li>
-                <li><a href="#evaluation">5. Evaluation</a></li>
-                <li><a href="#roadmap">6. Development status</a></li>
-                <li><a href="#references">7. References</a></li>
-                <li><a href="#contribute">8. Contributing</a></li>
-              </ul>
-            </nav>
-            <nav class="side-group">
-              <h2 class="side-heading">Project links</h2>
-              <ul class="side-list">
-                <li><a href="https://github.com/kaxokaze/fellows">GitHub repository</a></li>
-                <li><a href="https://github.com/kaxokaze/fellows/blob/main/README.md">Project README</a></li>
-                <li><a href="https://github.com/kaxokaze/fellows/blob/main/ROADMAP.md">Roadmap</a></li>
-                <li><a href="https://github.com/kaxokaze/fellows/blob/main/CONTRIBUTING.md">Contributing guide</a></li>
-              </ul>
-            </nav>
-            <div class="side-note">
-              <strong>Page information</strong><br>
-              Static project overview<br>
-              Last reviewed: 25 November 2026<br>
-              License: MIT
+        </section>
+
+        <nav class="contents" aria-label="Article contents">
+          <strong>Contents:</strong>
+          <a href="#approach">Problem</a>
+          <a href="#architecture">Architecture</a>
+          <a href="#operation">Operating model</a>
+          <a href="#protocol">Protocol</a>
+          <a href="#evaluation">Evaluation</a>
+          <a href="#roadmap">Roadmap</a>
+          <a href="#references">References</a>
+          <a href="#contribute">Contribute</a>
+        </nav>
+
+        <div class="section-grid">
+          <section class="section-card" id="approach">
+            <h2>1. The coordination problem</h2>
+            <p>Parallel execution does not automatically create a team. Without shared context and explicit coordination, several model sessions can increase duplicated work, stale information and integration cost.</p>
+            <div class="callout"><strong>The missing layer:</strong> agents need to exchange evidence, challenge assumptions, establish ownership and verify the combined result. A chat transcript is not a reliable project state.</div>
+            <ul>
+              <li>Context drifts between independent sessions.</li>
+              <li>Tasks are duplicated and dependencies are missed.</li>
+              <li>Disagreements are not resolved or recorded.</li>
+              <li>Concurrent changes conflict during integration.</li>
+            </ul>
+          </section>
+
+          <section class="section-card" id="operation">
+            <h2>2. A flexible operating model</h2>
+            <p>The collaboration pattern should adapt to the task. Exploration, parallel execution, pair work and independent review are options—not mandatory stages in a fixed pipeline.</p>
+            <div class="steps">
+              <div class="step"><span class="step-no">01 / INTAKE</span><strong>Interpret</strong><span>Set the objective and acceptance criteria.</span></div>
+              <div class="step"><span class="step-no">02 / PEERS</span><strong>Exchange</strong><span>Share findings and challenge assumptions.</span></div>
+              <div class="step"><span class="step-no">03 / PLAN</span><strong>Organise</strong><span>Define work, dependencies and ownership.</span></div>
+              <div class="step"><span class="step-no">04 / BUILD</span><strong>Execute</strong><span>Work in scoped environments.</span></div>
+              <div class="step"><span class="step-no">05 / VERIFY</span><strong>Integrate</strong><span>Review against the original objective.</span></div>
             </div>
-          </aside>
+          </section>
 
-          <main class="article">
-            <div class="article-heading">
-              <div>
-                <h1>Fellows</h1>
-                <div class="article-kicker">Peer-first collaboration for autonomous AI agents</div>
+          <section class="section-card wide" id="architecture">
+            <h2>3. System architecture</h2>
+            <p>Fellows separates peer reasoning from deterministic coordination. Three logical planes keep participants independent while providing a reliable source of truth for state, policy and execution.</p>
+            <div class="planes">
+              <div class="plane">
+                <div class="plane-title">01 · Peer layer</div>
+                <div class="plane-body"><strong>Independent reasoning</strong>Model sessions, direct messages, proposals, challenges, findings and reviews.</div>
               </div>
-              <div class="article-actions">
-                <a class="xp-button" href="https://github.com/kaxokaze/fellows">Repository</a>
-                <a class="xp-button" href="https://github.com/kaxokaze/fellows/issues">Issues</a>
+              <div class="plane">
+                <div class="plane-title">02 · Control plane</div>
+                <div class="plane-body"><strong>Deterministic coordination</strong>Shared state, event history, task ownership, policy checks and recovery.</div>
+              </div>
+              <div class="plane">
+                <div class="plane-title">03 · Execution plane</div>
+                <div class="plane-body"><strong>Controlled work</strong>Scoped tools, isolated workspaces, integration and verification.</div>
               </div>
             </div>
+            <table class="mini-table">
+              <thead><tr><th>System area</th><th>Responsibility</th></tr></thead>
+              <tbody>
+                <tr><td>Agent runtime</td><td>Independent model sessions, identities, capabilities, context and execution budgets.</td></tr>
+                <tr><td>Collaboration protocol</td><td>Typed messages, decisions, task offers, claims, reviews and attributable findings.</td></tr>
+                <tr><td>Project state</td><td>Requirements, dependencies, decisions, artifacts and inspectable event history.</td></tr>
+                <tr><td>Control and execution</td><td>Validated transitions, scheduling, permissions, cancellation, isolated changes and acceptance evidence.</td></tr>
+              </tbody>
+            </table>
+            <p>See the <a href="https://github.com/kaxokaze/fellows/blob/main/docs/architecture/OVERVIEW.md">architecture specification</a> and <a href="https://github.com/kaxokaze/fellows/blob/main/docs/architecture/COORDINATION.md">coordination proposal</a>.</p>
+          </section>
 
-            <section class="intro-grid" id="overview" aria-labelledby="overview-title">
-              <div class="intro-copy">
-                <p class="lead" id="overview-title">Fellows explores a peer-first runtime where independent AI agents reason, exchange findings, negotiate work and deliver together — supported by deterministic coordination rather than a permanent lead model.</p>
-                <p>The project investigates the systems work behind useful collaboration: shared project state, agent-to-agent communication, task negotiation, conflict-aware execution and verifiable integration.</p>
-                <div class="project-notice">
-                  <span class="notice-icon" aria-hidden="true">ℹ</span>
-                  <div><strong>Development status — design and research.</strong> The repository currently contains specifications and planning documents. There is no runnable runtime, SDK, CLI or benchmark implementation yet.</div>
-                </div>
-              </div>
+          <section class="section-card" id="protocol">
+            <h2>4. Collaboration protocol</h2>
+            <p>Messages are proposals; state changes are validated. An agent may request an action, but the control plane checks it before it changes project state or grants ownership.</p>
+            <table class="mini-table">
+              <thead><tr><th>Message</th><th>Purpose</th></tr></thead>
+              <tbody>
+                <tr><td>Proposal</td><td>Share an approach, rationale and expected outcome.</td></tr>
+                <tr><td>Challenge</td><td>Contribute evidence, surface risk or offer an alternative.</td></tr>
+                <tr><td>Decision</td><td>Record outcome, rationale and unresolved disagreement.</td></tr>
+                <tr><td>Task claim</td><td>Check availability and policy before ownership is assigned.</td></tr>
+              </tbody>
+            </table>
+            <p><a href="https://github.com/kaxokaze/fellows/blob/main/docs/architecture/COORDINATION.md">Read the protocol</a> · <a href="https://github.com/kaxokaze/fellows/blob/main/docs/decisions/0001-peer-first-collaboration.md">Architecture decision</a></p>
+          </section>
+
+          <section class="section-card" id="evaluation">
+            <h2>5. Evaluation before claims</h2>
+            <p>More agents is not a result; evidence is. The proposed experiment compares peer-first collaboration against simpler baselines.</p>
+            <div class="comparison">
+              <div class="comparison-item"><small>A / BASELINE</small><strong>Single agent</strong><span>One model session completes the task.</span></div>
+              <div class="comparison-item"><small>B / BASELINE</small><strong>Orchestrated team</strong><span>A primary agent delegates to other sessions.</span></div>
+              <div class="comparison-item featured"><small>C / FELLOWS</small><strong>Peer-first team</strong><span>Independent agents coordinate through shared state.</span></div>
+            </div>
+            <p><strong>Measures:</strong> outcome quality, latency and compute cost, duplicated work and conflicts, and human interventions. The first experiment is exploratory; it should not support broad performance claims.</p>
+            <a href="https://github.com/kaxokaze/fellows/blob/main/docs/evaluation/PLAN.md">Read the evaluation plan</a>
+          </section>
+
+          <section class="section-card wide" id="roadmap">
+            <h2>6. Development status</h2>
+            <p>The repository currently contains design documents and planning material. The runtime has not started. Work is gated by research and testable deliverables.</p>
+            <div class="milestones">
+              <div class="milestone"><strong>M0 · CURRENT</strong><span>Research, architecture, protocol and experiment definition <em class="status current">Current focus</em></span></div>
+              <div class="milestone"><strong>M1 · PLANNED</strong><span>Independent sessions, typed messages and shared state</span></div>
+              <div class="milestone"><strong>M2 · PLANNED</strong><span>Task offers, claims, dependencies and recovery</span></div>
+              <div class="milestone"><strong>M3 · PLANNED</strong><span>Isolated workspaces, integration and verification</span></div>
+              <div class="milestone"><strong>M4 · PLANNED</strong><span>Repeatable comparative evaluation</span></div>
+              <div class="milestone"><strong>M5 · PLANNED</strong><span>Stable API, provider adapters, CLI and examples</span></div>
+            </div>
+            <p><a href="https://github.com/kaxokaze/fellows/blob/main/ROADMAP.md">View the full development roadmap</a></p>
+          </section>
+
+          <section class="section-card" id="references">
+            <h2>7. Project documentation</h2>
+            <ol class="references">
+              <li><a href="https://github.com/kaxokaze/fellows/blob/main/README.md">README</a> — project direction and technical overview.</li>
+              <li><a href="https://github.com/kaxokaze/fellows/blob/main/docs/architecture/OVERVIEW.md">Architecture overview</a> — system boundaries.</li>
+              <li><a href="https://github.com/kaxokaze/fellows/blob/main/docs/architecture/COORDINATION.md">Coordination protocol</a> — messages and work negotiation.</li>
+              <li><a href="https://github.com/kaxokaze/fellows/blob/main/docs/evaluation/PLAN.md">Evaluation plan</a> — proposed experiments.</li>
+              <li><a href="https://github.com/kaxokaze/fellows/blob/main/ROADMAP.md">Roadmap</a> — planned milestones.</li>
+            </ol>
+          </section>
+
+          <section class="section-card" id="contribute">
+            <h2>8. Contribute to the research</h2>
+            <div class="contribute-row">
               <div>
-                <div class="hero-scene" role="img" aria-label="Animated three-dimensional conceptual model showing independent research, review and build agents around a shared Fellows core.">
-                  <div class="scene-topline"><span>FELLOWS / SYSTEM MODEL</span><span>FIG. 01</span></div>
-                  <div class="scene-grid"></div>
-                  <div class="scene-stage">
-                    <div class="orbit one"></div><div class="orbit two"></div><div class="orbit three"></div>
-                    <div class="scene-link a"></div><div class="scene-link b"></div><div class="scene-link c"></div>
-                    <div class="core">
-                      <div class="cube-face face-front">F</div>
-                      <div class="cube-face face-back">F</div>
-                      <div class="cube-face face-right"></div>
-                      <div class="cube-face face-left"></div>
-                      <div class="cube-face face-top"></div>
-                      <div class="cube-face face-bottom"></div>
-                    </div>
-                    <div class="agent-node research"><b>Research</b><small>AGENT 01</small></div>
-                    <div class="agent-node review"><b>Review</b><small>AGENT 02</small></div>
-                    <div class="agent-node build"><b>Build</b><small>AGENT 03</small></div>
-                  </div>
-                  <div class="scene-caption"><span>INDEPENDENT PARTICIPANTS</span><span>SHARED PROJECT STATE</span></div>
-                </div>
-                <div class="hero-caption">Conceptual 3D illustration · not a running product interface</div>
+                <p>Help pressure-test the design through architecture reviews, protocol critique, failure-mode analysis, security feedback and reproducible evaluation ideas.</p>
+                <p>Implementation work will follow once the first runtime boundary is defined.</p>
               </div>
-            </section>
-
-            <nav class="toc" aria-label="Table of contents">
-              <div class="toc-title"><span>Contents</span><a href="#top">[hide]</a></div>
-              <ol>
-                <li><a href="#approach">Problem statement</a></li>
-                <li><a href="#architecture">Architecture</a></li>
-                <li><a href="#operation">Operating model</a></li>
-                <li><a href="#protocol">Collaboration protocol</a></li>
-                <li><a href="#evaluation">Evaluation</a></li>
-                <li><a href="#roadmap">Development status</a></li>
-                <li><a href="#references">References</a></li>
-                <li><a href="#contribute">Contributing</a></li>
-              </ol>
-            </nav>
-
-            <section class="article-section" id="approach">
-              <h2>1. Problem statement</h2>
-              <p class="section-lead">Parallel execution does not automatically create a team. Several model sessions can produce more activity, but without shared context and explicit coordination they can also increase duplicated work, stale information and integration cost.</p>
-              <div class="callout">
-                <div class="callout-title">The coordination problem</div>
-                Agents need a way to share evidence, disagree constructively, establish ownership and verify the combined result. A chat transcript alone is not a reliable project state.
+              <div class="contribute-actions">
+                <a class="button primary" href="https://github.com/kaxokaze/fellows/issues">Open an issue ↗</a>
+                <a class="button" href="https://github.com/kaxokaze/fellows/blob/main/CONTRIBUTING.md">Contribute</a>
               </div>
-              <ul>
-                <li>Context drifts between independent sessions.</li>
-                <li>Tasks are duplicated or dependencies are missed.</li>
-                <li>Disagreements are not resolved or recorded.</li>
-                <li>Concurrent artifact changes conflict during integration.</li>
-                <li>Completion is reported without sufficient evidence.</li>
-              </ul>
-            </section>
-
-            <section class="article-section" id="architecture">
-              <h2>2. Architecture</h2>
-              <p class="section-lead">Fellows proposes three cooperating planes. The separation keeps agents independent while giving the runtime a reliable source of truth for state, permissions and execution.</p>
-              <div class="three-planes">
-                <div class="plane">
-                  <div class="plane-head">01 · Peer layer</div>
-                  <div class="plane-body"><strong>Independent reasoning</strong>Independent sessions, direct messages, proposals, challenges and reviews.</div>
-                </div>
-                <div class="plane">
-                  <div class="plane-head">02 · Control plane</div>
-                  <div class="plane-body"><strong>Deterministic coordination</strong>Shared state, event history, task ownership, policy enforcement and recovery.</div>
-                </div>
-                <div class="plane">
-                  <div class="plane-head">03 · Execution plane</div>
-                  <div class="plane-body"><strong>Controlled work</strong>Scoped tools, isolated workspaces, integration and verification.</div>
-                </div>
-              </div>
-              <p><small><em>These are logical boundaries, not a prescribed process topology.</em></small></p>
-              <h3>Principal system areas</h3>
-              <table class="component-table">
-                <thead><tr><th scope="col">Area</th><th scope="col">Responsibility</th></tr></thead>
-                <tbody>
-                  <tr><td><strong>Agent runtime</strong></td><td>Independent model sessions with explicit identities, capabilities, working context and execution budgets.</td></tr>
-                  <tr><td><strong>Collaboration protocol</strong></td><td>Typed messages, decisions, task offers, claims, reviews and attributable findings.</td></tr>
-                  <tr><td><strong>Project state</strong></td><td>Requirements, dependencies, decisions, artifacts and an inspectable event history.</td></tr>
-                  <tr><td><strong>Runtime control plane</strong></td><td>Validated transitions, scheduling, permissions, budgets, cancellation and recovery.</td></tr>
-                  <tr><td><strong>Execution and verification</strong></td><td>Controlled tool access, isolated changes, integration checks and acceptance evidence.</td></tr>
-                </tbody>
-              </table>
-              <p>See the <a href="https://github.com/kaxokaze/fellows/blob/main/docs/architecture/OVERVIEW.md">architecture specification</a> for the current design proposal.</p>
-            </section>
-
-            <section class="article-section" id="operation">
-              <h2>3. Operating model</h2>
-              <p>The collaboration pattern should adapt to the task. Independent exploration, parallel execution, pair work and independent review are options, not mandatory steps in a fixed pipeline.</p>
-              <ol class="step-list">
-                <li><strong>Interpret</strong><span>Establish the objective, constraints and acceptance criteria.</span></li>
-                <li><strong>Exchange</strong><span>Share findings, challenge assumptions and record decisions.</span></li>
-                <li><strong>Organise</strong><span>Define bounded tasks, dependencies and ownership.</span></li>
-                <li><strong>Build</strong><span>Work in scoped environments and publish attributable artifacts.</span></li>
-                <li><strong>Integrate</strong><span>Review changes and test against the original objective.</span></li>
-              </ol>
-            </section>
-
-            <section class="article-section" id="protocol">
-              <h2>4. Collaboration protocol</h2>
-              <p>Messages are proposals; state changes are validated. An agent can request an action, but the control plane validates the request before it changes project state. This keeps peer discussion open while preventing an untrusted message or model output from silently granting ownership, permissions or completion status.</p>
-              <table class="component-table protocol-table">
-                <thead><tr><th scope="col">Message type</th><th scope="col">Purpose</th></tr></thead>
-                <tbody>
-                  <tr><td>Proposal</td><td>An agent shares an approach, its rationale and expected outcome.</td></tr>
-                  <tr><td>Challenge</td><td>A peer contributes evidence, identifies risk or offers an alternative.</td></tr>
-                  <tr><td>Decision</td><td>The outcome, rationale and unresolved disagreement are recorded.</td></tr>
-                  <tr><td>Task claim</td><td>The runtime checks availability and policy before assigning ownership.</td></tr>
-                </tbody>
-              </table>
-              <p>Related documents: <a href="https://github.com/kaxokaze/fellows/blob/main/docs/architecture/COORDINATION.md">coordination protocol</a> and <a href="https://github.com/kaxokaze/fellows/blob/main/docs/decisions/0001-peer-first-collaboration.md">peer-first architecture decision record</a>.</p>
-            </section>
-
-            <section class="article-section" id="evaluation">
-              <h2>5. Evaluation</h2>
-              <p>More agents is not a result; evidence is. The proposed experiment compares peer-first collaboration with simpler alternatives to determine whether extra coordination produces a better result or a better quality-to-cost trade-off.</p>
-              <div class="evaluation-cards">
-                <article class="evaluation-card">
-                  <div class="card-label">A / BASELINE</div>
-                  <h3>Single agent</h3>
-                  <p>One model session receives the task and produces the result. This establishes the simplest reference point.</p>
-                </article>
-                <article class="evaluation-card">
-                  <div class="card-label">B / BASELINE</div>
-                  <h3>Orchestrated team</h3>
-                  <p>A primary agent decomposes the work and delegates to other sessions under a conventional hierarchy.</p>
-                </article>
-                <article class="evaluation-card featured">
-                  <div class="card-label">C / FELLOWS</div>
-                  <h3>Peer-first team</h3>
-                  <p>Independent agents exchange information and coordinate through shared project state without a permanent supervisory model.</p>
-                </article>
-              </div>
-              <h3>Proposed measurement dimensions</h3>
-              <ul>
-                <li><strong>Outcome quality:</strong> acceptance tests and review findings.</li>
-                <li><strong>Efficiency:</strong> latency, tokens and compute cost.</li>
-                <li><strong>Coordination:</strong> duplicate work, conflicts and retries.</li>
-                <li><strong>Human effort:</strong> interventions and blocker resolution.</li>
-              </ul>
-              <div class="callout">The first experiment is exploratory. It should not be used to make broad performance claims. See the <a href="https://github.com/kaxokaze/fellows/blob/main/docs/evaluation/PLAN.md">evaluation plan</a>.</div>
-            </section>
-
-            <section class="article-section" id="roadmap">
-              <h2>6. Development status</h2>
-              <aside class="infobox" aria-label="Project information">
-                <div class="infobox-title">Fellows — project summary</div>
-                <div class="infobox-row"><strong>Type</strong><span>Open-source research</span></div>
-                <div class="infobox-row"><strong>Focus</strong><span>Multi-agent coordination</span></div>
-                <div class="infobox-row"><strong>Status</strong><span><span class="status-tag current">Design / research</span></span></div>
-                <div class="infobox-row"><strong>License</strong><span>MIT</span></div>
-                <div class="infobox-row"><strong>Runtime</strong><span>Not started</span></div>
-              </aside>
-              <p>The roadmap is gated by evidence and deliverables. The repository currently contains design documents and planning material; the runtime has not started.</p>
-              <table class="roadmap-table">
-                <thead><tr><th scope="col">Milestone</th><th scope="col">Scope</th><th scope="col">Status</th></tr></thead>
-                <tbody>
-                  <tr><td><strong>M0</strong></td><td>Research and system definition: architecture, protocol, trust boundaries and experiment design.</td><td><span class="status-tag current">Current focus</span></td></tr>
-                  <tr><td><strong>M1</strong></td><td>Collaboration kernel: independent sessions, typed messages and shared state.</td><td><span class="status-tag">Planned</span></td></tr>
-                  <tr><td><strong>M2</strong></td><td>Work coordination: task offers, claims, dependencies and recovery.</td><td><span class="status-tag">Planned</span></td></tr>
-                  <tr><td><strong>M3</strong></td><td>Controlled execution: isolated workspaces, integration and verification.</td><td><span class="status-tag">Planned</span></td></tr>
-                  <tr><td><strong>M4</strong></td><td>Comparative evaluation: repeatable runs against single-agent and orchestrated baselines.</td><td><span class="status-tag">Planned</span></td></tr>
-                  <tr><td><strong>M5</strong></td><td>Developer experience: stable API, provider adapters, CLI and examples.</td><td><span class="status-tag">Planned</span></td></tr>
-                </tbody>
-              </table>
-              <p>For the full sequence, see the <a href="https://github.com/kaxokaze/fellows/blob/main/ROADMAP.md">development roadmap</a>.</p>
-            </section>
-
-            <section class="article-section" id="references">
-              <h2>7. References and project documentation</h2>
-              <p>The following documents form the current design record for Fellows.</p>
-              <ol class="reference-list">
-                <li><a href="https://github.com/kaxokaze/fellows/blob/main/README.md">README</a> — project direction, problem framing and technical overview.</li>
-                <li><a href="https://github.com/kaxokaze/fellows/blob/main/docs/architecture/OVERVIEW.md">Architecture overview</a> — proposed system boundaries and components.</li>
-                <li><a href="https://github.com/kaxokaze/fellows/blob/main/docs/architecture/COORDINATION.md">Coordination protocol</a> — messages, work negotiation and coordination semantics.</li>
-                <li><a href="https://github.com/kaxokaze/fellows/blob/main/docs/evaluation/PLAN.md">Evaluation plan</a> — proposed experiment and comparison criteria.</li>
-                <li><a href="https://github.com/kaxokaze/fellows/blob/main/ROADMAP.md">Roadmap</a> — milestone sequence and current priorities.</li>
-              </ol>
-            </section>
-
-            <section class="article-section" id="contribute">
-              <h2>8. Contributing</h2>
-              <div class="contribute-box">
-                <div>
-                  <strong>Help pressure-test the design</strong>
-                  <p>Useful contributions at this stage include architecture reviews, protocol critique, failure-mode analysis, security feedback and reproducible evaluation ideas.</p>
-                </div>
-                <div class="contribute-actions">
-                  <a class="xp-button" href="https://github.com/kaxokaze/fellows/issues">Open an issue</a>
-                  <a class="xp-button" href="https://github.com/kaxokaze/fellows/blob/main/CONTRIBUTING.md">Contribute</a>
-                </div>
-              </div>
-            </section>
-
-            <footer class="article-footer">
-              <div>This page describes a project under active design and research. Proposed architecture and evaluation plans are not claims of implemented functionality.</div>
-              <div class="article-footer-links">
-                <a href="https://github.com/kaxokaze/fellows">GitHub repository</a>
-                <a href="https://github.com/kaxokaze/fellows/blob/main/LICENSE">MIT License</a>
-                <a href="https://github.com/kaxokaze/fellows/blob/main/CONTRIBUTING.md">Contributing</a>
-                <a href="#top">Back to top ↑</a>
-              </div>
-            </footer>
-          </main>
+            </div>
+          </section>
         </div>
-      </div>
+
+        <footer class="footer">
+          <span>Fellows · Open-source systems research · MIT License</span>
+          <div class="footer-links">
+            <a href="https://github.com/kaxokaze/fellows">GitHub</a>
+            <a href="https://github.com/kaxokaze/fellows/blob/main/LICENSE">License</a>
+            <a href="https://github.com/kaxokaze/fellows/blob/main/CONTRIBUTING.md">Contributing</a>
+            <a href="#top">Back to top ↑</a>
+          </div>
+        </footer>
+      </main>
     </div>
   </div>
-  <div class="taskbar" aria-label="Windows-style taskbar">
-    <div class="start-button"><span class="start-orb" aria-hidden="true"></span>start</div>
-    <div class="task-item"><img src="./favicon.svg" alt=""><span>Fellows — Project overview</span></div>
-    <div class="tray"><span class="tray-icon">◖◗</span><span>ENG</span><span id="taskbar-clock">--:--</span></div>
-  </div>
-  <script>
-    (() => {
-      const clock = document.getElementById("taskbar-clock");
-      const formatter = new Intl.DateTimeFormat("en-IN", {
-        timeZone: "Asia/Kolkata", hour: "2-digit", minute: "2-digit", hour12: true
-      });
-      const updateClock = () => { if (clock) clock.textContent = formatter.format(new Date()); };
-      updateClock();
-      window.setInterval(updateClock, 30000);
-    })();
-  </script>
 </body>
 </html>
