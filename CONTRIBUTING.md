@@ -1,51 +1,21 @@
-# Contributing to Fellows
+# Contributing
 
-Thank you for your interest in Fellows. The project is at an early concept and research stage, so feedback that improves the problem definition and architecture is especially valuable.
+Fellows is at the design and research stage. The most useful contributions right now are thoughtful feedback, relevant research, and help testing the assumptions behind the project.
 
-## Ways to contribute
+## Before opening an issue
 
-- Discuss multi-agent collaboration research and relevant prior work.
-- Identify failure modes in peer-based coordination.
-- Propose evaluation tasks and measurable success criteria.
-- Review architecture proposals.
-- Report documentation issues or unclear claims.
-- Submit code once an implementation area has been agreed.
+Check whether the topic has already been discussed. Explain the problem you are trying to solve and why it matters to peer-based agent collaboration. Links to papers, existing projects, or reproducible examples are helpful.
 
-## Before making a substantial change
+For a design proposal, include the trade-offs and any simpler alternatives you considered.
 
-1. Search existing issues and discussions for related work.
-2. For a major feature or architectural change, open an issue first.
-3. Explain the problem, proposed approach, alternatives, and trade-offs.
-4. Keep proposals narrow enough to review.
-5. Do not present planned capabilities as implemented.
+## Code contributions
 
-## Pull requests
+The implementation has not started yet. Once there is code to work on, contribution instructions will be updated with the development setup, test commands, and pull request expectations.
 
-When implementation begins, pull requests should:
+Please do not submit large implementation changes before the relevant design has been discussed.
 
-- Explain the problem being addressed.
-- Describe the behavior changed.
-- Include tests for changed behavior where applicable.
-- Document relevant configuration or compatibility changes.
-- Include benchmark methodology and raw results when making performance claims.
-- Avoid unrelated formatting or refactoring.
+## Keep claims specific
 
-## Research and claims
+Distinguish between ideas, proposed designs, implemented behavior, and measured results. If you report a performance improvement, include enough detail for someone else to reproduce it.
 
-Please distinguish clearly between:
-
-- Existing capabilities in other projects.
-- Hypotheses we want to investigate.
-- Designs proposed for Fellows.
-- Features implemented in this repository.
-- Results measured in reproducible experiments.
-
-Do not claim that Fellows is the first or only system to use a particular multi-agent technique without rigorous evidence.
-
-## Code of conduct
-
-Be respectful, constructive, and welcoming. Critique ideas and implementations, not people. Harassment, discrimination, personal attacks, and deliberate disruption are not acceptable.
-
-## Questions
-
-Open a GitHub issue for project questions or proposals. For security-sensitive issues, do not publish exploit details in a public issue; contact the maintainer privately through GitHub.
+Be respectful in issues and reviews. Focus criticism on the work, not the person.
