@@ -77,6 +77,10 @@ Fellows will be evaluated against both a single-agent baseline and a conventiona
 
 More agents, more messages, or longer discussions are not evidence of better performance. The [evaluation plan](docs/evaluation/PLAN.md) defines the proposed comparison.
 
+## Technical documentation
+
+The design material is organized under [docs/](docs/README.md). Start with the [architecture specification](docs/architecture/OVERVIEW.md), then review the [coordination protocol](docs/architecture/COORDINATION.md), the [peer-first architecture decision](docs/decisions/0001-peer-first-collaboration.md), and the [evaluation plan](docs/evaluation/PLAN.md).
+
 ## Development status
 
 | Area | Status |
