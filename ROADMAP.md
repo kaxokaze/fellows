@@ -1,68 +1,37 @@
-# Fellows Roadmap
+# Roadmap
 
-This roadmap describes intended exploration. Items are not complete until implementation and evidence are available in the repository.
+This is a working plan, not a list of completed features. Priorities may change as the design is tested.
 
-## Stage 1 — Project foundations
+## 1. Define the first experiment
 
-- [ ] Define problem statement and system boundaries.
-- [ ] Review existing multi-agent and peer-collaboration approaches.
-- [ ] Define terminology: agent, peer, project context, decision, task, dependency.
-- [ ] Write initial threat model and trust boundaries.
-- [ ] Define evaluation tasks and baselines.
+- [ ] Review existing peer-based and orchestrated multi-agent systems.
+- [ ] Write down what Fellows will and will not try to do.
+- [ ] Choose one small software task with objective acceptance criteria.
+- [ ] Define a single-agent baseline and a conventional multi-agent baseline.
+- [ ] Set a model and cost budget for the experiment.
 
-**Exit criteria:** reviewed architecture proposal, explicit non-goals, evaluation plan.
+**Outcome:** a short design note and an experiment that can be repeated.
 
-## Stage 2 — Shared project intelligence
+## 2. Build the smallest useful prototype
 
-- [ ] Define project state and context schema.
-- [ ] Record requirements, discoveries, decisions, and open questions.
-- [ ] Design agent messaging and event history.
-- [ ] Define context ownership, freshness, and conflict resolution.
-- [ ] Add inspection and replay tools for project decisions.
+- [ ] Run three independent agents on one project.
+- [ ] Give them a shared project state and a direct messaging mechanism.
+- [ ] Let them propose, claim, and report work.
+- [ ] Record decisions, dependencies, and unresolved questions.
+- [ ] Keep tool access scoped and changes reviewable.
+- [ ] Integrate the work and run the task's acceptance tests.
 
-**Exit criteria:** multiple independent agents can read and update a consistent project context with traceable changes.
+**Outcome:** a working example that shows how the agents coordinate, including where the approach fails.
 
-## Stage 3 — Peer coordination
+## 3. Measure the result
 
-- [ ] Allow agents to propose and discover work.
-- [ ] Represent dependencies and resource requirements.
-- [ ] Design responsibility negotiation and task claiming.
-- [ ] Support discussion, challenge, and decision finalization.
-- [ ] Prevent circular discussion and unproductive contention.
+- [ ] Run the same task with one agent.
+- [ ] Run it with a conventional orchestrated multi-agent setup.
+- [ ] Compare output quality, completion time, model usage, and integration problems.
+- [ ] Repeat the experiment and publish the setup and results.
 
-**Exit criteria:** agents coordinate a bounded task without requiring every action to be delegated by one central agent.
+**Outcome:** evidence about when peer collaboration helps and when it does not.
 
-## Stage 4 — Safe collaborative execution
+## 4. Decide what to build next
 
-- [ ] Define isolated workspace strategy.
-- [ ] Detect file and resource conflicts.
-- [ ] Integrate independent changes.
-- [ ] Add review and verification checkpoints.
-- [ ] Define tool permissions and human approval boundaries.
-
-**Exit criteria:** a small team can make coordinated changes and produce a verifiable integrated result.
-
-## Stage 5 — Evaluation
-
-- [ ] Establish single-agent baseline.
-- [ ] Establish conventional orchestrated multi-agent baseline.
-- [ ] Run identical tasks with comparable model and resource budgets.
-- [ ] Measure quality, completion time, token/compute cost, duplicate work, and integration failures.
-- [ ] Publish configurations, results, and limitations.
-
-**Exit criteria:** reproducible evaluation report with honest comparisons.
-
-## Stage 6 — Developer experience
-
-- [ ] CLI or developer API.
-- [ ] Project/team inspection interface.
-- [ ] Provider and model adapters.
-- [ ] Local and hosted execution options.
-- [ ] Documentation and examples.
-
-## Principles for roadmap changes
-
-- Prioritize verified user value over feature count.
-- Prefer measurable experiments over unsupported claims.
-- Keep security, privacy, cost, and failure recovery in scope.
-- Update this roadmap when priorities change; preserve completed work and explain meaningful changes.
+Use the results to decide whether to improve coordination, shared memory, execution isolation, model selection, or the developer experience. Avoid adding features just to make the roadmap look bigger.
