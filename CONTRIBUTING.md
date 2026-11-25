@@ -1,21 +1,47 @@
-# Contributing
+# Contributing to Fellows
 
-Fellows is at the design and research stage. The most useful contributions right now are thoughtful feedback, relevant research, and help testing the assumptions behind the project.
+Fellows is in the architecture and research phase. The project is not accepting broad implementation work yet; its first priority is to validate the collaboration model and define a small, testable runtime.
 
-## Before opening an issue
+Contributions that improve the technical direction are welcome.
 
-Check whether the topic has already been discussed. Explain the problem you are trying to solve and why it matters to peer-based agent collaboration. Links to papers, existing projects, or reproducible examples are helpful.
+## Current areas of interest
 
-For a design proposal, include the trade-offs and any simpler alternatives you considered.
+- Peer-based agent coordination and task ownership
+- Shared state, event logs, and context consistency
+- Agent messaging and decision protocols
+- Conflict-aware execution and artifact integration
+- Tool isolation, permissions, and prompt-injection boundaries
+- Evaluation methodology for multi-agent systems
+
+## Proposing a design change
+
+For substantial changes, open an issue before submitting a pull request. Include:
+
+1. The problem and the scenario in which it occurs.
+2. The proposed behavior or design.
+3. Relevant prior work or existing implementations.
+4. Alternatives considered.
+5. Failure modes, security implications, and operational costs.
+6. How the proposal could be tested.
+
+A proposal should make clear whether it is a research question, an architectural decision, or an implementation request.
 
 ## Code contributions
 
-The implementation has not started yet. Once there is code to work on, contribution instructions will be updated with the development setup, test commands, and pull request expectations.
+The runtime implementation has not started. Build instructions, supported toolchains, test commands, and coding conventions will be added when those choices are made.
 
-Please do not submit large implementation changes before the relevant design has been discussed.
+Until then, avoid introducing an arbitrary stack or a large implementation before its interfaces and acceptance criteria have been reviewed.
 
-## Keep claims specific
+## Technical claims and benchmarks
 
-Distinguish between ideas, proposed designs, implemented behavior, and measured results. If you report a performance improvement, include enough detail for someone else to reproduce it.
+Distinguish between a design proposal, implemented behavior, and measured results. Performance claims should include the task definition, model and provider versions, relevant configuration, resource limits, baseline, run count, and known limitations.
 
-Be respectful in issues and reviews. Focus criticism on the work, not the person.
+Do not use agent count, message volume, or a single successful demonstration as a substitute for a controlled comparison.
+
+## Pull requests
+
+Once implementation begins, pull requests should be focused and reviewable. Include tests for changed behavior, update the relevant design documents, and explain operational or compatibility implications. Do not include credentials, local configuration, generated artifacts, or unrelated changes.
+
+## Discussion
+
+Keep technical discussion specific and constructive. Disagreement is expected; explain the reasoning and evidence behind it.
