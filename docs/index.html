@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Fellows is an open-source systems research project exploring peer-first collaboration between independent AI agents.">
-  <meta name="theme-color" content="#f5f7fa">
+  <meta name="theme-color" content="#0b0f17">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Fellows — Peer-first AI collaboration">
   <meta property="og:description" content="Independent reasoning. Shared project state. Coordinated execution.">
@@ -13,39 +13,38 @@
   <meta name="twitter:title" content="Fellows — Peer-first AI collaboration">
   <meta name="twitter:description" content="An open-source exploration of how independent AI agents can work together.">
   <link rel="icon" type="image/svg+xml" href="./favicon.svg">
-  <link >
-  <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
   <title>Fellows — Peer-first AI collaboration</title>
   <style>
     :root {
-      color-scheme: light;
-      --page: #f5f7fa;
-      --surface: #ffffff;
-      --surface-soft: #edf1f6;
-      --surface-blue: #eaf0fc;
-      --ink: #172337;
-      --body: #435168;
-      --muted: #647187;
-      --line: #dce3ec;
-      --line-strong: #c8d2df;
-      --blue: #315caa;
-      --blue-dark: #24477f;
-      --blue-soft: #dbe6f8;
-      --green: #417a66;
-      --navy: #18263e;
-      --navy-2: #22334e;
-      --navy-line: rgba(235,241,250,.16);
-      --navy-text: #f0f4fa;
-      --navy-muted: #b4c0d1;
+      color-scheme: dark;
+      --page: #0b0f17;
+      --surface: #121a27;
+      --surface-soft: #172131;
+      --surface-blue: #19263a;
+      --ink: #e7edf6;
+      --body: #b3bfd0;
+      --muted: #8795aa;
+      --line: #263246;
+      --line-strong: #35445b;
+      --blue: #8ba9dc;
+      --blue-dark: #b7cdf1;
+      --blue-soft: #263752;
+      --green: #8eaa9d;
+      --navy: #101827;
+      --navy-2: #172338;
+      --navy-line: rgba(224,234,248,.14);
+      --navy-text: #eaf0f8;
+      --navy-muted: #aab8cc;
       --mono: "IBM Plex Mono", ui-monospace, monospace;
       --sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
       --content: 1200px;
       --ease: cubic-bezier(.22,1,.36,1);
     }
     * { box-sizing: border-box; }
-    html { background: var(--page); scroll-behavior: smooth; }
+    html { color-scheme: dark; background: var(--page); scroll-behavior: smooth; }
     body {
       margin: 0;
       min-width: 320px;
@@ -56,8 +55,8 @@
       line-height: 1.6;
     }
     a { color: inherit; }
-    a:focus-visible, summary:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; }
-    ::selection { background: #cbdaf4; color: var(--ink); }
+    a:focus-visible, summary:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 6px; }
+    ::selection { background: #344d72; color: #f4f7fc; }
     .shell { width: min(var(--content), calc(100% - 64px)); margin-inline: auto; }
     .mono { font: 11px var(--mono); letter-spacing: 0; }
     .topbar {
@@ -67,7 +66,7 @@
     .brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; }
     .brand-mark {
       width: 28px; height: 28px; display: grid; place-items: center;
-      border-radius: 8px; background: var(--navy); color: #dce8ff;
+      border-radius: 8px; background: #1e2b41; color: #dce8ff; border: 1px solid #354966;
       font-size: 14px; font-weight: 600;
     }
     .brand-name { font-size: 16px; font-weight: 600; letter-spacing: -.02em; }
@@ -76,7 +75,7 @@
     .nav a:hover { color: var(--blue); }
     .nav .nav-cta {
       min-height: 36px; display: inline-flex; align-items: center; padding: 0 12px;
-      border: 1px solid var(--line-strong); border-radius: 8px; color: var(--ink);
+      border: 1px solid var(--line-strong); border-radius: 6px; color: var(--ink); background: rgba(255,255,255,.025);
       transition: border-color .16s ease, color .16s ease;
     }
     .nav .nav-cta:hover { border-color: var(--blue); color: var(--blue); }
@@ -95,34 +94,67 @@
     .hero-copy { max-width: 465px; margin: 0; color: var(--body); font-size: 16px; line-height: 1.8; }
     .hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 30px; }
     .button {
-      min-height: 44px; display: inline-flex; align-items: center; justify-content: center; gap: 12px;
-      padding: 0 16px; border: 1px solid transparent; border-radius: 8px;
-      text-decoration: none; font-size: 13px; font-weight: 500;
-      transition: background-color .16s ease, border-color .16s ease, color .16s ease;
+      min-height: 40px; display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      padding: 0 16px; border: 1px solid transparent; border-radius: 6px;
+      text-decoration: none; font-size: 13px; font-weight: 500; cursor: pointer;
+      box-shadow: 0 1px 2px rgba(0,0,0,.16);
+      transition: background-color .16s ease, border-color .16s ease, color .16s ease, box-shadow .16s ease;
     }
-    .button.primary { background: var(--blue); border-color: var(--blue); color: #fff; }
-    .button.primary:hover { background: var(--blue-dark); border-color: var(--blue-dark); }
-    .button.secondary { background: var(--surface); border-color: var(--line-strong); color: var(--ink); }
-    .button.secondary:hover { border-color: var(--blue); color: var(--blue); }
+    .button.primary { background: #dce7f8; border-color: #dce7f8; color: #152238; box-shadow: 0 1px 2px rgba(0,0,0,.24); }
+    .button.primary:hover { background: #c8d9f3; border-color: #c8d9f3; }
+    .button.primary:active { background: #b7cbea; }
+    .button.secondary { background: rgba(255,255,255,.025); border-color: var(--line-strong); color: var(--ink); box-shadow: 0 1px 2px rgba(0,0,0,.12); }
+    .button.secondary:hover { background: rgba(255,255,255,.07); border-color: #536782; color: #f4f7fb; }
+    .button.ghost { background: transparent; border-color: transparent; color: var(--body); box-shadow: none; }
+    .button.ghost:hover { background: rgba(255,255,255,.06); color: var(--ink); }
+    .button.link { min-height: 32px; padding: 0 4px; background: transparent; border: 0; color: #a9c1eb; box-shadow: none; }
+    .button.link:hover { color: #d7e4f8; text-decoration: underline; text-underline-offset: 4px; }
+    .button:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
     .project-status { display: flex; align-items: center; gap: 8px; margin-top: 32px; color: var(--muted); font-size: 12px; }
     .status-dot { width: 7px; height: 7px; border-radius: 50%; background: #718c7f; }
+    .shadcn-card {
+      border: 1px solid var(--line-strong);
+      border-radius: 10px;
+      background: var(--surface);
+      box-shadow: 0 1px 2px rgba(0,0,0,.22), 0 8px 24px rgba(0,0,0,.12);
+    }
+    .shadcn-badge {
+      min-height: 24px; display: inline-flex; align-items: center; gap: 8px;
+      padding: 2px 9px; border: 1px solid #354a68; border-radius: 6px;
+      background: #18263a; color: #c2d4f1; font: 11px var(--mono);
+    }
+    .shadcn-separator { height: 1px; width: 100%; background: var(--line); }
     .hero-visual { position: relative; min-width: 0; }
     .diagram-frame {
       padding: 24px; border: 1px solid var(--line); border-radius: 12px;
-      background: var(--surface); box-shadow: 0 12px 32px rgba(25,43,68,.055);
+      background: var(--surface); border-color: var(--line-strong); box-shadow: 0 14px 38px rgba(0,0,0,.2);
     }
     .diagram-head { display: flex; justify-content: space-between; gap: 16px; margin-bottom: 14px; color: var(--muted); font: 11px var(--mono); }
     .diagram-frame svg { display: block; width: 100%; height: auto; }
     .mobile-model { display: none; }
     .diagram-foot { display: flex; justify-content: space-between; gap: 12px; margin-top: 12px; color: var(--muted); font-size: 11px; }
     .hero-caption { margin: 12px 0 0; color: var(--muted); font-size: 11px; }
-    .principle-strip { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: #f0f3f7; }
+    .principle-strip { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: #101722; }
     .principle-inner { min-height: 78px; display: grid; grid-template-columns: 1fr 2fr; gap: 24px; align-items: center; }
     .strip-label { color: var(--muted); font: 11px var(--mono); }
     .strip-items { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
     .strip-item { color: var(--body); font-size: 13px; }
     .strip-item span { margin-right: 8px; color: var(--blue); font: 11px var(--mono); }
-    .section { padding: 104px 0; border-top: 1px solid var(--line); }
+    .section {
+      position: relative; isolation: isolate; padding: 104px 0;
+      border-top: 1px solid var(--line); border-bottom: 1px solid rgba(255,255,255,.025);
+    }
+    .section::before {
+      content: ""; position: absolute; z-index: -1; top: 0; bottom: 0; left: 50%;
+      width: 100vw; transform: translateX(-50%); background: var(--section-bg, #0d131e);
+    }
+    #approach { --section-bg: #0e1420; }
+    #architecture { --section-bg: #111a29; }
+    #workflow { --section-bg: #0b111b; }
+    #protocol { --section-bg: #121c2b; }
+    #evaluation { --section-bg: #0c121d; }
+    #roadmap { --section-bg: #101827; }
+    #contribute { --section-bg: #0b111b; }
     .section:first-child { border-top: 0; }
     .section-head { display: grid; grid-template-columns: .7fr 1.3fr; gap: 48px; align-items: start; }
     .section-index { color: var(--blue); font: 11px var(--mono); padding-top: 8px; }
@@ -130,31 +162,33 @@
     .section-copy { max-width: 680px; margin: 16px 0 0; color: var(--body); font-size: 14px; line-height: 1.85; }
     .problem-layout { display: grid; grid-template-columns: .9fr 1.1fr; gap: 56px; margin-top: 48px; }
     .problem-statement {
-      padding: 24px; border-left: 3px solid var(--blue); background: var(--surface-blue);
-      border-radius: 0 8px 8px 0;
+      padding: 24px; border: 1px solid var(--line-strong); border-left: 3px solid var(--blue);
+      background: #151f2e; border-radius: 0 8px 8px 0;
     }
     .problem-statement h3 { margin: 0 0 12px; font-size: 23px; line-height: 1.25; font-weight: 500; letter-spacing: -.02em; }
     .problem-statement p { margin: 0; color: var(--body); font-size: 13px; line-height: 1.8; }
+    .issue-list li { border-bottom-color: #2c394d; }
+    .issue-list li:first-child { border-top-color: #2c394d; }
     .issue-list { list-style: none; padding: 0; margin: 0; }
     .issue-list li { display: grid; grid-template-columns: 32px 1fr; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--line); color: var(--body); font-size: 13px; }
     .issue-list li:first-child { border-top: 1px solid var(--line); }
     .issue-list span { color: var(--blue); font: 11px var(--mono); padding-top: 2px; }
-    .architecture-section { background: var(--navy); color: var(--navy-text); }
+    .architecture-section { background: transparent; color: var(--navy-text); }
     .architecture-section .section-index { color: #a9c1ef; }
     .architecture-section .section-copy { color: var(--navy-muted); }
     .architecture-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; margin-top: 48px; }
     .architecture-diagram {
       padding: 28px; border: 1px solid var(--navy-line); border-radius: 12px;
-      background: rgba(255,255,255,.035);
+      background: #151f30;
     }
     .architecture-diagram .diagram-kicker { color: #a9c1ef; font: 11px var(--mono); margin-bottom: 20px; }
     .layer {
       display: grid; grid-template-columns: 44px 1fr; gap: 16px;
       padding: 20px 16px; border: 1px solid var(--navy-line); border-radius: 8px;
-      background: rgba(255,255,255,.045);
+      background: #182438;
     }
     .layer + .layer { margin-top: 9px; }
-    .layer.control { background: rgba(124,158,216,.12); border-color: rgba(169,193,239,.45); }
+    .layer.control { background: #20334f; border-color: #4d668e; }
     .layer-number { color: #a9c1ef; font: 11px var(--mono); padding-top: 3px; }
     .layer h3 { margin: 0 0 4px; font-size: 15px; font-weight: 500; }
     .layer p { margin: 0; color: var(--navy-muted); font-size: 11px; line-height: 1.65; }
@@ -170,11 +204,13 @@
     .workflow { display: grid; grid-template-columns: repeat(5,1fr); gap: 0; margin-top: 50px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
     .workflow-step { position: relative; min-height: 192px; padding: 20px 16px 24px; border-right: 1px solid var(--line); }
     .workflow-step:first-child { border-left: 1px solid var(--line); }
+    .workflow-step { background: rgba(255,255,255,.018); }
+    .workflow-step:nth-child(even) { background: rgba(255,255,255,.035); }
     .step-number { color: var(--blue); font: 11px var(--mono); }
-    .step-marker { width: 10px; height: 10px; margin: 24px 0 16px; border-radius: 50%; background: var(--blue); box-shadow: 0 0 0 5px #e4ebf7; }
+    .step-marker { width: 10px; height: 10px; margin: 24px 0 16px; border-radius: 50%; background: var(--blue); box-shadow: 0 0 0 5px #1b2b43; }
     .workflow-step h3 { margin: 0 0 8px; font-size: 15px; font-weight: 500; }
     .workflow-step p { margin: 0; color: var(--body); font-size: 11px; line-height: 1.7; }
-    .protocol-section { background: #eef2f7; }
+    .protocol-section { background: transparent; }
     .protocol-layout { display: grid; grid-template-columns: .75fr 1.25fr; gap: 56px; margin-top: 48px; align-items: start; }
     .protocol-intro { max-width: 400px; color: var(--body); font-size: 14px; line-height: 1.8; margin: 0; }
     .message-list { border-top: 1px solid var(--line-strong); }
@@ -183,20 +219,22 @@
     .message-type { color: var(--ink); font: 11px var(--mono); padding-top: 2px; }
     .message-row p { margin: 0; color: var(--body); font-size: 12px; line-height: 1.7; }
     .evaluation-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-top: 48px; }
-    .evaluation-card { padding: 24px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
-    .evaluation-card.featured { border-color: #9fb4db; background: var(--surface-blue); }
+    .evaluation-card { padding: 24px; border: 1px solid var(--line); border-radius: 12px; background: #131d2b; border-color: var(--line-strong); }
+    .evaluation-card.featured { border-color: #506b95; background: #192940; }
+    .evaluation-card:hover { border-color: #526785; }
     .eval-label { color: var(--blue); font: 11px var(--mono); }
     .evaluation-card h3 { margin: 16px 0 8px; font-size: 18px; font-weight: 500; }
     .evaluation-card p { min-height: 72px; margin: 0; color: var(--body); font-size: 12px; line-height: 1.75; }
     .eval-foot { margin-top: 20px; padding-top: 13px; border-top: 1px solid var(--line); color: var(--muted); font: 10px var(--mono); }
-    .metrics { margin-top: 28px; padding: 24px; border: 1px solid var(--line); border-radius: 12px; background: #edf1f6; }
+    .metrics { margin-top: 28px; padding: 24px; border: 1px solid var(--line); border-radius: 12px; background: #121c2a; }
     .metrics-title { margin: 0 0 16px; color: var(--muted); font: 11px var(--mono); }
+    .metrics .metric-item { border-left-color: #657fa9; }
     .metric-list { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; }
-    .metric-item { padding-left: 13px; border-left: 2px solid #8da7d5; }
+    .metric-item { padding-left: 13px; border-left: 2px solid #7694c5; }
     .metric-item strong { display: block; color: var(--ink); font-size: 13px; font-weight: 500; }
     .metric-item span { display: block; margin-top: 4px; color: var(--body); font-size: 11px; }
     .roadmap-layout { display: grid; grid-template-columns: .72fr 1.28fr; gap: 56px; margin-top: 48px; align-items: start; }
-    .roadmap-focus { padding: 24px; border: 1px solid #c7d5eb; border-radius: 12px; background: var(--surface-blue); }
+    .roadmap-focus { padding: 24px; border: 1px solid #435a7c; border-radius: 10px; background: #19283d; }
     .roadmap-focus .focus-label { color: var(--blue); font: 11px var(--mono); }
     .roadmap-focus h3 { margin: 12px 0 8px; font-size: 22px; font-weight: 500; }
     .roadmap-focus p { margin: 0; color: var(--body); font-size: 12px; line-height: 1.75; }
@@ -209,7 +247,7 @@
     .contribute { padding-bottom: 92px; }
     .contribute-panel {
       display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: center;
-      padding: 32px 36px; border: 1px solid var(--line-strong); border-radius: 12px; background: var(--surface);
+      padding: 32px 36px; border: 1px solid var(--line-strong); border-radius: 10px; background: #121b29;
     }
     .contribute-panel h2 { max-width: 600px; margin: 12px 0 8px; font-size: clamp(28px,3.5vw,42px); line-height: 1.12; letter-spacing: -.035em; font-weight: 500; }
     .contribute-panel p { max-width: 650px; margin: 0; color: var(--body); font-size: 13px; line-height: 1.8; }
@@ -218,7 +256,7 @@
     .footer { display: flex; justify-content: space-between; align-items: center; gap: 20px; min-height: 76px; border-top: 1px solid var(--line); color: var(--muted); font-size: 11px; }
     .footer-links { display: flex; flex-wrap: wrap; gap: 20px; }
     .footer a { color: var(--body); text-decoration: none; }
-    .footer a:hover { color: var(--blue); }
+    .footer a:hover { color: #c4d7f5; }
     @media (hover:hover) and (pointer:fine) {
       .evaluation-card,.problem-statement,.architecture-diagram { transition: border-color .16s ease, background-color .16s ease; }
       .evaluation-card:hover { border-color: #b7c8e3; }
@@ -248,13 +286,13 @@
       .diagram-frame > svg { display: none; }
       .mobile-model { display: block; }
       .mobile-agents { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-      .mobile-agent { display: grid; gap: 4px; padding: 12px; border: 1px solid var(--line); border-radius: 8px; background: #fff; }
+      .mobile-agent { display: grid; gap: 4px; padding: 12px; border: 1px solid var(--line-strong); border-radius: 8px; background: #141e2c; }
       .mobile-agent.wide { grid-column: 1 / -1; }
       .mobile-agent strong { color: var(--ink); font-size: 12px; font-weight: 500; }
       .mobile-agent span { color: var(--muted); font-size: 11px; }
-      .mobile-state { display: grid; gap: 4px; margin-top: 10px; padding: 12px; border: 1px solid #b4c6e2; border-radius: 8px; background: var(--surface-blue); }
-      .mobile-state strong { color: var(--blue-dark); font-size: 12px; font-weight: 500; }
-      .mobile-state span { color: var(--body); font-size: 10px; }
+      .mobile-state { display: grid; gap: 4px; margin-top: 10px; padding: 12px; border: 1px solid #465f83; border-radius: 8px; background: #1a2a41; }
+      .mobile-state strong { color: #dce8fa; font-size: 12px; font-weight: 500; }
+      .mobile-state span { color: #bdcbe0; font-size: 10px; }
       .diagram-head { font-size: 9px; }
       .diagram-foot { font-size: 9px; }
       .principle-inner { grid-template-columns: 1fr; gap: 12px; padding: 16px 0; }
@@ -315,30 +353,30 @@
           <a class="button primary" href="https://github.com/kaxokaze/fellows">Explore the project <span aria-hidden="true">↗</span></a>
           <a class="button secondary" href="https://github.com/kaxokaze/fellows/blob/main/docs/architecture/OVERVIEW.md">Read the architecture</a>
         </div>
-        <div class="project-status"><span class="status-dot" aria-hidden="true"></span> Design and research stage · Runtime implementation not started</div>
+        <div class="project-status"><span class="shadcn-badge"><span class="status-dot" aria-hidden="true"></span> In research</span><span>Runtime implementation not started</span></div>
       </div>
 
       <div class="hero-visual">
-        <div class="diagram-frame">
+        <div class="diagram-frame shadcn-card">
           <div class="diagram-head"><span>Proposed collaboration model</span><span>01 / System view</span></div>
           <svg viewBox="0 0 680 430" role="img" aria-labelledby="hero-diagram-title hero-diagram-desc">
             <title id="hero-diagram-title">Fellows peer collaboration model</title>
             <desc id="hero-diagram-desc">Three independent agents exchange messages and work through a shared project state.</desc>
             <defs>
               <filter id="panelShadow" x="-20%" y="-20%" width="140%" height="160%">
-                <feDropShadow dx="0" dy="7" stdDeviation="9" flood-color="#233d68" flood-opacity=".08"/>
+                <feDropShadow dx="0" dy="7" stdDeviation="9" flood-color="#000000" flood-opacity=".3"/>
               </filter>
             </defs>
             <path d="M194 109 C236 109 239 159 272 177" stroke="#9aaac0" stroke-width="2" fill="none"/>
             <path d="M486 109 C444 109 441 159 408 177" stroke="#9aaac0" stroke-width="2" fill="none"/>
             <path d="M340 310 L340 286" stroke="#315caa" stroke-width="2" fill="none"/>
-            <circle cx="194" cy="109" r="4" fill="#315caa"/>
+            <circle cx="194" cy="109" r="4" fill="#8ba9dc"/>
             <circle cx="486" cy="109" r="4" fill="#315caa"/>
             <circle cx="340" cy="310" r="4" fill="#315caa"/>
-            <rect x="25" y="48" width="169" height="122" rx="9" fill="#fff" stroke="#dce3ec" filter="url(#panelShadow)"/>
+            <rect x="25" y="48" width="169" height="122" rx="9" fill="#141e2c" stroke="#34445d" filter="url(#panelShadow)"/>
             <rect x="25" y="48" width="169" height="5" rx="2.5" fill="#315caa"/>
-            <text x="44" y="79" font-family="IBM Plex Mono, monospace" font-size="11" fill="#647187">Agent A</text>
-            <text x="44" y="111" font-family="IBM Plex Sans, sans-serif" font-size="20" font-weight="500" fill="#172337">Research</text>
+            <text x="44" y="79" font-family="IBM Plex Mono, monospace" font-size="11" fill="#99a9bf">Agent A</text>
+            <text x="44" y="111" font-family="IBM Plex Sans, sans-serif" font-size="20" font-weight="500" fill="#e7edf6">Research</text>
             <text x="44" y="139" font-family="IBM Plex Sans, sans-serif" font-size="12" fill="#647187">Evidence and proposals</text>
             <rect x="486" y="48" width="169" height="122" rx="9" fill="#fff" stroke="#dce3ec" filter="url(#panelShadow)"/>
             <rect x="486" y="48" width="169" height="5" rx="2.5" fill="#315caa"/>
@@ -350,10 +388,10 @@
             <text x="274" y="341" font-family="IBM Plex Mono, monospace" font-size="11" fill="#647187">Agent C</text>
             <text x="274" y="369" font-family="IBM Plex Sans, sans-serif" font-size="19" font-weight="500" fill="#172337">Execution</text>
             <text x="274" y="390" font-family="IBM Plex Sans, sans-serif" font-size="11" fill="#647187">Changes and verification</text>
-            <rect x="230" y="153" width="220" height="133" rx="10" fill="#eaf0fc" stroke="#a9bfdf" filter="url(#panelShadow)"/>
+            <rect x="230" y="153" width="220" height="133" rx="10" fill="#1a2a41" stroke="#506b95" filter="url(#panelShadow)"/>
             <text x="251" y="180" font-family="IBM Plex Mono, monospace" font-size="11" fill="#315caa">Shared project state</text>
-            <path d="M251 193 H429" stroke="#c8d7ee"/>
-            <text x="251" y="216" font-family="IBM Plex Sans, sans-serif" font-size="12" fill="#435168">Requirements</text>
+            <path d="M251 193 H429" stroke="#3c4d68"/>
+            <text x="251" y="216" font-family="IBM Plex Sans, sans-serif" font-size="12" fill="#c0cada">Requirements</text>
             <text x="429" y="216" text-anchor="end" font-family="IBM Plex Mono, monospace" font-size="11" fill="#315caa">01</text>
             <text x="251" y="239" font-family="IBM Plex Sans, sans-serif" font-size="12" fill="#435168">Decisions and findings</text>
             <text x="429" y="239" text-anchor="end" font-family="IBM Plex Mono, monospace" font-size="11" fill="#315caa">02</text>
@@ -396,7 +434,7 @@
         </div>
       </div>
       <div class="problem-layout">
-        <div class="problem-statement">
+        <div class="problem-statement shadcn-card">
           <h3>Coordination is the missing layer</h3>
           <p>Agents need a way to share evidence, disagree constructively, establish ownership and verify the combined result. A chat transcript alone is not a reliable project state.</p>
         </div>
@@ -539,7 +577,7 @@
         </div>
       </div>
       <div class="evaluation-grid">
-        <article class="evaluation-card">
+        <article class="evaluation-card shadcn-card">
           <span class="eval-label">A / Baseline</span>
           <h3>Single agent</h3>
           <p>One model session receives the task and produces the result. This establishes the simplest reference point.</p>
@@ -551,14 +589,14 @@
           <p>A primary agent decomposes the work and delegates to other sessions under a conventional hierarchy.</p>
           <div class="eval-foot">Supervisor and delegates</div>
         </article>
-        <article class="evaluation-card featured">
+        <article class="evaluation-card featured shadcn-card">
           <span class="eval-label">C / Fellows</span>
           <h3>Peer-first team</h3>
           <p>Independent agents exchange information and coordinate through shared project state without a permanent supervisory model.</p>
           <div class="eval-foot">Peer reasoning and control plane</div>
         </article>
       </div>
-      <div class="metrics">
+      <div class="metrics shadcn-card">
         <div class="metrics-title">Proposed measurement dimensions</div>
         <div class="metric-list">
           <div class="metric-item"><strong>Outcome quality</strong><span>Acceptance tests and review findings</span></div>
@@ -580,7 +618,7 @@
         </div>
       </div>
       <div class="roadmap-layout">
-        <article class="roadmap-focus">
+        <article class="roadmap-focus shadcn-card">
           <span class="focus-label">Current priority / M0</span>
           <h3>Research and system definition</h3>
           <p>Review prior systems, define the first bounded task, settle the initial state and message models, and specify fair comparison baselines.</p>
@@ -598,7 +636,7 @@
     </section>
 
     <section class="section shell contribute" id="contribute">
-      <div class="contribute-panel">
+      <div class="contribute-panel shadcn-card">
         <div>
           <div class="section-index">07 — Contribute</div>
           <h2>Help pressure-test the design</h2>
