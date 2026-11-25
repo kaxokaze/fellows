@@ -3,33 +3,41 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Fellows explores peer-first collaboration between independent AI agents, with shared project state and deterministic coordination.">
-  <meta name="theme-color" content="#161513">
+  <meta name="description" content="Fellows is an open-source research project exploring peer-first collaboration between independent AI agents, shared project state and deterministic coordination.">
+  <meta name="theme-color" content="#151411">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Fellows — Independent agents, working together">
-  <meta property="og:description" content="An open-source research project exploring peer-first collaboration between AI agents.">
+  <meta property="og:title" content="Fellows — Agents work better as peers">
+  <meta property="og:description" content="Independent reasoning. Shared state. Coordinated execution.">
   <meta property="og:url" content="https://kaxokaze.github.io/fellows/">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Fellows — Independent agents, working together">
-  <meta name="twitter:description" content="An open-source research project exploring peer-first collaboration between AI agents.">
+  <meta name="twitter:title" content="Fellows — Agents work better as peers">
+  <meta name="twitter:description" content="An open-source study of peer-first AI collaboration.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
-  <title>Fellows — Independent agents, working together</title>
+  <title>Fellows — Agents work better as peers</title>
   <style>
     :root {
       color-scheme: dark;
-      --bg: #161513;
-      --surface: #1c1a18;
-      --raised: #262421;
-      --text: #efe9de;
-      --secondary: #aaa398;
-      --muted: #8a847a;
-      --line: rgba(239,233,222,.09);
-      --accent: #e1a071;
+      --bg: #151411;
+      --bg-raised: #1b1916;
+      --surface: #201e1a;
+      --surface-2: #29261f;
+      --surface-3: #353026;
+      --text: #eee9de;
+      --secondary: #b1aa9d;
+      --muted: #837c70;
+      --line: rgba(238,233,222,.12);
+      --line-strong: rgba(238,233,222,.2);
+      --accent: #d6a174;
+      --accent-bright: #e9bb91;
+      --accent-ink: #21170f;
+      --green: #9dae98;
       --mono: "DM Mono", ui-monospace, monospace;
       --sans: "Instrument Sans", ui-sans-serif, system-ui, sans-serif;
       --serif: "Newsreader", Georgia, serif;
+      --content: 1240px;
+      --ease: cubic-bezier(.22,1,.36,1);
     }
     * { box-sizing: border-box; }
     html { background: var(--bg); scroll-behavior: smooth; }
@@ -37,182 +45,337 @@
       margin: 0;
       min-width: 320px;
       color: var(--text);
-      background: var(--bg);
+      background:
+        linear-gradient(90deg, transparent calc(50% - .5px), rgba(238,233,222,.025) 50%, transparent calc(50% + .5px)),
+        var(--bg);
       font-family: var(--sans);
       -webkit-font-smoothing: antialiased;
       line-height: 1.55;
     }
     a { color: inherit; }
-    a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
-    .shell { width: min(1200px, calc(100% - 64px)); margin: 0 auto; }
+    a:focus-visible, summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+    ::selection { background: var(--accent); color: var(--accent-ink); }
+    .shell { width: min(var(--content), calc(100% - 72px)); margin-inline: auto; }
     .mono { font: 11px var(--mono); letter-spacing: .015em; }
+    .eyebrow { display: flex; align-items: center; gap: 10px; color: var(--secondary); font-size: 12px; }
+    .eyebrow::before { content: ""; width: 22px; height: 1px; background: var(--accent); flex: 0 0 auto; }
+    .section { padding: 112px 0; border-top: 1px solid var(--line); }
+    .section-head { display: grid; grid-template-columns: .7fr 1.3fr; gap: 56px; align-items: start; }
+    .section-index { color: var(--accent); font: 11px var(--mono); padding-top: 8px; }
+    .section-title { max-width: 780px; margin: 0; font-size: clamp(34px,4.6vw,58px); font-weight: 400; line-height: 1.1; letter-spacing: -.045em; }
+    .section-title em { color: var(--accent); font-family: var(--serif); font-weight: 400; }
+    .section-copy { max-width: 650px; margin: 18px 0 0; color: var(--secondary); font-size: 14px; line-height: 1.85; }
     .topbar {
-      height: 76px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      height: 78px; display: flex; align-items: center; justify-content: space-between;
       border-bottom: 1px solid var(--line);
     }
-    .brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
+    .brand { display: inline-flex; align-items: center; gap: 11px; text-decoration: none; }
     .brand-mark {
-      width: 26px; height: 26px; display: grid; place-items: center;
-      color: var(--accent); border: 1px solid rgba(225,160,113,.48);
-      border-radius: 7px; font-size: 14px; font-weight: 600;
+      width: 28px; height: 28px; display: grid; place-items: center;
+      border: 1px solid rgba(214,161,116,.55); border-radius: 7px;
+      color: var(--accent); font-size: 14px; font-weight: 600;
     }
     .brand-name { font-size: 16px; font-weight: 600; letter-spacing: -.025em; }
-    .nav { display: flex; align-items: center; gap: 28px; }
-    .nav a { text-decoration: none; color: var(--secondary); font-size: 12px; transition: color .16s ease; }
+    .nav { display: flex; align-items: center; gap: 27px; }
+    .nav a { color: var(--secondary); text-decoration: none; font-size: 12px; transition: color .16s ease; }
     .nav a:hover { color: var(--text); }
-    .nav .nav-cta { color: var(--text); border: 1px solid var(--line); border-radius: 6px; padding: 9px 13px; }
-    .nav .nav-cta:hover { border-color: rgba(225,160,113,.55); color: var(--accent); }
+    .nav .nav-cta { padding: 9px 14px; border: 1px solid var(--line-strong); border-radius: 6px; color: var(--text); }
+    .nav .nav-cta:hover { border-color: var(--accent); color: var(--accent-bright); }
     .hero {
-      min-height: 690px;
-      display: grid;
-      grid-template-columns: .9fr 1.1fr;
-      align-items: center;
-      gap: 46px;
-      padding: 74px 0 86px;
+      min-height: 730px; display: grid; grid-template-columns: .87fr 1.13fr;
+      gap: 40px; align-items: center; padding: 72px 0 90px;
     }
-    .hero-copy { padding: 6px 0; }
-    .eyebrow { display: flex; gap: 10px; align-items: center; color: var(--secondary); font-size: 12px; }
-    .eyebrow::before { content: ""; width: 22px; height: 1px; background: var(--accent); }
+    .hero-copy { position: relative; z-index: 2; padding: 12px 0; }
     h1 {
-      max-width: 550px;
-      margin: 25px 0 22px;
-      font-size: clamp(54px, 6.4vw, 86px);
-      line-height: 1.02;
-      letter-spacing: -.055em;
-      font-weight: 500;
+      max-width: 580px; margin: 25px 0 22px;
+      font-size: clamp(58px,7.1vw,94px); line-height: .98;
+      font-weight: 500; letter-spacing: -.062em;
     }
-    h1 em { color: var(--accent); font-family: var(--serif); font-weight: 400; }
-    .intro { max-width: 450px; color: var(--secondary); font-size: 16px; line-height: 1.75; margin: 0; }
-    .intro strong { color: var(--text); font-weight: 500; }
-    .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 18px; margin-top: 30px; }
+    h1 em { color: var(--accent); font-family: var(--serif); font-weight: 400; letter-spacing: -.045em; }
+    .hero-lede { max-width: 470px; margin: 0; color: var(--secondary); font-size: 16px; line-height: 1.8; }
+    .hero-lede strong { color: var(--text); font-weight: 500; }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-top: 30px; }
     .button {
-      min-height: 44px; display: inline-flex; align-items: center; gap: 16px;
-      padding: 0 16px; border-radius: 7px; text-decoration: none; font-size: 12px; font-weight: 600;
-      transition: background-color .16s ease, border-color .16s ease, color .16s ease;
+      min-height: 46px; display: inline-flex; align-items: center; justify-content: center; gap: 14px;
+      padding: 0 17px; border: 1px solid transparent; border-radius: 7px;
+      text-decoration: none; font-size: 12px; font-weight: 600;
+      transition: background-color .16s ease, color .16s ease, border-color .16s ease;
     }
-    .button.primary { color: #1b1713; background: var(--accent); border: 1px solid var(--accent); }
-    .button.primary:hover { background: #edb487; border-color: #edb487; }
-    .button.secondary { color: var(--secondary); border: 1px solid var(--line); }
-    .button.secondary:hover { color: var(--text); border-color: rgba(239,233,222,.25); }
-    .status { display: flex; align-items: center; gap: 9px; margin-top: 38px; color: var(--muted); font-size: 11px; }
-    .status-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
-    .visual { position: relative; min-height: 520px; display: grid; place-items: center; perspective: 1400px; }
-    .visual-caption { position: absolute; top: 2px; left: 0; color: var(--muted); }
-    .visual-index { position: absolute; right: 0; bottom: 2px; color: var(--muted); }
-    .workbench { position: relative; width: min(100%, 650px); height: 480px; display: grid; place-items: center; perspective: 1400px; }
-    .workbench::before { content: ""; position: absolute; width: 78%; height: 58%; bottom: 7%; left: 11%; background: #0d0c0b; filter: blur(22px); border-radius: 50%; }
-    .workbench-plane { position: relative; width: 94%; height: 78%; transform-style: preserve-3d; transform: rotateX(57deg) rotateZ(-31deg) translateY(8px); }
-    .floor {
-      position: absolute; inset: 0; border: 1px solid #514a40; border-radius: 17px;
-      background: linear-gradient(145deg,#302d28,#211f1c 58%,#191816);
-      box-shadow: 0 32px 0 #100f0e, 0 34px 0 #51483c, 0 48px 42px rgba(0,0,0,.55);
-      transform: translateZ(-18px);
+    .button.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+    .button.primary:hover { background: var(--accent-bright); border-color: var(--accent-bright); }
+    .button.secondary { border-color: var(--line-strong); color: var(--text); background: rgba(255,255,255,.015); }
+    .button.secondary:hover { border-color: var(--accent); color: var(--accent-bright); }
+    .hero-status { display: flex; align-items: center; gap: 9px; margin-top: 38px; color: var(--muted); font-size: 11px; }
+    .status-dot { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; }
+    .hero-art { min-width: 0; min-height: 560px; display: grid; place-items: center; position: relative; perspective: 1500px; }
+    .art-caption { position: absolute; top: 8px; left: 3%; color: var(--muted); }
+    .art-footnote { position: absolute; right: 2%; bottom: 9px; color: var(--muted); }
+    .hero-stage { position: relative; width: min(100%,690px); height: 510px; transform-style: preserve-3d; }
+    .stage-shadow { position: absolute; width: 76%; height: 25%; left: 13%; bottom: 7%; border-radius: 50%; background: #080807; filter: blur(20px); }
+    .stage-deck {
+      position: absolute; width: 88%; height: 69%; left: 6%; top: 19%;
+      border: 1px solid #625747; border-radius: 18px;
+      background: linear-gradient(148deg,#3a352d 0%,#26231e 54%,#1d1b17 100%);
+      box-shadow: 0 12px 0 #171511, 0 14px 0 #4b4336, 0 25px 32px rgba(0,0,0,.5);
+      transform: rotateX(58deg) rotateZ(-30deg) translateZ(-28px);
+      transform-style: preserve-3d;
     }
-    .floor::before {
-      content: ""; position: absolute; inset: 18px; border: 1px solid rgba(239,233,222,.08); border-radius: 10px;
-      background-image: linear-gradient(rgba(239,233,222,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(239,233,222,.045) 1px,transparent 1px);
-      background-size: 30px 30px;
+    .stage-deck::before {
+      content: ""; position: absolute; inset: 18px; border: 1px solid rgba(238,233,222,.13); border-radius: 9px;
+      background-image: linear-gradient(rgba(238,233,222,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(238,233,222,.05) 1px,transparent 1px);
+      background-size: 31px 31px;
     }
-    .floor::after { content: "FELLOWS / SHARED PROJECT SPACE"; position: absolute; left: 22px; bottom: 17px; color: #777066; font: 9px var(--mono); letter-spacing: .04em; transform: rotateZ(0deg); }
-    .beam { position: absolute; height: 2px; background: #b28b69; transform-origin: left center; opacity: .9; box-shadow: 0 1px 0 rgba(0,0,0,.5); }
-    .beam.one { left: 27%; top: 31%; width: 47%; transform: translateZ(16px) rotate(0deg); }
-    .beam.two { left: 27%; top: 31%; width: 43%; transform: translateZ(16px) rotate(58deg); }
-    .beam.three { left: 74%; top: 31%; width: 43%; transform: translateZ(16px) rotate(122deg); }
-    .module {
-      position: absolute; z-index: 3; width: 24%; height: 24%; padding: 12px;
+    .deck-edge {
+      position: absolute; left: 10%; right: 10%; bottom: 7%; height: 1px;
+      background: rgba(238,233,222,.16); transform: translateZ(-13px);
+    }
+    .agent-pod {
+      position: absolute; z-index: 4; width: 154px; min-height: 114px; padding: 14px;
       display: flex; flex-direction: column; justify-content: space-between;
-      border: 1px solid #82715e; border-radius: 8px;
-      background: linear-gradient(145deg,#494238,#292621 65%);
-      box-shadow: 0 9px 0 #171513, 0 10px 0 #665744, 0 20px 18px rgba(0,0,0,.36);
-      transform-style: preserve-3d; color: var(--text);
+      border: 1px solid #8b755e; border-radius: 9px;
+      background: linear-gradient(145deg,#514638,#332e27 66%,#29251f);
+      box-shadow: 0 8px 0 #211d18, 0 10px 0 #665744, 0 19px 23px rgba(0,0,0,.36);
+      transform-style: preserve-3d;
     }
-    .module::after { content: ""; position: absolute; inset: 7px; border: 1px solid rgba(239,233,222,.08); border-radius: 4px; pointer-events: none; }
-    .module .agent-id { color: var(--accent); font: 9px var(--mono); }
-    .module strong { font-size: 13px; font-weight: 500; }
-    .module small { color: #b0a89c; font-size: 9px; }
-    .module.a { left: 12%; top: 14%; transform: translateZ(40px); }
-    .module.b { right: 12%; top: 14%; transform: translateZ(40px); }
-    .module.c { left: 38%; bottom: 8%; transform: translateZ(40px); }
-    .state-stack {
-      position: absolute; z-index: 5; width: 34%; height: 37%; left: 33%; top: 29%;
-      padding: 15px 16px; border: 1px solid #a58a6d; border-radius: 8px;
-      background: linear-gradient(145deg,#514638,#332e27);
-      box-shadow: 0 8px 0 #211d18, 0 9px 0 #88745c, 0 18px 0 #181613, 0 26px 24px rgba(0,0,0,.48);
-      transform: translateZ(78px); color: var(--text);
+    .agent-pod::before {
+      content: ""; position: absolute; left: 10px; right: 10px; bottom: -9px; height: 9px;
+      border-radius: 0 0 4px 4px; background: #28231d; transform: skewX(-35deg); transform-origin: top;
     }
-    .state-stack::before { content: ""; position: absolute; inset: -8px 7px 7px -8px; border: 1px solid rgba(225,160,113,.34); border-radius: 8px; transform: translateZ(-8px); }
-    .state-title { display: block; color: #e8b58d; font: 9px var(--mono); margin-bottom: 10px; }
-    .state-row { display: flex; justify-content: space-between; padding: 4px 0; border-top: 1px solid rgba(239,233,222,.12); color: #d0c6b8; font-size: 9px; }
-    .state-row span:last-child { color: #a99c8b; font-family: var(--mono); }
-    .scene-note { position: absolute; left: 4%; bottom: 0; color: var(--muted); font-size: 10px; }
-    .depth-tag { position: absolute; z-index: 6; right: 1%; top: 8%; padding: 8px 10px; background: #24211d; border: 1px solid var(--line); border-radius: 5px; color: var(--secondary); font: 9px var(--mono); transform: translateZ(100px); }
-    .workbench:hover .workbench-plane { transform: rotateX(53deg) rotateZ(-28deg) translateY(3px) translateZ(8px); transition: transform .35s ease; }
-    .principles {
-      display: grid; grid-template-columns: 1fr 2fr; gap: 32px;
-      padding: 22px 0 25px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+    .agent-pod::after { content: ""; position: absolute; inset: 7px; border: 1px solid rgba(238,233,222,.1); border-radius: 5px; pointer-events: none; }
+    .pod-a { left: 11%; top: 18%; transform: translateZ(68px) rotateY(-8deg); }
+    .pod-b { right: 8%; top: 18%; transform: translateZ(68px) rotateY(8deg); }
+    .pod-c { left: calc(50% - 77px); bottom: 12%; transform: translateZ(75px) rotateX(4deg); }
+    .pod-id { color: var(--accent-bright); font: 10px var(--mono); }
+    .pod-name { font-size: 15px; font-weight: 500; }
+    .pod-detail { color: #b9ad9c; font-size: 10px; }
+    .pod-pin { position: absolute; top: 13px; right: 13px; width: 6px; height: 6px; border-radius: 50%; background: var(--green); }
+    .hub {
+      position: absolute; z-index: 6; left: 50%; top: 43%; width: 205px; min-height: 164px;
+      padding: 16px 17px; border: 1px solid #b18c69; border-radius: 9px;
+      background: linear-gradient(145deg,#594a38,#3a3126 72%,#2a251f);
+      box-shadow: 0 8px 0 #211b14,0 10px 0 #8b7054,0 18px 0 #191612,0 28px 30px rgba(0,0,0,.48);
+      transform: translate(-50%,-50%) translateZ(125px);
     }
-    .principles-label { color: var(--muted); font: 11px var(--mono); }
-    .principles-list { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; }
-    .principle { color: var(--secondary); font-size: 12px; }
-    .principle span { color: var(--accent); margin-right: 9px; font: 10px var(--mono); }
-    .manifesto {
-      display: grid; grid-template-columns: .72fr 1.28fr; gap: 56px;
-      padding: 112px 0 120px; border-bottom: 1px solid var(--line);
+    .hub::before { content: ""; position: absolute; inset: -9px 8px 8px -9px; border: 1px solid rgba(214,161,116,.35); border-radius: 9px; transform: translateZ(-8px); }
+    .hub-title { color: var(--accent-bright); font: 10px var(--mono); display: block; margin-bottom: 10px; }
+    .hub-row { display: flex; justify-content: space-between; gap: 10px; padding: 5px 0; border-top: 1px solid rgba(238,233,222,.13); color: #ded4c5; font-size: 10px; }
+    .hub-row span:last-child { color: #bca58c; font-family: var(--mono); }
+    .link-rail { position: absolute; z-index: 2; height: 2px; background: #c19b74; transform-origin: left center; }
+    .rail-one { left: 28%; top: 35%; width: 43%; transform: rotate(0deg) translateZ(85px); }
+    .rail-two { left: 30%; top: 38%; width: 35%; transform: rotate(62deg) translateZ(82px); }
+    .rail-three { left: 70%; top: 38%; width: 35%; transform: rotate(118deg) translateZ(82px); }
+    .port { position: absolute; z-index: 7; width: 10px; height: 10px; border: 2px solid #171511; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 1px #c69a6d; }
+    .port.p1 { left: 28%; top: 35%; transform: translateZ(90px); }
+    .port.p2 { right: 29%; top: 35%; transform: translateZ(90px); }
+    .port.p3 { left: calc(50% - 5px); bottom: 24%; transform: translateZ(90px); }
+    .art-note { position: absolute; left: 4%; bottom: 7%; color: var(--muted); font: 10px var(--mono); }
+    .index-mark { position: absolute; right: 2%; top: 16%; color: var(--muted); font: 10px var(--mono); }
+    .strip { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .strip-inner { min-height: 72px; display: grid; grid-template-columns: 1fr 2fr; gap: 30px; align-items: center; }
+    .strip-label { color: var(--muted); font: 11px var(--mono); }
+    .strip-items { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+    .strip-item { color: var(--secondary); font-size: 12px; }
+    .strip-item b { color: var(--accent); font: 10px var(--mono); margin-right: 8px; font-weight: 400; }
+    .problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 52px; }
+    .problem-panel {
+      padding: 28px 30px; border: 1px solid var(--line); border-radius: 10px;
+      background: var(--bg-raised); min-height: 264px;
     }
-    .section-label { color: var(--accent); font: 11px var(--mono); }
-    .manifesto h2 {
-      max-width: 760px; margin: 0; font-size: clamp(34px, 4.6vw, 58px);
-      line-height: 1.12; letter-spacing: -.045em; font-weight: 400;
+    .panel-kicker { color: var(--muted); font: 10px var(--mono); }
+    .problem-panel h3 { margin: 16px 0 20px; font-size: 23px; font-weight: 400; letter-spacing: -.025em; }
+    .issue-list { margin: 0; padding: 0; list-style: none; display: grid; gap: 12px; }
+    .issue-list li { display: flex; gap: 12px; align-items: baseline; color: var(--secondary); font-size: 13px; }
+    .issue-list li::before { content: "—"; color: var(--accent); font-family: var(--mono); }
+    .thesis-panel { background: #262118; border-color: rgba(214,161,116,.23); }
+    .thesis-panel p { max-width: 500px; margin: 0; color: #c5b8a6; font-size: 14px; line-height: 1.8; }
+    .thesis-panel strong { color: var(--text); font-weight: 500; }
+    .architecture-section { overflow: hidden; }
+    .architecture-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 70px; align-items: center; margin-top: 48px; }
+    .architecture-stack { position: relative; min-height: 500px; perspective: 1200px; display: grid; place-items: center; }
+    .stack-base { position: absolute; width: 78%; height: 61%; left: 11%; bottom: 9%; background: #211e19; border: 1px solid #51483b; border-radius: 13px; transform: rotateX(56deg) rotateZ(-28deg); box-shadow: 0 22px 0 #11100e,0 24px 0 #4b4236,0 38px 30px rgba(0,0,0,.4); }
+    .stack-layer {
+      position: absolute; width: 70%; min-height: 100px; padding: 17px 20px;
+      border: 1px solid #7a6a56; border-radius: 9px;
+      background: linear-gradient(135deg,#3b352c,#29251f);
+      box-shadow: 0 8px 0 #171511,0 10px 0 #514638,0 20px 22px rgba(0,0,0,.32);
+      transform: rotateX(4deg) rotateY(-7deg);
     }
-    .manifesto h2 em { color: var(--accent); font-family: var(--serif); font-weight: 400; }
-    .manifesto p { max-width: 650px; margin: 24px 0 0; color: var(--secondary); font-size: 14px; line-height: 1.8; }
-    .doc-links { display: flex; flex-wrap: wrap; gap: 22px; margin-top: 28px; }
-    .doc-links a { color: var(--text); text-decoration-color: rgba(239,233,222,.3); text-underline-offset: 4px; font-size: 12px; }
-    .doc-links a:hover { color: var(--accent); }
-    footer { display: flex; justify-content: space-between; align-items: center; gap: 18px; padding: 25px 0 32px; color: var(--muted); font-size: 11px; }
-    footer .footer-links { display: flex; gap: 20px; }
-    footer a { color: var(--secondary); text-decoration: none; }
-    footer a:hover { color: var(--text); }
-    @media(max-width: 900px) {
-      .shell { width: min(100% - 48px, 720px); }
-      .hero { grid-template-columns: 1fr; gap: 28px; padding: 64px 0 70px; }
-      .visual { min-height: 500px; }
-      .workbench { max-width: 620px; }
-      .manifesto { grid-template-columns: 1fr; gap: 22px; padding: 84px 0; }
+    .stack-layer.peer { top: 12%; left: 6%; transform: translateZ(100px) rotateX(4deg) rotateY(-7deg); }
+    .stack-layer.control { top: 38%; left: 19%; transform: translateZ(55px) rotateX(4deg) rotateY(-7deg); border-color: #b18c69; background: linear-gradient(135deg,#504335,#302921); }
+    .stack-layer.execute { top: 64%; left: 31%; transform: translateZ(10px) rotateX(4deg) rotateY(-7deg); }
+    .layer-topline { display: flex; justify-content: space-between; align-items: center; color: var(--accent-bright); font: 10px var(--mono); }
+    .layer-name { display: block; margin-top: 8px; font-size: 16px; font-weight: 500; }
+    .layer-desc { display: block; margin-top: 2px; color: var(--secondary); font-size: 11px; }
+    .stack-note { position: absolute; bottom: 2%; left: 3%; color: var(--muted); font-size: 10px; }
+    .architecture-points { display: grid; gap: 0; }
+    .architecture-point { display: grid; grid-template-columns: 42px 1fr; gap: 14px; padding: 19px 0; border-bottom: 1px solid var(--line); }
+    .architecture-point:first-child { border-top: 1px solid var(--line); }
+    .point-number { color: var(--accent); font: 11px var(--mono); padding-top: 3px; }
+    .architecture-point h3 { margin: 0 0 6px; font-size: 16px; font-weight: 500; }
+    .architecture-point p { margin: 0; color: var(--secondary); font-size: 12px; line-height: 1.75; }
+    .architecture-link { display: inline-block; margin-top: 22px; color: var(--text); font-size: 12px; text-underline-offset: 4px; text-decoration-color: rgba(238,233,222,.35); }
+    .architecture-link:hover { color: var(--accent); }
+    .protocol-section { background: #191713; }
+    .protocol-top { display: flex; justify-content: space-between; align-items: end; gap: 30px; }
+    .protocol-top .section-title { max-width: 660px; }
+    .protocol-note { width: 260px; color: var(--muted); font-size: 11px; line-height: 1.7; }
+    .protocol-board {
+      position: relative; margin-top: 50px; padding: 36px 28px 30px;
+      border: 1px solid var(--line); border-radius: 12px; background: #201e1a;
+      perspective: 1000px; overflow: hidden;
     }
-    @media(max-width: 600px) {
+    .protocol-board::before { content: ""; position: absolute; inset: 0; background-image: linear-gradient(rgba(238,233,222,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(238,233,222,.035) 1px,transparent 1px); background-size: 28px 28px; opacity: .45; }
+    .message-path { position: absolute; left: 10%; right: 10%; top: 50%; height: 1px; background: rgba(214,161,116,.45); }
+    .message-track { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(4,1fr); gap: 17px; align-items: center; }
+    .message-card {
+      position: relative; min-height: 150px; padding: 17px;
+      border: 1px solid #655744; border-radius: 8px;
+      background: linear-gradient(145deg,#39332a,#27241e);
+      box-shadow: 0 7px 0 #171511,0 9px 0 #504638,0 15px 20px rgba(0,0,0,.24);
+      transform: rotateX(4deg) rotateY(-5deg);
+    }
+    .message-card:nth-child(2) { transform: translateY(-15px) rotateX(4deg) rotateY(4deg); }
+    .message-card:nth-child(3) { transform: translateY(12px) rotateX(4deg) rotateY(-4deg); }
+    .message-card:nth-child(4) { transform: rotateX(4deg) rotateY(5deg); }
+    .message-type { color: var(--accent-bright); font: 10px var(--mono); }
+    .message-card h3 { margin: 21px 0 7px; font-size: 15px; font-weight: 500; }
+    .message-card p { margin: 0; color: var(--secondary); font-size: 11px; line-height: 1.65; }
+    .message-number { position: absolute; right: 14px; top: 14px; color: #786c5a; font: 10px var(--mono); }
+    .protocol-foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; padding-top: 23px; color: var(--muted); font-size: 11px; }
+    .workflow { display: grid; grid-template-columns: repeat(5,1fr); gap: 12px; margin-top: 48px; }
+    .workflow-step { min-height: 190px; position: relative; padding: 18px; border: 1px solid var(--line); border-radius: 9px; background: var(--bg-raised); }
+    .workflow-step:nth-child(2),.workflow-step:nth-child(4) { transform: translateY(16px); background: #211e19; }
+    .step-no { color: var(--accent); font: 10px var(--mono); }
+    .step-symbol { width: 43px; height: 43px; display: grid; place-items: center; margin: 22px 0 18px; border: 1px solid #6c5b46; border-radius: 9px; color: var(--accent-bright); background: #302920; box-shadow: 0 5px 0 #17140f; }
+    .step-symbol svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+    .workflow-step h3 { margin: 0 0 7px; font-size: 14px; font-weight: 500; }
+    .workflow-step p { margin: 0; color: var(--secondary); font-size: 11px; line-height: 1.7; }
+    .evaluation-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 48px; align-items: stretch; }
+    .evaluation-card { padding: 23px; border: 1px solid var(--line); border-radius: 10px; background: var(--bg-raised); min-height: 235px; }
+    .evaluation-card.featured { border-color: rgba(214,161,116,.45); background: linear-gradient(155deg,#2b261f,#1d1b17 75%); transform: translateY(-10px); }
+    .evaluation-letter { color: var(--accent); font: 11px var(--mono); }
+    .evaluation-card h3 { margin: 20px 0 8px; font-size: 19px; font-weight: 500; }
+    .evaluation-card p { margin: 0; color: var(--secondary); font-size: 12px; line-height: 1.75; }
+    .evaluation-card .tagline { margin-top: 22px; padding-top: 13px; border-top: 1px solid var(--line); color: var(--muted); font: 10px var(--mono); }
+    .metrics { margin-top: 44px; padding: 25px 28px; border: 1px solid var(--line); border-radius: 10px; background: #1b1916; }
+    .metrics-title { margin: 0 0 19px; color: var(--muted); font: 10px var(--mono); }
+    .metric-list { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; }
+    .metric-item { min-height: 67px; padding-left: 13px; border-left: 1px solid rgba(214,161,116,.55); }
+    .metric-item strong { display: block; font-size: 13px; font-weight: 500; }
+    .metric-item span { display: block; margin-top: 5px; color: var(--secondary); font-size: 10px; }
+    .roadmap { display: grid; grid-template-columns: 1fr 2fr; gap: 60px; margin-top: 48px; }
+    .roadmap-current { padding: 24px; border: 1px solid rgba(214,161,116,.35); border-radius: 10px; background: #262118; align-self: start; }
+    .roadmap-current .current-label { color: var(--accent-bright); font: 10px var(--mono); }
+    .roadmap-current h3 { margin: 14px 0 8px; font-size: 24px; font-weight: 400; }
+    .roadmap-current p { margin: 0; color: #c0b4a3; font-size: 12px; line-height: 1.75; }
+    .roadmap-track { position: relative; display: grid; }
+    .roadmap-track::before { content: ""; position: absolute; left: 21px; top: 20px; bottom: 20px; width: 1px; background: var(--line-strong); }
+    .milestone { position: relative; display: grid; grid-template-columns: 44px 1fr auto; gap: 14px; align-items: start; padding: 15px 0; border-bottom: 1px solid var(--line); }
+    .milestone:first-child { padding-top: 0; }
+    .milestone:last-child { border-bottom: 0; }
+    .milestone-dot { position: relative; z-index: 1; width: 12px; height: 12px; margin: 5px 0 0 16px; border: 2px solid #8b7057; border-radius: 50%; background: var(--bg); }
+    .milestone.active .milestone-dot { background: var(--accent); border-color: var(--accent); }
+    .milestone h4 { margin: 0; font-size: 13px; font-weight: 500; }
+    .milestone p { margin: 4px 0 0; color: var(--muted); font-size: 11px; }
+    .milestone-state { color: var(--muted); font: 10px var(--mono); padding-top: 4px; }
+    .contribute { padding-bottom: 108px; }
+    .contribute-panel {
+      position: relative; display: grid; grid-template-columns: 1.25fr .75fr; gap: 38px; align-items: center;
+      padding: 42px 46px; border: 1px solid #665640; border-radius: 12px;
+      background: linear-gradient(135deg,#30291f,#201e19 68%);
+      box-shadow: 0 12px 0 #100f0d,0 14px 0 #4a4032,0 26px 35px rgba(0,0,0,.3);
+      overflow: hidden;
+    }
+    .contribute-panel::after { content: "F"; position: absolute; right: 2%; bottom: -44%; color: rgba(214,161,116,.055); font: 360px var(--serif); pointer-events: none; }
+    .contribute-copy,.contribute-actions { position: relative; z-index: 1; }
+    .contribute-copy h2 { margin: 12px 0; font-size: clamp(30px,4vw,48px); line-height: 1.1; font-weight: 400; letter-spacing: -.04em; }
+    .contribute-copy p { max-width: 600px; margin: 0; color: #c0b5a5; font-size: 13px; line-height: 1.8; }
+    .contribute-actions { display: flex; flex-direction: column; gap: 10px; align-items: stretch; }
+    .contribute-actions .button { width: 100%; }
+    .footer { display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 25px 0 32px; border-top: 1px solid var(--line); color: var(--muted); font-size: 11px; }
+    .footer-links { display: flex; gap: 20px; flex-wrap: wrap; }
+    .footer a { color: var(--secondary); text-decoration: none; }
+    .footer a:hover { color: var(--text); }
+    .footer-meta { display: flex; gap: 16px; flex-wrap: wrap; }
+    @media (hover:hover) and (pointer:fine) {
+      .agent-pod,.message-card,.workflow-step,.evaluation-card { transition: transform .22s var(--ease), border-color .22s ease, background-color .22s ease; }
+      .agent-pod:hover { transform: translateZ(82px) translateY(-4px); border-color: var(--accent); }
+      .message-card:hover { transform: translateY(-5px) rotateX(2deg); border-color: var(--accent); }
+      .workflow-step:hover { transform: translateY(-3px); border-color: rgba(214,161,116,.45); }
+      .evaluation-card:hover { border-color: rgba(214,161,116,.4); }
+      .evaluation-card.featured:hover { transform: translateY(-13px); }
+    }
+    @media (max-width: 980px) {
+      .shell { width: min(100% - 52px, 760px); }
+      .hero { grid-template-columns: 1fr; gap: 22px; padding: 58px 0 70px; }
+      .hero-art { min-height: 540px; }
+      .section { padding: 88px 0; }
+      .section-head { grid-template-columns: 1fr; gap: 17px; }
+      .architecture-grid { grid-template-columns: 1fr; gap: 34px; }
+      .architecture-stack { min-height: 460px; }
+      .workflow { grid-template-columns: repeat(3,1fr); }
+      .workflow-step:nth-child(4) { transform: none; }
+      .roadmap { grid-template-columns: 1fr; gap: 26px; }
+    }
+    @media (max-width: 640px) {
       .shell { width: calc(100% - 36px); }
       .topbar { height: 68px; }
       .nav { gap: 14px; }
-      .nav a:first-child { display: none; }
-      .nav a { font-size: 11px; }
-      .hero { padding: 60px 0 48px; gap: 14px; }
-      h1 { font-size: clamp(50px, 13vw, 72px); }
-      .intro { font-size: 14px; }
-      .actions { gap: 12px; }
-      .visual { min-height: 350px; margin: 0 -8px; }
-      .workbench { height: 340px; }
-      .workbench-plane { width: 100%; height: 75%; transform: rotateX(57deg) rotateZ(-31deg) scale(.94); }
-      .module { padding: 8px; }
-      .module strong { font-size: 10px; }
-      .module small { font-size: 7px; }
-      .module .agent-id { font-size: 7px; }
-      .state-stack { padding: 9px; width: 36%; left: 32%; }
-      .state-title,.state-row { font-size: 7px; }
-      .depth-tag { font-size: 7px; right: 0; }
-      .scene-note { font-size: 8px; left: 0; }
-      .principles { grid-template-columns: 1fr; gap: 14px; }
-      .principles-list { grid-template-columns: 1fr; gap: 11px; }
-      .manifesto { padding: 72px 0; }
-      .manifesto h2 { font-size: 40px; }
-      footer { align-items: flex-start; flex-direction: column; }
+      .nav a:nth-child(1),.nav a:nth-child(2) { display: none; }
+      .nav .nav-cta { padding: 8px 10px; }
+      .hero { padding: 54px 0 52px; gap: 8px; }
+      h1 { font-size: clamp(49px,13vw,74px); }
+      .hero-lede { font-size: 14px; }
+      .hero-art { min-height: 370px; margin: 0 -10px; }
+      .hero-stage { height: 360px; transform: scale(.88); transform-origin: center; }
+      .agent-pod { width: 126px; min-height: 100px; padding: 10px; }
+      .pod-a { left: 5%; }
+      .pod-b { right: 3%; }
+      .pod-c { left: calc(50% - 63px); }
+      .hub { width: 174px; min-height: 148px; padding: 12px; }
+      .hub-row { font-size: 9px; }
+      .stage-deck { width: 94%; left: 3%; }
+      .art-caption { left: 2%; font-size: 9px; }
+      .art-footnote { right: 1%; font-size: 9px; }
+      .strip-inner { grid-template-columns: 1fr; gap: 12px; padding: 19px 0; }
+      .strip-items { grid-template-columns: 1fr; gap: 9px; }
+      .section { padding: 72px 0; }
+      .section-title { font-size: 38px; }
+      .problem-grid { grid-template-columns: 1fr; margin-top: 34px; }
+      .problem-panel { min-height: 0; padding: 22px; }
+      .architecture-stack { min-height: 360px; margin: 0 -15px; transform: scale(.92); }
+      .stack-layer { width: 78%; padding: 13px; }
+      .stack-layer.peer { left: 2%; }
+      .stack-layer.control { left: 12%; }
+      .stack-layer.execute { left: 22%; }
+      .protocol-top { display: block; }
+      .protocol-note { width: auto; margin-top: 15px; }
+      .protocol-board { padding: 22px 16px; margin-top: 32px; }
+      .message-path { display: none; }
+      .message-track { grid-template-columns: 1fr 1fr; gap: 12px; }
+      .message-card { min-height: 145px; padding: 13px; transform: none !important; }
+      .message-card h3 { font-size: 13px; margin-top: 22px; }
+      .message-card p { font-size: 10px; }
+      .workflow { grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 32px; }
+      .workflow-step { min-height: 174px; padding: 14px; }
+      .workflow-step:nth-child(2) { transform: none; }
+      .workflow-step:last-child { grid-column: 1 / -1; min-height: 140px; }
+      .step-symbol { margin: 15px 0; }
+      .evaluation-grid { grid-template-columns: 1fr; gap: 11px; margin-top: 32px; }
+      .evaluation-card,.evaluation-card.featured { min-height: 0; transform: none; padding: 20px; }
+      .metrics { padding: 20px; margin-top: 28px; }
+      .metric-list { grid-template-columns: 1fr 1fr; gap: 16px 10px; }
+      .roadmap { margin-top: 32px; }
+      .milestone { grid-template-columns: 38px 1fr; }
+      .milestone-state { grid-column: 2; padding-top: 0; }
+      .contribute { padding-bottom: 72px; }
+      .contribute-panel { grid-template-columns: 1fr; padding: 26px 22px; gap: 22px; }
+      .contribute-panel::after { font-size: 250px; }
+      .footer { align-items: flex-start; flex-direction: column; }
     }
-    @media(prefers-reduced-motion: reduce) {
+    @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
-      *, *::before, *::after { animation: none !important; transition: none !important; }
+      *,*::before,*::after { transition-duration: .01ms !important; }
     }
   </style>
 </head>
@@ -223,80 +386,335 @@
       <span class="brand-name">Fellows</span>
     </a>
     <nav class="nav" aria-label="Main navigation">
-      <a href="#idea">The idea</a>
-      <a href="https://github.com/kaxokaze/fellows">Source</a>
-      <a class="nav-cta" href="https://github.com/kaxokaze/fellows">Follow the build ↗</a>
+      <a href="#approach">Approach</a>
+      <a href="#architecture">Architecture</a>
+      <a href="#evaluation">Evaluation</a>
+      <a class="nav-cta" href="https://github.com/kaxokaze/fellows">View source ↗</a>
     </nav>
   </header>
 
   <main id="top">
     <section class="hero shell" aria-labelledby="hero-title">
       <div class="hero-copy">
-        <div class="eyebrow">An experiment in agent collaboration</div>
-        <h1 id="hero-title">Independent agents, <em>working together</em></h1>
-        <p class="intro">Fellows explores a peer-first runtime where independent AI agents share context, challenge decisions and coordinate work — without relying on one permanent lead agent</p>
+        <div class="eyebrow">An open-source systems research project</div>
+        <h1 id="hero-title">Agents work better as <em>peers</em></h1>
+        <p class="hero-lede">Fellows explores a peer-first runtime where independent AI agents reason, exchange findings, negotiate work and deliver together — while a deterministic control plane keeps the project coherent</p>
         <div class="actions">
           <a class="button primary" href="https://github.com/kaxokaze/fellows">Explore the project <span aria-hidden="true">↗</span></a>
-          <a class="button secondary" href="architecture/OVERVIEW.md">Architecture</a>
+          <a class="button secondary" href="https://github.com/kaxokaze/fellows/blob/main/docs/architecture/OVERVIEW.md">Read the architecture</a>
         </div>
-        <div class="status"><span class="status-dot" aria-hidden="true"></span> Design and research stage · Runtime not yet implemented</div>
+        <div class="hero-status"><span class="status-dot" aria-hidden="true"></span> Design and research stage · Runtime implementation not started</div>
       </div>
 
-      <div class="visual" aria-label="Three-dimensional conceptual model of independent agents collaborating through shared project state">
-        <span class="visual-caption mono">A system taking shape</span>
-        <div class="workbench">
-          <div class="workbench-plane" role="img" aria-label="Isometric 3D model: three raised agent modules connect to a central shared project state">
-            <div class="floor"></div>
-            <span class="beam one"></span><span class="beam two"></span><span class="beam three"></span>
-            <div class="module a"><span class="agent-id">AGENT / A</span><strong>Research</strong><small>Evidence + proposals</small></div>
-            <div class="module b"><span class="agent-id">AGENT / B</span><strong>Review</strong><small>Challenge + refine</small></div>
-            <div class="module c"><span class="agent-id">AGENT / C</span><strong>Execute</strong><small>Build + verify</small></div>
-            <div class="state-stack">
-              <span class="state-title">SHARED STATE</span>
-              <div class="state-row"><span>Requirements</span><span>01</span></div>
-              <div class="state-row"><span>Decisions</span><span>02</span></div>
-              <div class="state-row"><span>Work graph</span><span>03</span></div>
-              <div class="state-row"><span>Artifacts</span><span>04</span></div>
-            </div>
+      <div class="hero-art" aria-label="Three-dimensional conceptual model of three independent agents collaborating through shared project state">
+        <span class="art-caption mono">Concept / 001 · Peer workspace</span>
+        <div class="hero-stage">
+          <div class="stage-shadow"></div>
+          <div class="stage-deck"></div>
+          <div class="deck-edge"></div>
+          <span class="link-rail rail-one"></span><span class="link-rail rail-two"></span><span class="link-rail rail-three"></span>
+          <span class="port p1"></span><span class="port p2"></span><span class="port p3"></span>
+          <div class="agent-pod pod-a"><span class="pod-id">Agent / A</span><strong class="pod-name">Research</strong><span class="pod-detail">Evidence · proposals</span><span class="pod-pin"></span></div>
+          <div class="agent-pod pod-b"><span class="pod-id">Agent / B</span><strong class="pod-name">Review</strong><span class="pod-detail">Challenge · refine</span><span class="pod-pin"></span></div>
+          <div class="agent-pod pod-c"><span class="pod-id">Agent / C</span><strong class="pod-name">Execution</strong><span class="pod-detail">Changes · verification</span><span class="pod-pin"></span></div>
+          <div class="hub">
+            <span class="hub-title">Shared project state</span>
+            <div class="hub-row"><span>Requirements</span><span>01</span></div>
+            <div class="hub-row"><span>Decisions</span><span>02</span></div>
+            <div class="hub-row"><span>Work graph</span><span>03</span></div>
+            <div class="hub-row"><span>Artifacts</span><span>04</span></div>
           </div>
-          <span class="depth-tag">PEER MODEL / 01</span>
-          <span class="scene-note">Conceptual architecture · Not implemented yet</span>
+          <span class="art-note">Illustrative architecture · Not a running product</span>
+          <span class="index-mark">F / 001</span>
         </div>
-        <span class="visual-index mono">Fellows / Architecture study</span>
+        <span class="art-footnote mono">Independent minds · Shared objective</span>
       </div>
     </section>
 
-    <section class="principles shell" aria-label="Project principles">
-      <div class="principles-label">The working model</div>
-      <div class="principles-list">
-        <div class="principle"><span>01</span>Independent reasoning</div>
-        <div class="principle"><span>02</span>Shared project context</div>
-        <div class="principle"><span>03</span>Controlled execution</div>
+    <div class="strip">
+      <div class="shell strip-inner">
+        <div class="strip-label">The working model</div>
+        <div class="strip-items">
+          <div class="strip-item"><b>01</b> Independent reasoning</div>
+          <div class="strip-item"><b>02</b> Shared project state</div>
+          <div class="strip-item"><b>03</b> Controlled execution</div>
+        </div>
+      </div>
+    </div>
+
+    <section class="section shell" id="approach">
+      <div class="section-head">
+        <div class="section-index">01 / The problem</div>
+        <div>
+          <h2 class="section-title">Parallel work is easy to start. <em>Reliable collaboration is harder.</em></h2>
+          <p class="section-copy">Adding more model sessions can create more output, but it can also create more coordination work. Fellows focuses on the systems required to make independent agents useful to one another.</p>
+        </div>
+      </div>
+      <div class="problem-grid">
+        <article class="problem-panel">
+          <div class="panel-kicker">What breaks in practice</div>
+          <h3>More agents can mean more overhead</h3>
+          <ul class="issue-list">
+            <li>Context drifts between separate sessions</li>
+            <li>Work gets duplicated or dependencies go unnoticed</li>
+            <li>Disagreements remain unresolved or unrecorded</li>
+            <li>Concurrent edits collide during integration</li>
+            <li>Completion is reported without verifiable evidence</li>
+          </ul>
+        </article>
+        <article class="problem-panel thesis-panel">
+          <div class="panel-kicker">The Fellows thesis</div>
+          <h3>Keep reasoning independent. Make coordination explicit.</h3>
+          <p>Agents should be able to exchange proposals, questions, findings and reviews directly. A <strong>deterministic runtime</strong> should own durable state, task transitions, permissions, budgets and recovery — without becoming a permanent lead model.</p>
+        </article>
       </div>
     </section>
 
-    <section class="manifesto shell" id="idea">
-      <div class="section-label">Why Fellows</div>
-      <div>
-        <h2>Coordination should be part of the system, not another prompt</h2>
-        <p>Running several agents in parallel does not automatically make them a team. They can duplicate work, lose context, make conflicting changes or reach incompatible conclusions. Fellows investigates the protocols and runtime infrastructure needed to make collaboration explicit and reliable.</p>
-        <p>The design separates peer reasoning from the deterministic control plane that owns project state, task claims, permissions, budgets and recovery. The aim is to keep agents independent without making the system itself unpredictable.</p>
+    <section class="section architecture-section" id="architecture">
+      <div class="shell">
+        <div class="section-head">
+          <div class="section-index">02 / System architecture</div>
+          <div>
+            <h2 class="section-title">Three planes. <em>One coherent system.</em></h2>
+            <p class="section-copy">The design separates the work agents do from the infrastructure that keeps their collaboration consistent, bounded and auditable.</p>
+          </div>
+        </div>
+        <div class="architecture-grid">
+          <div class="architecture-stack" role="img" aria-label="Exploded layered 3D architecture illustration: peer reasoning layer, deterministic control plane and execution plane">
+            <div class="stack-base"></div>
+            <div class="stack-layer peer">
+              <div class="layer-topline"><span>01 / PEER LAYER</span><span>REASON</span></div>
+              <strong class="layer-name">Independent agents</strong>
+              <span class="layer-desc">Propose · discuss · challenge · review</span>
+            </div>
+            <div class="stack-layer control">
+              <div class="layer-topline"><span>02 / CONTROL PLANE</span><span>COORDINATE</span></div>
+              <strong class="layer-name">Authoritative project state</strong>
+              <span class="layer-desc">Validate · persist · schedule · recover</span>
+            </div>
+            <div class="stack-layer execute">
+              <div class="layer-topline"><span>03 / EXECUTION PLANE</span><span>DELIVER</span></div>
+              <strong class="layer-name">Scoped tools and artifacts</strong>
+              <span class="layer-desc">Run · change · integrate · verify</span>
+            </div>
+            <span class="stack-note">Logical separation · Deployment topology remains open</span>
+          </div>
+          <div>
+            <div class="architecture-points">
+              <article class="architecture-point">
+                <span class="point-number">01</span>
+                <div><h3>Peer reasoning</h3><p>Independent model sessions own their working context and communicate directly through typed messages.</p></div>
+              </article>
+              <article class="architecture-point">
+                <span class="point-number">02</span>
+                <div><h3>Deterministic coordination</h3><p>A control plane validates state transitions, persists events, manages claims and leases, checks permissions and enforces budgets.</p></div>
+              </article>
+              <article class="architecture-point">
+                <span class="point-number">03</span>
+                <div><h3>Controlled execution</h3><p>Tools and workspaces stay within explicit boundaries. Changes remain attributable and pass through integration and verification.</p></div>
+              </article>
+            </div>
+            <a class="architecture-link" href="https://github.com/kaxokaze/fellows/blob/main/docs/architecture/OVERVIEW.md">Read the full architecture specification ↗</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section protocol-section" id="protocol">
+      <div class="shell">
+        <div class="protocol-top">
+          <div>
+            <div class="section-index">03 / Collaboration protocol</div>
+            <h2 class="section-title">Conversation should change the <em>shared work.</em></h2>
+          </div>
+          <p class="protocol-note">The protocol proposal treats messages as attributed events and requests — not as commands that can silently mutate authoritative project state.</p>
+        </div>
+        <div class="protocol-board">
+          <div class="message-path"></div>
+          <div class="message-track">
+            <article class="message-card">
+              <span class="message-number">01</span>
+              <span class="message-type">PROPOSAL</span>
+              <h3>Put forward an approach</h3>
+              <p>An agent shares a plan, rationale and expected outcome.</p>
+            </article>
+            <article class="message-card">
+              <span class="message-number">02</span>
+              <span class="message-type">CHALLENGE</span>
+              <h3>Test the assumptions</h3>
+              <p>A peer raises evidence, risk or a different interpretation.</p>
+            </article>
+            <article class="message-card">
+              <span class="message-number">03</span>
+              <span class="message-type">DECISION</span>
+              <h3>Record the outcome</h3>
+              <p>The result and its rationale become part of project history.</p>
+            </article>
+            <article class="message-card">
+              <span class="message-number">04</span>
+              <span class="message-type">TASK CLAIM</span>
+              <h3>Take bounded ownership</h3>
+              <p>The runtime validates the claim before work is assigned.</p>
+            </article>
+          </div>
+          <div class="protocol-foot">
+            <span>Messages are proposals and information</span>
+            <span>Validated transitions belong to the control plane</span>
+          </div>
+        </div>
         <div class="doc-links">
-          <a href="architecture/OVERVIEW.md">Architecture overview ↗</a>
-          <a href="architecture/COORDINATION.md">Coordination protocol ↗</a>
-          <a href="evaluation/PLAN.md">Evaluation plan ↗</a>
-          <a href="../ROADMAP.md">Roadmap ↗</a>
+          <a href="https://github.com/kaxokaze/fellows/blob/main/docs/architecture/COORDINATION.md">Coordination protocol proposal ↗</a>
+          <a href="https://github.com/kaxokaze/fellows/blob/main/docs/decisions/0001-peer-first-collaboration.md">Architecture decision record ↗</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section shell" id="workflow">
+      <div class="section-head">
+        <div class="section-index">04 / Operating model</div>
+        <div>
+          <h2 class="section-title">From independent interpretation to <em>verified delivery.</em></h2>
+          <p class="section-copy">The intended flow adapts to the work. Not every task needs a long debate or maximum parallelism; collaboration should be proportional to uncertainty, dependencies and risk.</p>
+        </div>
+      </div>
+      <div class="workflow">
+        <article class="workflow-step">
+          <span class="step-no">01 / INTAKE</span>
+          <div class="step-symbol"><svg viewBox="0 0 24 24"><path d="M5 4.5h14v15H5z"/><path d="M8 8h8M8 12h5M8 16h7"/></svg></div>
+          <h3>Interpret</h3>
+          <p>Understand the goal, constraints and acceptance criteria.</p>
+        </article>
+        <article class="workflow-step">
+          <span class="step-no">02 / DELIBERATE</span>
+          <div class="step-symbol"><svg viewBox="0 0 24 24"><path d="M4 5h12a3 3 0 0 1 3 3v4a3 3 0 0 1-3 3H9l-4 3v-3.5A3 3 0 0 1 4 12z"/><path d="M8 9h7M8 12h4"/></svg></div>
+          <h3>Exchange</h3>
+          <p>Share findings, test assumptions and record decisions.</p>
+        </article>
+        <article class="workflow-step">
+          <span class="step-no">03 / PLAN</span>
+          <div class="step-symbol"><svg viewBox="0 0 24 24"><path d="M5 6h5v5H5zM14 13h5v5h-5z"/><path d="M10 8.5h4a2 2 0 0 1 2 2V13"/></svg></div>
+          <h3>Organise</h3>
+          <p>Define bounded tasks, dependencies and ownership.</p>
+        </article>
+        <article class="workflow-step">
+          <span class="step-no">04 / EXECUTE</span>
+          <div class="step-symbol"><svg viewBox="0 0 24 24"><path d="m8 7-5 5 5 5M16 7l5 5-5 5M14 5l-4 14"/></svg></div>
+          <h3>Build</h3>
+          <p>Work in scoped environments and publish attributable artifacts.</p>
+        </article>
+        <article class="workflow-step">
+          <span class="step-no">05 / VERIFY</span>
+          <div class="step-symbol"><svg viewBox="0 0 24 24"><path d="m4 12 5 5L20 6"/><path d="M20 12v7H4V5h11"/></svg></div>
+          <h3>Integrate</h3>
+          <p>Review changes and test against the original objective.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section shell" id="evaluation">
+      <div class="section-head">
+        <div class="section-index">05 / Evaluation</div>
+        <div>
+          <h2 class="section-title">More agents is not a result. <em>Evidence is.</em></h2>
+          <p class="section-copy">The project proposes a controlled comparison to find out whether peer-first collaboration improves task quality or the quality-to-cost trade-off enough to justify its coordination overhead.</p>
+        </div>
+      </div>
+      <div class="evaluation-grid">
+        <article class="evaluation-card">
+          <span class="evaluation-letter">A / BASELINE</span>
+          <h3>Single agent</h3>
+          <p>One model session receives the task and produces the result. This establishes the simplest reference point.</p>
+          <div class="tagline">ONE MODEL SESSION</div>
+        </article>
+        <article class="evaluation-card">
+          <span class="evaluation-letter">B / BASELINE</span>
+          <h3>Orchestrated team</h3>
+          <p>A primary agent decomposes the work and delegates to other agents under a conventional hierarchy.</p>
+          <div class="tagline">SUPERVISOR + DELEGATES</div>
+        </article>
+        <article class="evaluation-card featured">
+          <span class="evaluation-letter">C / FELLOWS</span>
+          <h3>Peer-first team</h3>
+          <p>Independent agents exchange information and coordinate through shared project state without a permanent supervisory model.</p>
+          <div class="tagline">PEER REASONING + CONTROL PLANE</div>
+        </article>
+      </div>
+      <div class="metrics">
+        <div class="metrics-title">Proposed measurement dimensions</div>
+        <div class="metric-list">
+          <div class="metric-item"><strong>Outcome quality</strong><span>Acceptance tests · review findings</span></div>
+          <div class="metric-item"><strong>Efficiency</strong><span>Latency · tokens · compute cost</span></div>
+          <div class="metric-item"><strong>Coordination</strong><span>Duplicate work · conflicts · retries</span></div>
+          <div class="metric-item"><strong>Human effort</strong><span>Interventions · blocker resolution</span></div>
+        </div>
+      </div>
+      <div class="doc-links">
+        <a href="https://github.com/kaxokaze/fellows/blob/main/docs/evaluation/PLAN.md">Read the evaluation plan ↗</a>
+      </div>
+    </section>
+
+    <section class="section shell" id="roadmap">
+      <div class="section-head">
+        <div class="section-index">06 / Development</div>
+        <div>
+          <h2 class="section-title">A small first experiment. <em>Then the evidence decides.</em></h2>
+          <p class="section-copy">The roadmap is milestone-gated. Work moves forward when exit criteria are met, not because a feature has been discussed or sketched.</p>
+        </div>
+      </div>
+      <div class="roadmap">
+        <article class="roadmap-current">
+          <span class="current-label">CURRENT FOCUS / M0</span>
+          <h3>Research and system definition</h3>
+          <p>Validate the first task, state model, protocol, trust boundaries and comparison baselines before committing to a runtime stack.</p>
+        </article>
+        <div class="roadmap-track">
+          <div class="milestone active">
+            <span class="milestone-dot"></span><div><h4>M0 — Research and system definition</h4><p>Architecture, protocol, threat boundaries and experiment design</p></div><span class="milestone-state">Current focus</span>
+          </div>
+          <div class="milestone">
+            <span class="milestone-dot"></span><div><h4>M1 — Collaboration kernel</h4><p>Independent sessions, typed messages and shared state</p></div><span class="milestone-state">Planned</span>
+          </div>
+          <div class="milestone">
+            <span class="milestone-dot"></span><div><h4>M2 — Work coordination</h4><p>Task offers, claims, dependencies and recovery</p></div><span class="milestone-state">Planned</span>
+          </div>
+          <div class="milestone">
+            <span class="milestone-dot"></span><div><h4>M3 — Controlled execution</h4><p>Isolated workspaces, integration and verification</p></div><span class="milestone-state">Planned</span>
+          </div>
+          <div class="milestone">
+            <span class="milestone-dot"></span><div><h4>M4 — Comparative evaluation</h4><p>Repeatable runs against single-agent and orchestrated baselines</p></div><span class="milestone-state">Planned</span>
+          </div>
+          <div class="milestone">
+            <span class="milestone-dot"></span><div><h4>M5 — Developer experience</h4><p>Stable API, adapters, CLI and examples</p></div><span class="milestone-state">Planned</span>
+          </div>
+        </div>
+      </div>
+      <div class="doc-links">
+        <a href="https://github.com/kaxokaze/fellows/blob/main/ROADMAP.md">Full development roadmap ↗</a>
+        <a href="https://github.com/kaxokaze/fellows">Repository activity ↗</a>
+      </div>
+    </section>
+
+    <section class="section shell contribute" id="contribute">
+      <div class="contribute-panel">
+        <div class="contribute-copy">
+          <div class="section-index">07 / Join the research</div>
+          <h2>Help make the design harder to break</h2>
+          <p>At this stage, the most useful contributions are architecture reviews, protocol critique, failure-mode analysis, security feedback and reproducible evaluation ideas. The runtime is not accepting broad implementation work yet.</p>
+        </div>
+        <div class="contribute-actions">
+          <a class="button primary" href="https://github.com/kaxokaze/fellows/issues">Discuss a technical issue ↗</a>
+          <a class="button secondary" href="https://github.com/kaxokaze/fellows/blob/main/CONTRIBUTING.md">Read contribution notes</a>
         </div>
       </div>
     </section>
   </main>
 
-  <footer class="shell">
-    <span>Fellows · Open-source systems research · MIT License</span>
+  <footer class="footer shell">
+    <div class="footer-meta"><span>Fellows</span><span>Open-source systems research</span><span>MIT License</span></div>
     <div class="footer-links">
       <a href="https://github.com/kaxokaze/fellows">GitHub ↗</a>
-      <a href="../CONTRIBUTING.md">Contributing</a>
-      <a href="../LICENSE">License</a>
+      <a href="https://github.com/kaxokaze/fellows/blob/main/README.md">Readme</a>
+      <a href="https://github.com/kaxokaze/fellows/blob/main/CONTRIBUTING.md">Contributing</a>
     </div>
   </footer>
 </body>
