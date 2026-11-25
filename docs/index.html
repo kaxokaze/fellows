@@ -21,19 +21,35 @@
     :root {
       color-scheme: dark;
       --page: #0b0f17;
-      --surface: #121a27;
+      --background: #0b0f17;
+      --foreground: #e7edf6;
+      --card: #121a27;
+      --card-foreground: #e7edf6;
+      --popover: #161f2d;
+      --popover-foreground: #e7edf6;
+      --primary: #dce7f8;
+      --primary-foreground: #152238;
+      --secondary: #1c2636;
+      --secondary-foreground: #d5deeb;
+      --accent: #263752;
+      --accent-foreground: #e7edf6;
+      --border: #29364a;
+      --input: #35445b;
+      --ring: #8ba9dc;
+      --radius: 8px;
+      --surface: var(--card);
       --surface-soft: #172131;
       --surface-blue: #19263a;
-      --ink: #e7edf6;
+      --ink: var(--foreground);
       --body: #b3bfd0;
       --muted: #8795aa;
-      --line: #263246;
-      --line-strong: #35445b;
-      --blue: #8ba9dc;
+      --line: var(--border);
+      --line-strong: var(--input);
+      --blue: var(--ring);
       --blue-dark: #b7cdf1;
       --blue-soft: #263752;
       --green: #8eaa9d;
-      --navy: #101827;
+      --navy: #131f32;
       --navy-2: #172338;
       --navy-line: rgba(224,234,248,.14);
       --navy-text: #eaf0f8;
@@ -110,20 +126,25 @@
     .button.link { min-height: 32px; padding: 0 4px; background: transparent; border: 0; color: #a9c1eb; box-shadow: none; }
     .button.link:hover { color: #d7e4f8; text-decoration: underline; text-underline-offset: 4px; }
     .button:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
-    .project-status { display: flex; align-items: center; gap: 8px; margin-top: 32px; color: var(--muted); font-size: 12px; }
+    .project-status { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 32px; color: var(--muted); font-size: 12px; }
     .status-dot { width: 7px; height: 7px; border-radius: 50%; background: #718c7f; }
     .shadcn-card {
       border: 1px solid var(--line-strong);
-      border-radius: 10px;
-      background: var(--surface);
-      box-shadow: 0 1px 2px rgba(0,0,0,.22), 0 8px 24px rgba(0,0,0,.12);
+      border-radius: var(--radius);
+      background: var(--card);
+      color: var(--card-foreground);
+      box-shadow: 0 1px 2px rgba(0,0,0,.22);
     }
     .shadcn-badge {
       min-height: 24px; display: inline-flex; align-items: center; gap: 8px;
       padding: 2px 9px; border: 1px solid #354a68; border-radius: 6px;
       background: #18263a; color: #c2d4f1; font: 11px var(--mono);
     }
-    .shadcn-separator { height: 1px; width: 100%; background: var(--line); }
+    .shadcn-separator { height: 1px; width: 100%; background: var(--border); }
+    .shadcn-alert {
+      display: flex; gap: 12px; padding: 14px 16px; border: 1px solid var(--border);
+      border-radius: var(--radius); background: var(--muted); color: var(--foreground);
+    }
     .hero-visual { position: relative; min-width: 0; }
     .diagram-frame {
       padding: 24px; border: 1px solid var(--line); border-radius: 12px;
@@ -134,7 +155,7 @@
     .mobile-model { display: none; }
     .diagram-foot { display: flex; justify-content: space-between; gap: 12px; margin-top: 12px; color: var(--muted); font-size: 11px; }
     .hero-caption { margin: 12px 0 0; color: var(--muted); font-size: 11px; }
-    .principle-strip { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: #101722; }
+    .principle-strip { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: #111b2a; }
     .principle-inner { min-height: 78px; display: grid; grid-template-columns: 1fr 2fr; gap: 24px; align-items: center; }
     .strip-label { color: var(--muted); font: 11px var(--mono); }
     .strip-items { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
@@ -148,13 +169,14 @@
       content: ""; position: absolute; z-index: -1; top: 0; bottom: 0; left: 50%;
       width: 100vw; transform: translateX(-50%); background: var(--section-bg, #0d131e);
     }
-    #approach { --section-bg: #0e1420; }
-    #architecture { --section-bg: #111a29; }
+    #approach { --section-bg: #0d1522; }
+    #architecture { --section-bg: #152138; }
     #workflow { --section-bg: #0b111b; }
-    #protocol { --section-bg: #121c2b; }
-    #evaluation { --section-bg: #0c121d; }
+    #protocol { --section-bg: #17253a; }
+    #evaluation { --section-bg: #0d1624; }
     #roadmap { --section-bg: #101827; }
     #contribute { --section-bg: #0b111b; }
+    .section::before { border-top: 1px solid rgba(173,194,226,.035); border-bottom: 1px solid rgba(173,194,226,.045); }
     .section:first-child { border-top: 0; }
     .section-head { display: grid; grid-template-columns: .7fr 1.3fr; gap: 48px; align-items: start; }
     .section-index { color: var(--blue); font: 11px var(--mono); padding-top: 8px; }
@@ -369,7 +391,7 @@
             </defs>
             <path d="M194 109 C236 109 239 159 272 177" stroke="#9aaac0" stroke-width="2" fill="none"/>
             <path d="M486 109 C444 109 441 159 408 177" stroke="#9aaac0" stroke-width="2" fill="none"/>
-            <path d="M340 310 L340 286" stroke="#315caa" stroke-width="2" fill="none"/>
+            <path d="M340 310 L340 286" stroke="#8ba9dc" stroke-width="2" fill="none"/>
             <circle cx="194" cy="109" r="4" fill="#8ba9dc"/>
             <circle cx="486" cy="109" r="4" fill="#8ba9dc"/>
             <circle cx="340" cy="310" r="4" fill="#8ba9dc"/>
@@ -458,7 +480,7 @@
           </div>
         </div>
         <div class="architecture-layout">
-          <div class="architecture-diagram" role="img" aria-label="Three logical layers: peer layer, deterministic control plane and execution plane">
+          <div class="architecture-diagram shadcn-card" role="img" aria-label="Three logical layers: peer layer, deterministic control plane and execution plane">
             <div class="diagram-kicker">Logical system layers</div>
             <div class="layer">
               <span class="layer-number">01</span>
