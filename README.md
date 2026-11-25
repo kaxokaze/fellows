@@ -81,6 +81,14 @@ More agents, more messages, or longer discussions are not evidence of better per
 
 The design material is organized under [docs/](docs/README.md). Start with the [architecture specification](docs/architecture/OVERVIEW.md), then review the [coordination protocol](docs/architecture/COORDINATION.md), the [peer-first architecture decision](docs/decisions/0001-peer-first-collaboration.md), and the [evaluation plan](docs/evaluation/PLAN.md).
 
+## Project site
+
+The project landing page is available at [kaxokaze.github.io/fellows](https://kaxokaze.github.io/fellows/) once GitHub Pages is enabled for the `/docs` directory. The source is [docs/index.html](docs/index.html).
+
+## Visibility and community
+
+The [distribution notes](docs/launch/DISTRIBUTION.md) contain the current project description, launch copy, suggested communities, and publication checklist. Please keep public claims aligned with the development status above.
+
 ## Development status
 
 | Area | Status |
