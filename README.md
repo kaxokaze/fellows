@@ -1,55 +1,105 @@
 # Fellows
 
-**Independent AI agents, working together on one project.**
+**Peer-first collaboration runtime for autonomous AI agents.**
 
-Fellows is an open-source project exploring a different way to build with AI agents. Instead of treating every additional agent as a subagent managed by one primary model, Fellows asks what happens when several independent agents can share context, discuss the work, make decisions, and coordinate as peers.
+Fellows is an open-source project investigating how independent AI agents can reason, coordinate, and deliver work as a team—without making one model the permanent authority over every other agent.
 
-The goal is a team that can take a project from an initial request to a reviewed result, while keeping the user in control.
+The project focuses on the systems work behind useful collaboration: shared project state, agent-to-agent communication, task negotiation, conflict-aware execution, and verifiable integration.
 
-## Why
+> **Status: design and research.** The repository currently contains specifications and planning documents. There is no runnable runtime, SDK, CLI, or benchmark implementation yet.
 
-Running several agents at once is easy to describe and hard to make useful. Agents can repeat work, lose important context, disagree without resolving anything, or make changes that conflict with each other. More agents do not necessarily produce a better result.
+## Problem
 
-Fellows is focused on the parts that make collaboration work: shared project context, direct communication, clear decisions, coordination around dependencies, and verification of the finished work.
+Multi-agent systems can distribute work across several model sessions, but parallel execution alone does not produce reliable collaboration.
 
-## How it should work
+In practice, teams of agents need to deal with:
 
-A user gives the team an objective and its constraints.
+- inconsistent or stale context;
+- duplicated task ownership and untracked dependencies;
+- disagreements that never converge;
+- concurrent edits to shared artifacts;
+- tool permissions and untrusted agent output;
+- integration failures and unverified completion;
+- coordination overhead that can outweigh the benefit of parallelism.
 
-The agents examine the task, share what they know, and discuss important choices. They then agree on a plan, divide work where that makes sense, and coordinate when their work overlaps. Before delivery, the team checks that the pieces fit together and that the result meets the original requirements.
+Fellows is concerned with these coordination problems, not with maximizing the number of agents in a run.
 
-The team should be able to change its working style as the project changes. Some tasks need parallel work; others need a closer discussion or an independent review.
+## Technical direction
 
-## First use case
+Fellows separates **peer reasoning** from **deterministic coordination**.
 
-The first area to explore is software development.
+Agents remain independent participants. They can exchange proposals, findings, questions, challenges, and reviews directly. They can offer to take work, claim responsibilities, and coordinate around a shared objective.
 
-For example, a request to build a portfolio site might involve agents looking at product requirements, design, implementation, and testing. Those are areas of responsibility, not permanent ranks. The agents should be able to share findings and work together when a decision affects more than one area.
+A deterministic runtime remains responsible for authoritative project state, event persistence, task transitions, resource limits, permission checks, and artifact integration. This infrastructure is not a permanent supervisory model; it provides the consistency and safety guarantees that autonomous participants cannot reliably provide on their own.
 
-## Current status
+The intended architecture has five main areas:
 
-**Fellows is at the design and research stage. There is no working implementation in this repository yet.**
+| Area | Responsibility |
+| --- | --- |
+| Agent runtime | Independent model sessions, capabilities, tools, and execution budgets |
+| Collaboration protocol | Typed messages, decisions, task offers, claims, and reviews |
+| Project state | Requirements, artifacts, dependencies, decisions, and event history |
+| Coordination plane | Scheduling, task ownership, state transitions, policy enforcement, and recovery |
+| Execution and verification | Isolated workspaces, controlled tool access, integration, tests, and review |
 
-The repository currently contains the project overview, a proposed architecture, and a development roadmap. The next step is to narrow the design into a small prototype and test whether peer collaboration improves results over a single agent and a conventional orchestrated team.
+See the [architecture specification](docs/architecture/OVERVIEW.md) and the [coordination protocol proposal](docs/architecture/COORDINATION.md).
 
-- [Proposed architecture](docs/architecture/OVERVIEW.md)
-- [Roadmap](ROADMAP.md)
-- [Contributing](CONTRIBUTING.md)
+## Operating model
 
-## What the first prototype needs to test
+A project begins with a user-defined objective, constraints, and acceptance criteria.
 
-- A small group of independent agents can discuss and plan one shared task.
-- Agents can read and update a common project state without losing the history of decisions.
-- Work can be divided without unnecessary duplication.
-- Changes can be integrated and checked safely.
-- Any improvement is worth the extra time and model cost.
+1. Agents independently inspect the request and identify missing information.
+2. They exchange proposals and evidence, challenge assumptions, and record decisions.
+3. The team identifies capabilities, dependencies, and work that can safely proceed in parallel.
+4. Agents claim work and execute it within scoped environments.
+5. Findings and artifacts are published to shared project state.
+6. Changes are integrated, reviewed, and tested against the original criteria.
+7. The user receives the result with verification evidence and known limitations.
 
-We will update this section as the design becomes an implementation. Planned work should not be read as an existing feature.
+The collaboration pattern should adapt to the task. Independent exploration, parallel execution, pair work, and independent review are different tools—not mandatory stages in a fixed pipeline.
 
-## Support and collaboration
+## Initial target: software engineering
 
-Fellows is being developed as an open-source project. Help with model access, API credits, coding tools, compute, infrastructure, or technical feedback would be useful. This is a request for in-kind developer support, not investment or equity funding.
+The first prototype is intended to evaluate a small team of independent agents on a bounded software task. It should demonstrate shared context, direct communication, work ownership, controlled changes, and integrated verification.
+
+The first experiment is deliberately small: three agents, one task, a shared project state, and a measurable acceptance test. A broader runtime should follow only if the experiment demonstrates a useful improvement over simpler baselines.
+
+## Evaluation criteria
+
+Fellows will be evaluated against both a single-agent baseline and a conventional orchestrated multi-agent baseline. Relevant measures include:
+
+- task success and acceptance-test results;
+- wall-clock completion time;
+- model and compute cost per accepted result;
+- duplicated work and unresolved dependencies;
+- merge conflicts and integration failures;
+- human interventions and recovery effort.
+
+More agents, more messages, or longer discussions are not evidence of better performance. The [evaluation plan](docs/evaluation/PLAN.md) defines the proposed comparison.
+
+## Development status
+
+| Area | Status |
+| --- | --- |
+| Problem statement and project direction | Drafted |
+| High-level architecture | Proposed |
+| Coordination protocol | Proposed |
+| Execution and safety model | To be specified and tested |
+| Runtime implementation | Not started |
+| Provider adapters | Not started |
+| CLI / developer API | Not started |
+| Automated tests and benchmarks | Not started |
+
+Status will change only when corresponding code, tests, or experimental results are present in the repository.
+
+## Contributing
+
+At this stage, useful contributions include architecture review, research references, failure-mode analysis, and feedback on the first prototype design. Read [CONTRIBUTING.md](CONTRIBUTING.md) before opening a proposal.
+
+## Support
+
+Fellows is intended to remain open source. The project is looking for in-kind technical support such as model/API access, coding tools, compute, infrastructure, and research feedback. It is not seeking investment or equity funding.
 
 ## License
 
-Fellows is available under the [MIT License](LICENSE).
+[MIT](LICENSE)
