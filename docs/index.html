@@ -798,7 +798,18 @@
   <div class="taskbar" aria-label="Windows-style taskbar">
     <div class="start-button"><span class="start-orb" aria-hidden="true"></span>start</div>
     <div class="task-item"><img src="./favicon.svg" alt=""><span>Fellows — Project overview</span></div>
-    <div class="tray"><span class="tray-icon">◖◗</span><span>ENG</span><span>23:24</span></div>
+    <div class="tray"><span class="tray-icon">◖◗</span><span>ENG</span><span id="taskbar-clock">--:--</span></div>
   </div>
+  <script>
+    (() => {
+      const clock = document.getElementById("taskbar-clock");
+      const formatter = new Intl.DateTimeFormat("en-IN", {
+        timeZone: "Asia/Kolkata", hour: "2-digit", minute: "2-digit", hour12: true
+      });
+      const updateClock = () => { if (clock) clock.textContent = formatter.format(new Date()); };
+      updateClock();
+      window.setInterval(updateClock, 30000);
+    })();
+  </script>
 </body>
 </html>
