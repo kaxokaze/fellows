@@ -6,7 +6,7 @@
 
 **An open-source exploration of peer-based AI collaboration.**
 
-[Vision](#the-vision) · [How it works](#how-it-works) · [Roadmap](#project-status--roadmap) · [Contributing](CONTRIBUTING.md)
+[Vision](#the-vision) · [Architecture](docs/architecture/OVERVIEW.md) · [How it works](#how-it-should-work) · [Roadmap](ROADMAP.md) · [Contributing](CONTRIBUTING.md)
 
 </div>
 
@@ -59,6 +59,14 @@ This is the intended workflow. The implementation will evolve as the project is 
 | Measurable efficiency | Quality should be evaluated alongside time, compute, and token cost. |
 | Human direction | People define goals, constraints, and approval boundaries. |
 
+## Project architecture
+
+The proposed architecture describes the responsibilities and open questions behind Fellows, including independent agents, shared project state, peer communication, coordination, execution safety, and evaluation.
+
+**[Read the architecture overview →](docs/architecture/OVERVIEW.md)**
+
+The document is explicitly a proposal; implementation status will be updated as the prototype develops.
+
 ## Initial application: software development
 
 A user might ask Fellows to build a portfolio website.
@@ -80,7 +88,7 @@ Fellows is at an early stage. The following roadmap describes intended work, not
 - [ ] **Stage 5 — Evaluation:** compare Fellows with a single-agent baseline and conventional orchestrated multi-agent workflows.
 - [ ] **Stage 6 — Usability:** build a practical interface for creating, observing, and steering teams.
 
-Progress will be reflected here as work becomes real and verifiable.
+Progress will be reflected here as work becomes real and verifiable. See the detailed [roadmap](ROADMAP.md).
 
 ## How we plan to evaluate it
 
