@@ -18,7 +18,7 @@
       "name": "Fellows",
       "description": "Fellows is an open-source systems research project exploring peer-first collaboration between independent AI agents. It investigates agent-to-agent communication, task negotiation, shared project state, deterministic coordination, controlled execution and verifiable integration. The project is in the design and research stage. There is no runnable runtime, SDK, CLI or benchmark implementation yet.",
       "webpageUrl": {
-        "url": "https://github.com/kaxokaze/fellows",
+        "url": "https://okay-fellows.netlify.app/",
         "wellKnown": "https://github.com/kaxokaze/fellows/blob/main/.well-known/funding-manifest-urls"
       },
       "repositoryUrl": {
