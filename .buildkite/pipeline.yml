@@ -1,3 +1,0 @@
-steps:
-  - label: ":python: Validate public documentation"
-    command: "python3 scripts/validate_public_site.py"
