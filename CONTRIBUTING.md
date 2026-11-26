@@ -1,47 +1,53 @@
 # Contributing to Fellows
 
-Fellows is in the architecture and research phase. The project is not accepting broad implementation work yet; its first priority is to validate the collaboration model and define a small, testable runtime.
+Thank you for taking an interest in Fellows.
 
-Contributions that improve the technical direction are welcome.
+Fellows is currently in the design and research stage. The first priority is to test the peer-first collaboration thesis and define a small, measurable prototype. Contributions should improve the clarity, safety, or testability of that work.
 
-## Current areas of interest
+## Useful contributions
 
-- Peer-based agent coordination and task ownership
-- Shared state, event logs, and context consistency
-- Agent messaging and decision protocols
-- Conflict-aware execution and artifact integration
-- Tool isolation, permissions, and prompt-injection boundaries
-- Evaluation methodology for multi-agent systems
+- Research on peer-based and orchestrated agent systems
+- Review of the architecture and coordination protocol
+- Shared-state and event-history design
+- Task ownership, leases, and dependency handling
+- Permission boundaries and untrusted agent-output handling
+- Evaluation design and reproducible task selection
+- Precise documentation corrections
 
-## Proposing a design change
+## Before making a substantial change
 
-For substantial changes, open an issue before submitting a pull request. Include:
+Open an issue or start a discussion before investing in a large proposal. Explain:
 
-1. The problem and the scenario in which it occurs.
-2. The proposed behavior or design.
-3. Relevant prior work or existing implementations.
+1. The problem and the scenario in which it appears.
+2. The proposed change and expected behavior.
+3. Relevant prior work or evidence.
 4. Alternatives considered.
-5. Failure modes, security implications, and operational costs.
+5. Failure modes, security implications, and cost.
 6. How the proposal could be tested.
 
-A proposal should make clear whether it is a research question, an architectural decision, or an implementation request.
-
-## Code contributions
-
-The runtime implementation has not started. Build instructions, supported toolchains, test commands, and coding conventions will be added when those choices are made.
-
-Until then, avoid introducing an arbitrary stack or a large implementation before its interfaces and acceptance criteria have been reviewed.
-
-## Technical claims and benchmarks
-
-Distinguish between a design proposal, implemented behavior, and measured results. Performance claims should include the task definition, model and provider versions, relevant configuration, resource limits, baseline, run count, and known limitations.
-
-Do not use agent count, message volume, or a single successful demonstration as a substitute for a controlled comparison.
+Do not present an architectural suggestion as an implemented capability.
 
 ## Pull requests
 
-Once implementation begins, pull requests should be focused and reviewable. Include tests for changed behavior, update the relevant design documents, and explain operational or compatibility implications. Do not include credentials, local configuration, generated artifacts, or unrelated changes.
+Keep changes focused and reviewable. Update the relevant specification when a design decision changes. Include tests when behavior exists to test, and explain compatibility or operational consequences.
+
+Do not commit credentials, private data, local configuration, generated build output, or unrelated changes.
+
+## Technical claims
+
+Clearly distinguish between:
+
+- **Proposed:** described in a design document.
+- **Implemented:** present in source code.
+- **Verified:** exercised by tests or a reproducible experiment.
+- **Measured:** supported by recorded results and a stated methodology.
+
+Benchmarks should identify the task, model and provider versions, configuration, budgets, baseline, run count, and limitations.
 
 ## Discussion
 
-Keep technical discussion specific and constructive. Disagreement is expected; explain the reasoning and evidence behind it.
+Be specific, respectful, and evidence-led. Disagreement is welcome; personal attacks are not. Follow the [Code of Conduct](CODE_OF_CONDUCT.md).
+
+## License
+
+By contributing, you agree that your contribution is made available under the repository's [MIT License](LICENSE).
