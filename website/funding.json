@@ -1,0 +1,108 @@
+{
+  "$schema": "https://fundingjson.org/schema/v1.1.0.json",
+  "version": "v1.1.0",
+  "entity": {
+    "type": "individual",
+    "role": "maintainer",
+    "name": "kaxokaze",
+    "email": "okay.fellows@gmail.com",
+    "description": "Independent maintainer of Fellows, an MIT-licensed open-source research project exploring peer-first collaboration between autonomous AI agents. The project is at the design and research stage.",
+    "webpageUrl": {
+      "url": "https://github.com/kaxokaze",
+      "wellKnown": "https://github.com/kaxokaze/fellows/blob/main/.well-known/funding-manifest-urls"
+    }
+  },
+  "projects": [
+    {
+      "guid": "fellows",
+      "name": "Fellows",
+      "description": "An open-source research project exploring peer-first collaboration between independent AI agents through direct communication, shared project state, negotiated work, deterministic coordination, and verifiable results. The project is at the design and research stage; there is no runnable runtime, SDK, CLI, or benchmark implementation yet.",
+      "webpageUrl": {
+        "url": "https://github.com/kaxokaze/fellows",
+        "wellKnown": "https://github.com/kaxokaze/fellows/blob/main/.well-known/funding-manifest-urls"
+      },
+      "repositoryUrl": {
+        "url": "https://github.com/kaxokaze/fellows",
+        "wellKnown": "https://github.com/kaxokaze/fellows/blob/main/.well-known/funding-manifest-urls"
+      },
+      "licenses": [
+        "spdx:MIT"
+      ],
+      "tags": [
+        "ai-agents",
+        "multi-agent-systems",
+        "open-source",
+        "distributed-systems",
+        "research"
+      ]
+    }
+  ],
+  "funding": {
+    "channels": [
+      {
+        "guid": "bank-transfer",
+        "type": "bank",
+        "description": "Bank-transfer details for project grants, contributions, and sponsorships are available on request by emailing okay.fellows@gmail.com."
+      }
+    ],
+    "plans": [
+      {
+        "guid": "one-time-project-funding",
+        "status": "active",
+        "name": "One-time project grant or contribution",
+        "description": "Flexible one-time financial support for Fellows. Funding will support maintainer time, the initial runtime implementation, AI model/API usage, controlled evaluation, and release preparation. Contact okay.fellows@gmail.com for bank-transfer details.",
+        "amount": 0,
+        "currency": "INR",
+        "frequency": "one-time",
+        "channels": [
+          "bank-transfer"
+        ]
+      },
+      {
+        "guid": "monthly-project-sponsorship",
+        "status": "active",
+        "name": "Monthly project sponsorship",
+        "description": "Flexible recurring financial sponsorship for Fellows development, maintainer time, model API usage, and evaluation. Contact okay.fellows@gmail.com for bank-transfer details.",
+        "amount": 0,
+        "currency": "INR",
+        "frequency": "monthly",
+        "channels": [
+          "bank-transfer"
+        ]
+      }
+    ]
+  },
+  "disclaimer": "This manifest describes project funding plans and a separate request for AI model/API credits. Investment discussions, including potential equity arrangements, are handled separately and are not an offer of securities.",
+  "additionalSupportRequests": {
+    "scope": "Fellows is seeking only AI model/API credits and financial funding.",
+    "aiApiCredits": {
+      "status": "actively-seeking",
+      "type": "in-kind",
+      "description": "Capped AI model/API credits or research API quotas from model providers.",
+      "intendedUse": [
+        "Build and test independent agent sessions for the first prototype",
+        "Compare peer-first collaboration with single-agent and orchestrated baselines",
+        "Measure model usage, result quality, latency, and API cost"
+      ]
+    },
+    "financialFunding": {
+      "status": "actively-seeking",
+      "forms": [
+        "Open-source project grants",
+        "One-time financial contributions",
+        "Recurring project sponsorships"
+      ],
+      "intendedUse": [
+        "Maintainer time and initial runtime implementation",
+        "AI model/API usage",
+        "Controlled evaluation and release preparation"
+      ],
+      "investmentDiscussions": "Open to suitable investment discussions, including potential equity arrangements, on a case-by-case basis. This manifest does not set terms or make an equity offer."
+    },
+    "contact": {
+      "email": "okay.fellows@gmail.com",
+      "github": "https://github.com/kaxokaze/fellows",
+      "instagram": "https://www.instagram.com/okay.fellows/"
+    }
+  }
+}
