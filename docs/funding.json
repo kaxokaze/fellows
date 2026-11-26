@@ -39,8 +39,26 @@
     }
   ],
   "funding": {
-    "channels": [],
-    "plans": []
+    "channels": [
+      {
+        "guid": "no-payment-channel",
+        "type": "other",
+        "address": "",
+        "description": "Inactive schema placeholder only. No payment address is configured. Fellows is not requesting or accepting monetary contributions; contact is for in-kind technical support discussions only."
+      }
+    ],
+    "plans": [
+      {
+        "guid": "no-financial-plan",
+        "status": "inactive",
+        "name": "No financial funding requested",
+        "description": "Inactive compatibility placeholder required by the FLOSS/Fund directory validator. This is not an active funding plan, donation request or payment offer. Fellows seeks only non-financial technical support described in nonFinancialSupport.",
+        "amount": 0,
+        "currency": "USD",
+        "frequency": "other",
+        "channels": []
+      }
+    ]
   },
   "nonFinancialSupport": {
     "requestType": "in-kind-technical-support",
@@ -98,7 +116,8 @@
       "website": "https://kaxokaze.github.io/fellows/",
       "github": "https://github.com/kaxokaze/fellows",
       "instagram": "https://www.instagram.com/okay.fellows/"
-    }
+    },
+    "manifestCompatibilityNote": "The directory validator requires at least one funding channel and plan. The included channel has no payment address and the only plan is inactive; they are compatibility placeholders, not an active request for money."
   },
   "disclaimer": "This manifest describes the project's current in-kind technical support interests. No monetary payment channel or financial funding plan is being requested. The nonFinancialSupport field is a project-specific extension; funding.json v1.1.0 standard fields remain available for financial funding metadata if the project's policy changes."
 }
