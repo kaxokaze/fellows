@@ -108,9 +108,13 @@ Status will change only when corresponding code, tests, or experimental results 
 
 At this stage, useful contributions include architecture review, research references, failure-mode analysis, and feedback on the first prototype design. Read [CONTRIBUTING.md](CONTRIBUTING.md) before opening a proposal.
 
-## Support
+## Technical support
 
-Fellows is intended to remain open source. The project is looking for in-kind technical support such as model/API access, coding tools, compute, infrastructure, and research feedback. It is not seeking investment or equity funding.
+Fellows is intended to remain open source. The project is seeking **in-kind technical support** such as model/API access, coding tools, compute, infrastructure, and research feedback to help define, prototype, and evaluate the collaboration model.
+
+This is **not a cash-funding or investment request**. Fellows is not seeking money, investment, equity, loans, or financial sponsorship.
+
+See the [structured technical support request](docs/funding.json) for the current support areas, intended research use, project status, and contact details.
 
 ## License
 
