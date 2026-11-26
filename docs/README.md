@@ -1,30 +1,26 @@
-# Technical Documentation
+# Project documentation
 
-This section contains the design material for Fellows. All architecture documents are proposals until the corresponding behavior is implemented and tested.
+This directory contains the written design record for Fellows. The material is exploratory: proposed behavior must not be confused with implemented or verified behavior.
 
-## Architecture
+## Design
 
-- [Architecture specification](architecture/OVERVIEW.md) — system boundaries, logical components, execution lifecycle, control-plane responsibilities, security boundaries, and initial implementation scope.
-- [Coordination protocol](architecture/COORDINATION.md) — message envelope, message types, task state machine, claims, decision records, delivery semantics, and failure handling.
-- [ADR 0001: Peer-first collaboration](decisions/0001-peer-first-collaboration.md) — rationale for separating peer reasoning from deterministic runtime coordination.
-
-## Project site and distribution
-
-- [Project landing page](index.html) — static site source published on GitHub Pages from the `/docs` directory: https://kaxokaze.github.io/fellows/.
-- [Distribution notes](launch/DISTRIBUTION.md) — launch copy and suitable channels for the current research stage.
-
-## Funding
-
-- [Funding manifest](funding.json) — current request for AI model/API credits and financial funding through grants, contributions, and sponsorships. Investment discussions, including potential equity arrangements, are handled separately.
+- [Architecture overview](architecture/OVERVIEW.md) — system boundaries, agent responsibilities, shared state, control-plane rules, and security.
+- [Coordination protocol](architecture/COORDINATION.md) — message types, task ownership, delivery, decisions, and state consistency.
+- [ADR 0001: Peer-first collaboration](decisions/0001-peer-first-collaboration.md) — the central architectural direction and alternatives considered.
 
 ## Evaluation
 
-- [Evaluation plan](evaluation/PLAN.md) — proposed comparison against single-agent and orchestrated multi-agent baselines.
+- [Evaluation plan](evaluation/PLAN.md) — the proposed comparison with single-agent and orchestrated multi-agent baselines.
+
+## Funding
+
+- [Funding overview](FUNDING.md) — the current request and intended use.
+- [Funding manifest](funding.json) — machine-readable funding plans and AI API credit request.
+
+## Website
+
+The independent static website source lives in [website/](../website/). It has no hosting provider, deployment workflow, or build integration configured in this repository.
 
 ## Reading order
 
-Start with the architecture specification, then read the coordination protocol. The ADR captures the central architectural choice. The evaluation plan describes how the project intends to test whether that choice is worthwhile.
-
-## Document status
-
-Documents use explicit status labels. A proposal is not an implementation commitment. Update the relevant document when a design changes, and record meaningful architectural decisions as ADRs.
+Start with the repository [README](../README.md), then read the architecture overview and coordination protocol. The architecture decision record explains why this approach was selected for investigation. The evaluation plan defines how it should be tested.
