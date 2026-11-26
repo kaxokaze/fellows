@@ -19,7 +19,7 @@ This directory contains the written design record for Fellows. The material is e
 
 ## Website
 
-The independent static website source lives in [website/](../website/). It has no hosting provider, deployment workflow, or build integration configured in this repository.
+The static website source lives in [website/](../website/). GitHub Pages deploys this directory directly through [the Pages workflow](../.github/workflows/deploy-pages.yml). Changes to files under `website/` on `main` trigger a deployment.
 
 ## Reading order
 
