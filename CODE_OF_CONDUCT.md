@@ -1,40 +1,34 @@
 # Code of Conduct
 
-## Our commitment
+## Our standard
 
-Fellows is an open-source research project. We want its discussions and contribution spaces to be respectful, constructive, and focused on improving the work.
+Fellows is an open-source research project. We want every project space to be respectful, constructive, and focused on improving the work.
 
-We welcome participation regardless of experience level, background, identity, or point of view. Technical disagreement is expected; personal attacks are not.
+Participation is welcome regardless of experience, identity, background, or point of view. Technical disagreement is expected. Harassment and personal attacks are not.
 
 ## Expected behavior
 
-Participants are expected to:
-
-- Be respectful and considerate.
-- Discuss ideas and evidence rather than attack people.
-- Give and receive constructive feedback in good faith.
-- Respect differing experiences, perspectives, and communication styles.
-- Keep discussions relevant and useful to the project.
-- Respect privacy and do not publish another person's private information without permission.
+- Treat people with respect and consideration.
+- Discuss ideas, evidence, and work—not personal characteristics.
+- Give and receive criticism constructively.
+- Respect different experiences and communication styles.
+- Keep project discussions relevant and useful.
+- Respect privacy; do not publish private information without permission.
 
 ## Unacceptable behavior
 
-Unacceptable behavior includes harassment, discrimination, threats, intimidation, personal attacks, deliberate disruption, and sharing private information without consent.
+Unacceptable conduct includes harassment, discrimination, threats, intimidation, personal attacks, deliberate disruption, and sharing private information without consent.
 
-Project spaces include the repository, issues, pull requests, discussions, and other spaces where someone is representing Fellows.
+This standard applies to repository issues, pull requests, discussions, and public spaces where someone is representing Fellows.
 
-## Maintainer responsibilities
+## Maintainer responsibility
 
-Project maintainers are responsible for clarifying and enforcing these standards. They may edit or remove contributions that violate this Code of Conduct and may restrict participation when necessary to protect the community.
+Project maintainers are responsible for clarifying and enforcing this standard. They may edit or remove contributions that violate it and may restrict participation when necessary to protect the community.
 
 ## Reporting
 
-Report conduct that you believe violates this policy to **okay.fellows@gmail.com**. Please include relevant links or context. Reports will be reviewed by the project maintainer and handled as confidentially as reasonably possible.
+Report conduct that you believe violates this Code of Conduct to [okay.fellows@gmail.com](mailto:okay.fellows@gmail.com). Include relevant links or context. Reports will be reviewed by the maintainer and handled as confidentially as reasonably possible.
 
 ## Scope
 
-This Code of Conduct applies to project spaces and to public spaces when an individual is officially representing Fellows.
-
-## Attribution
-
-This policy is adapted from the Contributor Covenant community standards.
+This policy applies to project spaces and to public spaces when an individual is officially representing Fellows.
