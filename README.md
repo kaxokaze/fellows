@@ -108,13 +108,18 @@ Status will change only when corresponding code, tests, or experimental results 
 
 At this stage, useful contributions include architecture review, research references, failure-mode analysis, and feedback on the first prototype design. Read [CONTRIBUTING.md](CONTRIBUTING.md) before opening a proposal.
 
-## Technical support
+## Funding and AI API credits
 
-Fellows is intended to remain open source. The project is seeking **in-kind technical support** such as model/API access, coding tools, compute, infrastructure, and research feedback to help define, prototype, and evaluate the collaboration model.
+Fellows is seeking only two forms of support:
 
-This is **not a cash-funding or investment request**. Fellows is not seeking money, investment, equity, loans, or financial sponsorship.
+- **AI model/API credits:** capped inference credits or API quotas from model providers to develop and evaluate independent agent sessions and compare the peer-first approach against simpler baselines.
+- **Financial funding:** open-source project grants, one-time contributions, recurring sponsorships, and suitable investment discussions. Financial support would fund maintainer time, the initial implementation, model API usage, controlled evaluation, and release preparation. The maintainer is open to discussing potential equity arrangements case by case.
 
-See the [structured technical support request](docs/funding.json) for the current support areas, intended research use, project status, and contact details.
+Bank-transfer details for grants or sponsorships are available on request by emailing [okay.fellows@gmail.com](mailto:okay.fellows@gmail.com). No payment details or funding target are published yet.
+
+Fellows is **not requesting GPUs, compute, cloud hosting, storage, infrastructure, developer-tool licenses, or mentorship**.
+
+See the [funding and API credits manifest](docs/funding.json) for the machine-readable request and contact details.
 
 ## License
 
