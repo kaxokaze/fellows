@@ -1,124 +1,107 @@
 # Fellows
 
-**An open-source design project exploring peer-first collaboration between independent AI agents.**
+**Independent AI agents. Shared context. Verifiable collaboration.**
 
-Fellows is an open-source project investigating how independent AI agents can reason, coordinate, and deliver work as a team—without making one model the permanent authority over every other agent.
+Fellows is an open-source research project exploring how independent AI agents can work together as peers on a shared objective, without making one model the permanent supervisor of the team.
 
-The project focuses on the systems work behind useful collaboration: shared project state, agent-to-agent communication, task negotiation, conflict-aware execution, and verifiable integration.
+The project investigates the systems needed to make that collaboration dependable: shared project state, direct agent communication, task negotiation, conflict-aware changes, explicit permissions, and verifiable results.
 
-> **Status: design and research.** The repository currently contains specifications and planning documents. There is no runnable runtime, SDK, CLI, or benchmark implementation yet.
+> **Project stage: design and research.** This repository contains specifications and research plans. It does not yet contain a runnable runtime, SDK, CLI, or benchmark implementation.
 
-## Problem
+## Why Fellows
 
-Multi-agent systems can distribute work across several model sessions, but parallel execution alone does not produce reliable collaboration.
+Running multiple agents in parallel is easy to demonstrate. Making their work coherent is harder.
 
-In practice, teams of agents need to deal with:
+A useful team must be able to:
 
-- inconsistent or stale context;
-- duplicated task ownership and untracked dependencies;
-- disagreements that never converge;
-- concurrent edits to shared artifacts;
-- tool permissions and untrusted agent output;
-- integration failures and unverified completion;
-- coordination overhead that can outweigh the benefit of parallelism.
+- work from a consistent view of the project;
+- communicate findings, proposals, questions, and objections directly;
+- divide work without duplicated or conflicting ownership;
+- preserve decisions and their supporting evidence;
+- make changes without silently overwriting one another;
+- operate within explicit permissions and cost limits;
+- verify the integrated result against the original request.
 
-Fellows is concerned with these coordination problems, not with maximizing the number of agents in a run.
+Fellows is interested in the coordination model behind those capabilities—not in increasing the number of agents for its own sake.
 
-## Technical direction
+## The central idea
 
-Fellows separates **peer reasoning** from **deterministic coordination**.
+Fellows separates two responsibilities:
 
-Agents remain independent participants. They can exchange proposals, findings, questions, challenges, and reviews directly. They can offer to take work, claim responsibilities, and coordinate around a shared objective.
+**Peer reasoning** belongs to the agents. Agents retain their own context, exchange information directly, propose work, challenge assumptions, and review one another.
 
-A deterministic runtime remains responsible for authoritative project state, event persistence, task transitions, resource limits, permission checks, and artifact integration. This infrastructure is not a permanent supervisory model; it provides the consistency and safety guarantees that autonomous participants cannot reliably provide on their own.
+**Deterministic coordination** belongs to the runtime. A control plane owns authoritative project state, validates task transitions, records events, enforces permissions, and coordinates integration.
 
-The intended architecture has five main areas:
+The control plane is not another model that decides what everyone should think. It is the mechanism that makes important state changes explicit and testable.
 
-| Area | Responsibility |
+## Proposed system
+
+| Layer | Responsibility |
 | --- | --- |
-| Agent runtime | Independent model sessions, capabilities, tools, and execution budgets |
-| Collaboration protocol | Typed messages, decisions, task offers, claims, and reviews |
-| Project state | Requirements, artifacts, dependencies, decisions, and event history |
-| Coordination plane | Scheduling, task ownership, state transitions, policy enforcement, and recovery |
-| Execution and verification | Isolated workspaces, controlled tool access, integration, tests, and review |
+| Agent sessions | Independent model sessions with declared capabilities |
+| Collaboration protocol | Typed messages, proposals, task claims, reviews, and decisions |
+| Shared project state | Requirements, tasks, dependencies, decisions, artifacts, and event history |
+| Control plane | Validation, scheduling, permissions, budgets, recovery, and authoritative transitions |
+| Execution boundary | Scoped tools, attributable changes, integration, and verification |
 
-See the [architecture specification](docs/architecture/OVERVIEW.md) and the [coordination protocol proposal](docs/architecture/COORDINATION.md).
+Read the [architecture overview](docs/architecture/OVERVIEW.md) and [coordination protocol](docs/architecture/COORDINATION.md) for the current proposals.
 
-## Operating model
+## First research target
 
-A project begins with a user-defined objective, constraints, and acceptance criteria.
+The first intended experiment is deliberately narrow:
 
-1. Agents independently inspect the request and identify missing information.
-2. They exchange proposals and evidence, challenge assumptions, and record decisions.
-3. The team identifies capabilities, dependencies, and work that can safely proceed in parallel.
-4. Agents claim work and execute it within scoped environments.
-5. Findings and artifacts are published to shared project state.
-6. Changes are integrated, reviewed, and tested against the original criteria.
-7. The user receives the result with verification evidence and known limitations.
+- one bounded software-engineering task;
+- three independent agent sessions;
+- one shared project state;
+- direct peer communication;
+- explicit task ownership and review;
+- a repeatable acceptance test.
 
-The collaboration pattern should adapt to the task. Independent exploration, parallel execution, pair work, and independent review are different tools—not mandatory stages in a fixed pipeline.
+The result should be compared with a single-agent baseline and a conventional orchestrated multi-agent baseline. The experiment is intended to test whether the added coordination model is worth its cost and complexity.
 
-## Initial target: software engineering
-
-The first prototype is intended to evaluate a small team of independent agents on a bounded software task. It should demonstrate shared context, direct communication, work ownership, controlled changes, and integrated verification.
-
-The first experiment is deliberately small: three agents, one task, a shared project state, and a measurable acceptance test. A broader runtime should follow only if the experiment demonstrates a useful improvement over simpler baselines.
-
-## Evaluation criteria
-
-Fellows will be evaluated against both a single-agent baseline and a conventional orchestrated multi-agent baseline. Relevant measures include:
-
-- task success and acceptance-test results;
-- wall-clock completion time;
-- model and compute cost per accepted result;
-- duplicated work and unresolved dependencies;
-- merge conflicts and integration failures;
-- human interventions and recovery effort.
-
-More agents, more messages, or longer discussions are not evidence of better performance. The [evaluation plan](docs/evaluation/PLAN.md) defines the proposed comparison.
-
-## Technical documentation
-
-The design material is organized under [docs/](docs/README.md). Start with the [architecture specification](docs/architecture/OVERVIEW.md), then review the [coordination protocol](docs/architecture/COORDINATION.md), the [peer-first architecture decision](docs/decisions/0001-peer-first-collaboration.md), and the [evaluation plan](docs/evaluation/PLAN.md).
-
-## Project site
-
-The project landing page is published at [kaxokaze.github.io/fellows](https://kaxokaze.github.io/fellows/). The static site source is [docs/index.html](docs/index.html), published from the `/docs` directory using GitHub Pages.
-
-## Visibility and community
-
-The [distribution notes](docs/launch/DISTRIBUTION.md) contain the current project description, launch copy, suggested communities, and publication checklist. Please keep public claims aligned with the development status above.
-
-## Development status
+## Current status
 
 | Area | Status |
 | --- | --- |
-| Problem statement and project direction | Drafted |
+| Problem framing | Drafted |
 | High-level architecture | Proposed |
 | Coordination protocol | Proposed |
-| Execution and safety model | To be specified and tested |
-| Runtime implementation | Not started |
-| Provider adapters | Not started |
+| First experiment | Planned |
+| Runtime and provider adapters | Not started |
 | CLI / developer API | Not started |
-| Automated tests and benchmarks | Not started |
+| Automated evaluation | Not started |
 
-Status will change only when corresponding code, tests, or experimental results are present in the repository.
+A proposal is not an implemented feature. Status changes only when the corresponding code or evidence exists in the repository.
 
-## Contributing
+## Funding
 
-At this stage, useful contributions include architecture review, research references, failure-mode analysis, and feedback on the first prototype design. Read [CONTRIBUTING.md](CONTRIBUTING.md) before opening a proposal.
+Fellows is seeking only:
 
-## Funding and AI API credits
+1. **AI model/API credits** for development and controlled experiments.
+2. **Financial support** through open-source grants, contributions, and recurring sponsorships. Suitable investment discussions, including potential equity arrangements, are also open for separate discussion.
 
-Fellows is seeking only two forms of support:
+The project is not requesting GPUs, compute, hosting, storage, infrastructure, developer-tool plans, or mentorship.
 
-- **AI model/API credits:** capped inference credits or API quotas from model providers to develop and evaluate independent agent sessions and compare the peer-first approach against simpler baselines.
-- **Financial funding:** open-source project grants, one-time contributions, recurring sponsorships, and suitable investment discussions. Financial support would fund maintainer time, the initial implementation, model API usage, controlled evaluation, and release preparation. The maintainer is open to discussing potential equity arrangements case by case.
+See [Funding](docs/FUNDING.md) and the [machine-readable funding manifest](docs/funding.json). To discuss support, contact [okay.fellows@gmail.com](mailto:okay.fellows@gmail.com).
 
-Bank-transfer details for grants or sponsorships are available on request by emailing [okay.fellows@gmail.com](mailto:okay.fellows@gmail.com). No payment details or funding target are published yet.
+## Repository guide
 
-See the [funding and API credits manifest](docs/funding.json) for the machine-readable request and contact details.
+- [Architecture overview](docs/architecture/OVERVIEW.md)
+- [Coordination protocol](docs/architecture/COORDINATION.md)
+- [Architecture decision record](docs/decisions/0001-peer-first-collaboration.md)
+- [Evaluation plan](docs/evaluation/PLAN.md)
+- [Development roadmap](ROADMAP.md)
+- [Contributing](CONTRIBUTING.md)
+- [Code of Conduct](CODE_OF_CONDUCT.md)
+- [Website source](website/index.html)
 
-## License
+## Project details
 
-[MIT](LICENSE)
+- License: [MIT](LICENSE)
+- Contact: [okay.fellows@gmail.com](mailto:okay.fellows@gmail.com)
+- GitHub: https://github.com/kaxokaze/fellows
+- Instagram: https://www.instagram.com/okay.fellows/
+
+---
+
+Fellows is early by design. The goal is to test a specific collaboration thesis carefully, publish what is learned, and build only what the evidence supports.
