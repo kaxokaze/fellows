@@ -14,13 +14,12 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 SITE = ROOT / "docs" / "index.html"
 MANIFEST = ROOT / "docs" / "funding.json"
-SITE_URL = "https://okay-fellows.netlify.app/"
+SITE_URL = "https://kaxokaze.github.io/fellows/"
 
 
 class SiteInspector(HTMLParser):
     def __init__(self) -> None:
         super().__init__()
-        self.netlify_attribution = False
         self.canonical_url = False
         self.og_url = False
         self.links: list[str] = []
@@ -31,8 +30,6 @@ class SiteInspector(HTMLParser):
             href = values.get("href")
             if href:
                 self.links.append(href)
-            if values.get("href") == "https://www.netlify.com/":
-                self.netlify_attribution = True
         elif tag == "link" and values.get("rel") == "canonical":
             self.canonical_url = values.get("href") == SITE_URL
         elif tag == "meta" and values.get("property") == "og:url":
@@ -58,14 +55,12 @@ def main() -> None:
     inspector.feed(html)
     inspector.close()
 
-    if not inspector.netlify_attribution or "This site is powered by Netlify" not in html:
-        fail("The required Netlify attribution link is missing")
     if not inspector.canonical_url:
-        fail("The canonical URL does not point to the Netlify site")
+        fail("The canonical URL does not point to the GitHub Pages site")
     if not inspector.og_url:
-        fail("The Open Graph URL does not point to the Netlify site")
-    if any("kaxokaze.github.io/fellows" in url for url in inspector.links):
-        fail("A stale GitHub Pages link remains in the landing page")
+        fail("The Open Graph URL does not point to the GitHub Pages site")
+    if "okay-fellows.netlify.app" in html:
+        fail("A stale Netlify URL remains in the landing page")
 
     support_section = html.split('id="support"', 1)[-1].split("</section>", 1)[0]
     for obsolete in ("Technical support — in kind, not cash", "Compute &amp; infrastructure",
@@ -81,6 +76,8 @@ def main() -> None:
     projects = manifest.get("projects", [])
     if not projects or projects[0].get("licenses") != ["spdx:MIT"]:
         fail("The funding manifest does not identify the project as MIT licensed")
+    if projects[0].get("webpageUrl", {}).get("url") != SITE_URL:
+        fail("The project webpage URL does not match the GitHub Pages site")
 
     requests = manifest.get("additionalSupportRequests", {})
     if "nonFinancialSupport" in manifest:
@@ -92,7 +89,7 @@ def main() -> None:
     if requests.get("financialFunding", {}).get("status") != "actively-seeking":
         fail("The manifest does not actively request financial funding")
     if requests.get("contact", {}).get("website") != SITE_URL:
-        fail("The manifest contact website does not match the Netlify site")
+        fail("The manifest contact website does not match the GitHub Pages site")
 
     funding = manifest.get("funding", {})
     channels = funding.get("channels", [])
@@ -110,7 +107,7 @@ def main() -> None:
 
     print("PASS: Fellows public-site validation")
     print("- MIT licence and root Code of Conduct exist")
-    print("- Netlify attribution, canonical URL, and social URL are correct")
+    print("- Canonical and Open Graph URLs point to GitHub Pages")
     print("- Funding manifest requests AI API credits and active financial support plans")
 
 
