@@ -4,499 +4,655 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Fellows is an open-source research project exploring peer-first collaboration between independent AI agents.">
-  <meta name="theme-color" content="#143b5c">
+  <meta name="theme-color" content="#154f83">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Fellows — Independent agents. Shared direction.">
+  <meta property="og:description" content="A peer-first approach to AI agent collaboration. Built in the open.">
+  <meta property="og:url" content="https://kaxokaze.github.io/fellows/">
+  <link rel="canonical" href="https://kaxokaze.github.io/fellows/">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg?v=2">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500&display=swap" rel="stylesheet">
   <title>Fellows — Independent agents. Shared direction.</title>
-  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
   <style>
     :root {
-      color-scheme: light;
-      --ink: #182b3b;
-      --ink-2: #354b5d;
-      --muted: #637687;
-      --blue: #175c91;
-      --blue-2: #2b78ac;
-      --navy: #103653;
-      --navy-2: #174b70;
-      --pale: #edf4f8;
-      --pale-2: #f5f8fa;
+      --ink: #202b36;
+      --ink-soft: #405363;
+      --muted: #697a88;
+      --blue: #185b91;
+      --blue-dark: #123f67;
+      --blue-mid: #3176a9;
+      --blue-light: #dceaf5;
+      --blue-pale: #f1f6fa;
+      --line: #bdcbd6;
+      --line-soft: #dce4ea;
       --paper: #fff;
-      --line: #cbd7e0;
-      --line-dark: #9fb2c1;
-      --green: #2d6a4c;
-      --serif: Georgia, "Times New Roman", serif;
-      --sans: "Segoe UI", Tahoma, Arial, sans-serif;
-      --mono: "Cascadia Code", "SFMono-Regular", Consolas, monospace;
-      --shadow: 0 18px 48px rgba(19, 50, 74, .08);
-      --page: 1260px;
+      --paper-alt: #f7f9fb;
+      --green: #376e4b;
+      --mono: "IBM Plex Mono", "Courier New", monospace;
+      --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+      --sans: Tahoma, Verdana, Arial, sans-serif;
     }
     * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; background: #e8eef2; }
+    html { scroll-behavior: smooth; background: #e9eef2; }
     body {
-      margin: 0;
-      color: var(--ink);
+      margin: 0; min-width: 320px; color: var(--ink);
       background:
-        linear-gradient(90deg, rgba(28, 75, 109, .025) 1px, transparent 1px),
-        linear-gradient(rgba(28, 75, 109, .025) 1px, transparent 1px),
-        #e8eef2;
-      background-size: 26px 26px;
-      font: 14px/1.65 var(--sans);
-      -webkit-font-smoothing: antialiased;
+        linear-gradient(90deg,rgba(35,81,119,.018) 1px,transparent 1px),
+        linear-gradient(rgba(35,81,119,.018) 1px,transparent 1px),
+        #e9eef2;
+      background-size: 24px 24px;
+      font: 13px/1.58 var(--sans);
     }
-    a { color: var(--blue); text-decoration: none; }
+    a { color: #064d91; text-decoration: none; }
+    a:visited { color: #584181; }
     a:hover { text-decoration: underline; }
-    a:focus-visible, button:focus-visible { outline: 3px solid #e0a13d; outline-offset: 3px; }
-    ::selection { color: #fff; background: var(--blue); }
-    .shell { width: min(100%, var(--page)); margin: 0 auto; background: var(--paper); box-shadow: 0 0 0 1px rgba(27, 56, 77, .05), var(--shadow); min-height: 100vh; }
-    .topline { height: 5px; background: linear-gradient(90deg, var(--navy), var(--blue-2) 58%, #9dbcd1); }
+    a:focus-visible, button:focus-visible, input:focus-visible {
+      outline: 2px solid #da8524; outline-offset: 3px;
+    }
+    ::selection { background: #245f96; color: #fff; }
+    .site { width: 100%; min-height: 100vh; background: var(--paper); }
     .masthead {
-      display: flex; align-items: center; justify-content: space-between; gap: 24px;
-      padding: 20px 42px 17px; border-bottom: 1px solid var(--line);
+      min-height: 82px; display: flex; align-items: center; justify-content: space-between;
+      gap: 24px; padding: 10px clamp(20px,2.2vw,42px);
+      border-top: 4px solid #1b68a9; border-bottom: 1px solid var(--line);
+      background: linear-gradient(#fff,#f8fafc);
     }
-    .brand { display: flex; align-items: center; gap: 14px; min-width: 0; }
-    .brand img { width: 150px; height: auto; display: block; }
-    .brand-divider { width: 1px; height: 30px; background: var(--line); }
-    .brand-caption { color: var(--muted); font: 10px/1.5 var(--mono); letter-spacing: .08em; text-transform: uppercase; }
-    .mast-actions { display: flex; align-items: center; gap: 18px; }
-    .mast-actions a { color: var(--ink-2); font-size: 12px; font-weight: 600; }
-    .pill {
-      display: inline-flex; align-items: center; gap: 7px; padding: 5px 9px;
-      border: 1px solid #b8cbbb; background: #f1f7f2; color: #315d43;
-      font: 10px var(--mono); letter-spacing: .025em; white-space: nowrap;
+    .identity { display: flex; align-items: center; gap: 19px; min-width: 0; }
+    .brand-logo { display: block; width: clamp(205px,16vw,290px); max-height: 66px; height: auto; }
+    .tagline {
+      max-width: 240px; padding-left: 17px; border-left: 1px solid var(--line);
+      color: #647583; font: 11px/1.55 var(--sans);
     }
-    .pill-dot { width: 6px; height: 6px; border-radius: 50%; background: #49815f; }
+    .head-actions { display: flex; align-items: center; gap: 16px; }
+    .head-actions > a { font-size: 11px; white-space: nowrap; }
+    .search { display: flex; gap: 4px; }
+    .search input {
+      width: 175px; height: 28px; padding: 4px 8px;
+      border: 1px solid #9aabba; border-radius: 0; background: #fff;
+      box-shadow: inset 1px 1px 2px rgba(0,0,0,.06);
+      color: var(--ink); font: 11px var(--sans);
+    }
+    .button {
+      min-height: 29px; display: inline-flex; align-items: center; justify-content: center;
+      gap: 6px; padding: 3px 12px; border: 1px solid #88a3bb; border-radius: 2px;
+      color: #1d4d74 !important; background: linear-gradient(#fff,#eff5fa 49%,#dce8f2 50%,#f6f9fc);
+      box-shadow: inset 0 1px #fff,0 1px 1px rgba(0,0,0,.06);
+      font: bold 11px var(--sans); text-decoration: none !important; white-space: nowrap;
+    }
+    .button:hover { border-color: #3d719e; background: linear-gradient(#fff,#e7f1f8 49%,#cbddec 50%,#f1f7fb); }
+    .button.primary {
+      border-color: #164c7d; color: #fff !important;
+      background: linear-gradient(#438fc9,#1b659f 52%,#15558d);
+      text-shadow: 0 1px #17476e;
+    }
+    .button.primary:hover { background: linear-gradient(#5aa2d8,#2678b7 52%,#1b649c); }
+    .contact-links { display: flex; align-items: center; gap: 13px; }
+    .contact-links a { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; white-space: nowrap; }
+    .contact-icon {
+      width: 16px; height: 16px; display: inline-grid; place-items: center;
+      border: 1px solid #aabac8; border-radius: 2px; color: #285d87; font-size: 10px;
+      background: #f7fafc;
+    }
     .main-nav {
-      display: flex; align-items: center; gap: 0; padding: 0 42px;
-      border-bottom: 1px solid var(--line); background: #f7f9fb;
-      overflow-x: auto; scrollbar-width: thin;
+      min-height: 36px; display: flex; align-items: stretch; gap: 0;
+      padding: 0 clamp(12px,2vw,34px);
+      border-top: 1px solid #8db2d0; border-bottom: 1px solid #103f68;
+      background: linear-gradient(#438bc5 0%,#286fa8 48%,#1c5b91 49%,#164e80 100%);
+      box-shadow: inset 0 1px rgba(255,255,255,.45);
     }
     .main-nav a {
-      display: inline-flex; align-items: center; min-height: 42px; padding: 0 14px;
-      border-right: 1px solid #e1e8ed; color: #405a6e; white-space: nowrap;
-      font-size: 11px; font-weight: 650;
+      min-height: 35px; display: inline-flex; align-items: center; padding: 0 15px;
+      border-right: 1px solid rgba(0,34,68,.19); color: white !important;
+      text-shadow: 0 1px #174a73; font-size: 11px; text-decoration: none;
     }
-    .main-nav a:first-child { padding-left: 0; }
-    .main-nav a:hover { color: var(--blue); text-decoration: none; background: #eef4f8; }
+    .main-nav a:first-child { border-left: 1px solid rgba(0,34,68,.19); }
+    .main-nav a:hover,.main-nav a[aria-current="page"] { background: linear-gradient(#1e639a,#124776); text-decoration: none; }
+    .layout { display: grid; grid-template-columns: 205px minmax(0,1fr); }
+    .sidebar {
+      padding: 21px 15px 24px 20px; border-right: 1px solid #d5dee6;
+      background: linear-gradient(90deg,#f3f7fa,#fafcfd);
+    }
+    .side-group { margin-bottom: 17px; }
+    .side-title {
+      margin: 0 0 6px; padding-bottom: 4px; border-bottom: 1px solid #bfccd7;
+      color: #425b70; font: bold 10px var(--sans); letter-spacing: .35px;
+    }
+    .side-list { list-style: none; padding: 0; margin: 0; }
+    .side-list li { margin: 3px 0; font-size: 11px; line-height: 1.45; }
+    .side-status {
+      padding: 8px 9px; border: 1px solid #c4d0da;
+      background: linear-gradient(#fff,#eef4f8); color: #596b79;
+      font-size: 10px; line-height: 1.55;
+    }
+    .side-status strong { color: #244d70; }
+    .content { min-width: 0; padding: 18px clamp(18px,2.1vw,38px) 18px; }
+    .breadcrumb { margin: 0 0 5px; color: #788691; font-size: 10px; }
+    .breadcrumb a { color: #3e6a91; }
+    .hero-heading {
+      display: flex; align-items: end; justify-content: space-between; gap: 18px;
+      margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid #9fb2c2;
+    }
+    .eyebrow { margin-bottom: 4px; color: #4a7395; font: 10px var(--mono); letter-spacing: .8px; }
+    .hero-heading h1 {
+      margin: 0; color: #1e2d3b; font: normal clamp(28px,2.35vw,38px)/1.12 var(--serif);
+      letter-spacing: -.5px;
+    }
+    .hero-heading p { margin: 4px 0 0; color: #677681; font-size: 11px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 6px; padding-bottom: 2px; }
     .hero {
-      position: relative; overflow: hidden; display: grid;
-      grid-template-columns: minmax(0, 1.02fr) minmax(380px, .98fr);
-      gap: 36px; align-items: center; padding: 58px 50px 54px;
-      color: #f5f9fc; background:
-        radial-gradient(circle at 84% 20%, rgba(76, 147, 191, .28), transparent 31%),
-        linear-gradient(118deg, #102f49, #174d72 65%, #1a5d85);
+      display: grid; grid-template-columns: minmax(280px,.72fr) minmax(0,1.6fr);
+      gap: 15px; align-items: stretch; margin-bottom: 13px;
     }
-    .hero:after {
-      content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .10;
-      background-image: linear-gradient(rgba(255,255,255,.17) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.17) 1px, transparent 1px);
-      background-size: 32px 32px; mask-image: linear-gradient(90deg, transparent, #000);
+    .hero-copy {
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 17px 18px; border: 1px solid #c0cdd8;
+      background: linear-gradient(145deg,#f9fbfd,#edf4f9);
+      box-shadow: inset 0 1px #fff;
     }
-    .hero-copy, .hero-visual { position: relative; z-index: 1; }
-    .eyebrow { color: #a9cde4; font: 10px var(--mono); letter-spacing: .16em; text-transform: uppercase; }
-    h1 {
-      max-width: 620px; margin: 15px 0 14px; color: #fff;
-      font: normal clamp(42px, 5vw, 66px)/1.04 var(--serif); letter-spacing: -.045em;
+    .hero-copy h2 { margin: 0 0 8px; color: #224866; font: normal 23px/1.25 var(--serif); }
+    .hero-copy p { margin: 0 0 10px; color: #4d5d69; font-size: 11.5px; line-height: 1.65; }
+    .project-status {
+      display: flex; align-items: flex-start; gap: 8px; margin-top: 3px; padding: 8px 9px;
+      border: 1px solid #b8c9d7; background: rgba(255,255,255,.82);
+      color: #556674; font-size: 10px; line-height: 1.5;
     }
-    .hero-lede { max-width: 590px; margin: 0; color: #d5e4ee; font-size: 16px; line-height: 1.65; }
-    .hero-statement {
-      max-width: 560px; margin-top: 24px; padding: 12px 15px;
-      border-left: 2px solid #80b7d9; background: rgba(255,255,255,.07);
-      color: #e5f0f6; font-size: 12px; line-height: 1.55;
+    .status-dot { width: 7px; height: 7px; flex: 0 0 auto; margin-top: 4px; border-radius: 50%; background: #a17b37; }
+    .project-status strong { color: #284e6e; }
+    /* 3D collaboration model: independent peers -> shared state -> validated control -> scoped execution. */
+    .system-diagram {
+      position: relative; min-width: 0; min-height: 348px; overflow: hidden;
+      border: 1px solid #214968;
+      background:
+        radial-gradient(ellipse at 52% 39%,rgba(38,112,168,.25),transparent 58%),
+        linear-gradient(145deg,#10283d 0%,#0d304d 55%,#0a2035 100%);
+      box-shadow: inset 0 1px rgba(255,255,255,.12);
     }
-    .hero-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 25px; }
-    .button {
-      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-      padding: 10px 14px; border: 1px solid #91b3ca;
-      color: #f5fbff; background: rgba(255,255,255,.07);
-      font-size: 11px; font-weight: 650; letter-spacing: .01em;
+    .diagram-caption {
+      position: absolute; z-index: 5; top: 9px; left: 13px; right: 13px;
+      display: flex; justify-content: space-between; gap: 12px;
+      color: #afc5d8; font: 9px var(--mono); letter-spacing: .65px;
     }
-    .button.primary { color: #123954; border-color: #e4eff6; background: #f5f9fc; }
-    .button:hover { text-decoration: none; filter: brightness(1.06); }
-    .hero-visual {
-      padding: 13px; border: 1px solid rgba(207,230,245,.28);
-      background: rgba(6,28,46,.24); box-shadow: 0 18px 36px rgba(0,0,0,.12);
+    .system-diagram svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .peer-card { fill: url(#peerFill); stroke: #87b0ce; stroke-width: 1.1; }
+    .peer-title { fill: #f1f7fc; font: 600 13px Tahoma,Verdana,sans-serif; }
+    .peer-sub { fill: #b2ccdf; font: 9px var(--mono); }
+    .peer-symbol { fill: #9bd5fa; }
+    .network-line { fill: none; stroke: #82c4ed; stroke-width: 1.35; opacity: .8; stroke-dasharray: 5 6; marker-end: url(#arrow); }
+    .state-top { fill: #3579a9; stroke: #9bc9e7; stroke-width: 1; }
+    .state-side { fill: #174b73; stroke: #78afd4; stroke-width: 1; }
+    .state-face { fill: url(#stateFill); stroke: #91c4e4; stroke-width: 1; }
+    .state-label { fill: #f2f8fc; font: 600 12px Tahoma,Verdana,sans-serif; }
+    .state-item { fill: #c8ddec; font: 10px Tahoma,Verdana,sans-serif; }
+    .state-index { fill: #9ad5f5; font: 9px var(--mono); }
+    .plane-card { fill: url(#planeFill); stroke: #88b8d9; stroke-width: 1; }
+    .plane-title { fill: #f5f9fc; font: 600 11px Tahoma,Verdana,sans-serif; }
+    .plane-sub { fill: #c0d6e6; font: 9px Tahoma,Verdana,sans-serif; }
+    .execution-face { fill: #193e5d; stroke: #82b4d6; stroke-width: 1; }
+    .execution-title { fill: #f1f7fc; font: 600 11px Tahoma,Verdana,sans-serif; }
+    .execution-sub { fill: #b9cede; font: 9px Tahoma,Verdana,sans-serif; }
+    .flow-dash { stroke-dasharray: 5 7; animation: flow 6s linear infinite; }
+    .node-pulse { transform-box: fill-box; transform-origin: center; animation: pulse 4s ease-in-out infinite; }
+    .float-one { animation: float 6s ease-in-out infinite; }
+    .float-two { animation: float 7s ease-in-out -1.4s infinite; }
+    .float-three { animation: float 6.5s ease-in-out -2.2s infinite; }
+    @keyframes flow { to { stroke-dashoffset: -48; } }
+    @keyframes pulse { 0%,100% { opacity: .72; transform: scale(.94); } 50% { opacity: 1; transform: scale(1.08); } }
+    @keyframes float { 0%,100% { translate: 0 0; } 50% { translate: 0 -3px; } }
+    .diagram-legend {
+      display: flex; flex-wrap: wrap; gap: 5px 16px; align-items: center;
+      padding: 6px 10px; border: 1px solid #cbd6df; border-top: 0;
+      background: #f7f9fb; color: #5f6e79; font-size: 9px;
     }
-    .visual-head { display: flex; justify-content: space-between; gap: 12px; padding: 2px 4px 12px; color: #a9cde4; font: 9px var(--mono); letter-spacing: .08em; }
-    .architecture-svg { display: block; width: 100%; height: auto; }
-    .hero-legend { display: flex; gap: 17px; flex-wrap: wrap; padding: 10px 4px 1px; color: #c1d6e4; font-size: 9px; }
     .legend-item { display: inline-flex; align-items: center; gap: 6px; }
-    .legend-mark { width: 7px; height: 7px; border-radius: 50%; background: #91c5e5; }
-    .legend-mark.gold { background: #d7bb83; }
-    .statusbar {
-      display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 20px;
-      padding: 15px 42px; border-bottom: 1px solid var(--line); background: #f6f9fb;
+    .legend-dot { width: 7px; height: 7px; border-radius: 50%; background: #397fb0; }
+    .legend-line { width: 17px; height: 2px; background: #71acd6; }
+    .section-grid {
+      display: grid; grid-template-columns: repeat(2,minmax(0,1fr));
+      gap: 11px 14px; align-items: stretch;
     }
-    .statusbar p { margin: 0; color: #4b6070; font-size: 11px; }
-    .statusbar strong { color: var(--ink); }
-    .status-meta { color: #6f8190; font: 9px var(--mono); letter-spacing: .04em; white-space: nowrap; }
-    .body-layout { display: grid; grid-template-columns: 205px minmax(0, 1fr); gap: 34px; padding: 34px 42px 54px; }
-    .toc { align-self: start; position: sticky; top: 18px; padding: 14px 13px 15px; border: 1px solid var(--line); background: #f8fafb; }
-    .toc-title { margin: 0 0 11px; color: #62788a; font: 9px var(--mono); letter-spacing: .1em; text-transform: uppercase; }
-    .toc a { display: block; padding: 6px 5px; border-bottom: 1px solid #e7edf1; color: #3f5a70; font-size: 10px; }
-    .toc a:last-child { border: 0; }
-    .toc a:hover { color: var(--blue); background: #edf4f8; text-decoration: none; }
-    .toc-note { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line); color: #70818d; font-size: 9px; line-height: 1.55; }
-    main { min-width: 0; }
-    .section { padding: 0 0 31px; margin: 0 0 29px; border-bottom: 1px solid var(--line); scroll-margin-top: 18px; }
-    .section:last-child { border-bottom: 0; margin-bottom: 0; }
-    .section-kicker { display: flex; align-items: center; gap: 9px; color: #6b8293; font: 9px var(--mono); letter-spacing: .13em; text-transform: uppercase; }
-    .section-kicker:before { content: ""; width: 20px; height: 1px; background: #78a6c4; }
-    h2 { margin: 7px 0 12px; color: #1a3e5a; font: normal 28px/1.2 var(--serif); letter-spacing: -.02em; }
-    h3 { margin: 0 0 6px; color: #254b68; font-size: 12px; font-weight: 700; }
-    p { margin: 0 0 12px; color: #4a5e6e; }
-    .section-intro { max-width: 760px; color: #4b6070; font-size: 14px; }
-    .three-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 10px; margin-top: 18px; }
-    .info-card { min-width: 0; padding: 15px; border: 1px solid var(--line); background: linear-gradient(145deg,#fff,#f7fafc); }
-    .card-index { display: block; margin-bottom: 9px; color: #6a8da7; font: 9px var(--mono); letter-spacing: .08em; }
-    .info-card p { margin: 0; font-size: 11px; line-height: 1.6; }
-    .two-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; margin-top: 16px; }
-    .principle { padding: 17px 18px; border: 1px solid var(--line); background: #f8fafb; }
-    .principle.primary { border-color: #a9c4d7; background: #f0f6fa; }
-    .principle .number { display: block; margin-bottom: 8px; color: #6c8aa0; font: 9px var(--mono); }
-    .principle p { margin: 0; font-size: 11px; }
-    .architecture-list { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 0 18px; margin-top: 12px; border-top: 1px solid var(--line); }
-    .architecture-item { padding: 12px 0; border-bottom: 1px solid #e2e9ee; }
-    .architecture-item p { margin: 0; font-size: 11px; }
-    .architecture-item strong { color: #264d69; }
-    .steps { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 9px; margin-top: 16px; counter-reset: flow; }
-    .step { position: relative; padding: 13px 13px 14px; border: 1px solid var(--line); background: #fafcfd; counter-increment: flow; }
-    .step:before { content: "0" counter(flow); display: block; margin-bottom: 8px; color: #7193ab; font: 10px var(--mono); }
-    .step p { margin: 0; font-size: 10px; line-height: 1.55; }
-    .metric-list { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 8px; margin-top: 13px; }
-    .metric { padding: 10px 12px; border-left: 2px solid #7ca8c4; background: #f3f7fa; color: #506577; font-size: 10px; }
-    .status-table { width: 100%; border-collapse: collapse; margin-top: 14px; font-size: 10px; }
-    .status-table th, .status-table td { padding: 9px 10px; border-bottom: 1px solid #e0e8ed; text-align: left; }
-    .status-table th { color: #6a7f8e; background: #f6f9fb; font: 9px var(--mono); text-transform: uppercase; letter-spacing: .06em; }
-    .status-table td:last-child { color: #5c7181; white-space: nowrap; }
-    .funding-panel { margin-top: 16px; padding: 18px; border: 1px solid #b4c7d5; background: linear-gradient(130deg,#f3f8fb,#eaf2f7); }
-    .funding-panel .two-grid { margin-top: 0; }
-    .funding-panel .info-card { background: rgba(255,255,255,.78); }
-    .funding-note { margin-top: 13px; padding-top: 12px; border-top: 1px solid #cbd9e2; font-size: 10px; }
-    .doc-links { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 8px; margin-top: 14px; }
-    .doc-link { display: block; padding: 11px 13px; border: 1px solid var(--line); background: #fafcfd; }
-    .doc-link strong { display: block; color: #255477; font-size: 11px; }
-    .doc-link span { display: block; margin-top: 3px; color: #6a7d8b; font-size: 9px; line-height: 1.5; }
-    .contact {
-      display: grid; grid-template-columns: minmax(0,1fr) auto; align-items: center; gap: 20px;
-      padding: 23px 24px; color: #eff6fa; background: linear-gradient(110deg,#123b5a,#1a5a82);
+    .section-block {
+      min-width: 0; padding: 11px 13px 12px;
+      border-top: 2px solid #8da9bf; border-bottom: 1px solid #d5dfe6;
+      background: linear-gradient(180deg,#fff,#fbfcfd);
+      scroll-margin-top: 10px;
     }
-    .contact h2 { margin: 0 0 5px; color: #fff; font-size: 25px; }
-    .contact p { margin: 0; color: #ccdfeb; font-size: 11px; }
-    .contact-actions { display: flex; flex-wrap: wrap; gap: 8px; }
-    .contact-actions a { display: inline-flex; padding: 9px 12px; border: 1px solid rgba(223,239,248,.5); color: #f5fbff; font-size: 10px; font-weight: 650; }
-    .contact-actions a:hover { background: rgba(255,255,255,.1); text-decoration: none; }
-    footer {
-      display: flex; justify-content: space-between; gap: 20px; padding: 17px 42px;
-      border-top: 1px solid var(--line); color: #788895; background: #f7f9fb;
-      font-size: 9px;
+    .section-block.wide { grid-column: 1 / -1; }
+    .section-block h2 {
+      display: flex; align-items: baseline; gap: 8px;
+      margin: 0 0 7px; padding-bottom: 5px; border-bottom: 1px solid #d4dde5;
+      color: #23445f; font: normal 18px/1.2 var(--serif);
     }
-    footer a { color: #607d92; }
-    .footer-links { display: flex; flex-wrap: wrap; gap: 8px 14px; }
-    @media (min-width: 1500px) {
-      .hero { padding-top: 68px; padding-bottom: 65px; }
-      .body-layout { padding-top: 42px; }
+    .section-block h2 small { color: #7892a8; font: 9px var(--mono); }
+    .section-block h3 { margin: 10px 0 4px; color: #294b68; font: bold 11px var(--sans); }
+    .section-block p { margin: 4px 0 7px; color: #4d5c68; font-size: 11px; line-height: 1.58; }
+    .section-block ul { margin: 5px 0 3px; padding-left: 17px; color: #4d5c68; font-size: 10.5px; }
+    .section-block li { margin: 2px 0; }
+    .section-block a { font-size: 10.5px; }
+    .architecture-mini { display: grid; grid-template-columns: repeat(3,1fr); gap: 6px; margin: 8px 0; }
+    .architecture-mini > div { padding: 7px; border: 1px solid #c6d4df; background: #f4f8fb; }
+    .architecture-mini strong { display: block; margin-bottom: 3px; color: #2b5779; font-size: 10px; }
+    .architecture-mini span { display: block; color: #596a77; font-size: 9px; line-height: 1.45; }
+    .steps-mini { display: grid; grid-template-columns: repeat(5,1fr); gap: 5px; margin: 8px 0 4px; }
+    .steps-mini div { padding: 6px; border: 1px solid #cbd7e1; background: #f6f9fb; }
+    .steps-mini b { display: block; color: #2d6a9f; font: 9px var(--mono); }
+    .steps-mini span { display: block; margin-top: 3px; color: #40576b; font-size: 9px; }
+    .message-list { display: grid; grid-template-columns: repeat(2,1fr); gap: 6px 12px; margin: 8px 0; }
+    .message-list div { padding-left: 8px; border-left: 2px solid #8aafce; }
+    .message-list strong { display: block; color: #315b7d; font-size: 10px; }
+    .message-list span { display: block; color: #5e6c77; font-size: 9px; line-height: 1.45; }
+    .comparison { display: grid; grid-template-columns: repeat(3,1fr); gap: 6px; margin: 8px 0; }
+    .comparison div { padding: 7px; border: 1px solid #cbd6df; background: #f8fafc; }
+    .comparison .featured { border-color: #9db7cd; background: #edf5fa; }
+    .comparison b { display: block; margin-bottom: 3px; color: #365974; font: 9px var(--mono); }
+    .comparison span { display: block; color: #596875; font-size: 9px; line-height: 1.4; }
+    .milestones { display: grid; grid-template-columns: repeat(6,1fr); gap: 6px; margin: 8px 0; }
+    .milestone { padding: 7px; border: 1px solid #ccd7e0; background: #f8fafc; }
+    .milestone strong { display: block; color: #2b6190; font: 9px var(--mono); }
+    .milestone span { display: block; margin-top: 4px; color: #5b6874; font-size: 9px; line-height: 1.42; }
+    .current { color: var(--green) !important; }
+    .docs-list { display: grid; grid-template-columns: repeat(2,1fr); gap: 7px 16px; margin: 7px 0; }
+    .docs-list a { display: block; }
+    .docs-list span { display: block; color: #697782; font-size: 9px; line-height: 1.4; }
+    .support-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:7px; margin:8px 0; }
+    .support-item { min-width:0; padding:8px 9px; border:1px solid #c5d3df; background:linear-gradient(#fff,#f2f7fb); }
+    .support-item strong { display:block; color:#2c5577; font-size:10px; }
+    .support-item p { margin:4px 0 0; color:#5b6874; font-size:9.5px; line-height:1.45; }
+    .support-foot { display:flex; align-items:center; justify-content:space-between; gap:12px; padding-top:7px; border-top:1px solid #d4dde5; color:#647481; font-size:9.5px; }
+    .support-actions { display:flex; flex-wrap:wrap; gap:6px; flex:0 0 auto; }
+    .contact-panel {
+      display: grid; grid-template-columns: minmax(0,1fr) auto; align-items: center;
+      gap: 18px; margin-top: 12px; padding: 13px 15px;
+      border: 1px solid #b8c9d7; background: linear-gradient(100deg,#f4f8fb,#eaf2f8);
+      box-shadow: inset 0 1px #fff;
+      scroll-margin-top: 12px;
     }
-    @media (max-width: 980px) {
-      .hero { grid-template-columns: 1fr; gap: 28px; }
-      .hero-visual { max-width: 680px; }
-      .body-layout { grid-template-columns: 1fr; }
-      .toc { position: static; display: flex; flex-wrap: wrap; align-items: center; gap: 3px 8px; }
-      .toc-title { width: 100%; margin-bottom: 4px; }
-      .toc a { padding: 5px 7px; border: 1px solid #e0e8ed; }
-      .toc-note { display: none; }
+    .contact-panel h2 { margin: 0 0 3px; color: #234764; font: normal 18px var(--serif); }
+    .contact-panel p { margin: 0; color: #586a78; font-size: 10.5px; }
+    .contact-actions { display: flex; flex-wrap: wrap; gap: 7px; align-items: center; }
+    .contact-actions a { font-size: 10.5px; }
+    .contact-actions .contact-button {
+      display: inline-flex; align-items: center; gap: 6px; padding: 6px 9px;
+      border: 1px solid #a7bacb; background: #fff; color: #1d507c;
+      box-shadow: inset 0 1px #fff; white-space: nowrap;
     }
-    @media (max-width: 680px) {
-      .masthead { padding: 15px 18px; align-items: flex-start; }
-      .brand img { width: 116px; }
-      .brand-caption, .brand-divider, .mast-actions .plain-link { display: none; }
-      .mast-actions { gap: 8px; }
-      .main-nav { padding: 0 18px; }
-      .main-nav a { min-height: 39px; padding: 0 10px; }
-      .hero { padding: 38px 22px 35px; }
-      .hero-lede { font-size: 14px; }
-      .statusbar { grid-template-columns: 1fr; gap: 5px; padding: 12px 22px; }
-      .status-meta { white-space: normal; }
-      .body-layout { padding: 24px 20px 35px; }
-      .three-grid, .two-grid, .architecture-list, .steps, .metric-list, .doc-links { grid-template-columns: 1fr; }
-      .contact { grid-template-columns: 1fr; padding: 21px; }
-      footer { flex-direction: column; padding: 16px 20px; }
-      h2 { font-size: 25px; }
+    .contact-actions .contact-button:hover { border-color: #5f88ad; background: #f5faff; text-decoration: none; }
+    .footer {
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      margin-top: 11px; padding: 9px 1px 0; border-top: 1px solid #bccbd7;
+      color: #73818c; font-size: 9px;
+    }
+    .footer-links { display: flex; flex-wrap: wrap; gap: 8px 15px; }
+    @media (min-width: 1600px) {
+      .content { padding-top: 17px; padding-bottom: 14px; }
+      .hero { grid-template-columns: minmax(360px,.68fr) minmax(0,1.72fr); gap: 17px; }
+      .system-diagram { min-height: 378px; }
+      .section-grid { gap: 12px 17px; }
+      .section-block { padding: 12px 15px 13px; }
+    }
+    @media (max-width: 1160px) {
+      .layout { grid-template-columns: 185px minmax(0,1fr); }
+      .hero { grid-template-columns: minmax(270px,.78fr) minmax(0,1.22fr); }
+      .section-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+      .milestones { grid-template-columns: repeat(3,1fr); }
+    }
+    @media (max-width: 760px) {
+      .support-grid { grid-template-columns:1fr; }
+      .support-foot { align-items:flex-start; flex-direction:column; }
+      .masthead { align-items: flex-start; flex-direction: column; gap: 9px; padding: 12px 14px; }
+      .brand-logo { width: min(245px,65vw); }
+      .tagline { max-width: none; }
+      .head-actions { width: 100%; justify-content: space-between; flex-wrap: wrap; gap: 9px; }
+      .search { flex: 1; }
+      .search input { width: 100%; }
+      .main-nav { overflow-x: auto; padding-inline: 5px; }
+      .main-nav a { flex: 0 0 auto; padding-inline: 11px; }
+      .layout { grid-template-columns: 1fr; }
+      .sidebar { padding: 8px 12px; border-right: 0; border-bottom: 1px solid #d1dce5; }
+      .side-group { margin: 0; }
+      .side-group:not(:first-child),.side-status { display: none; }
+      .side-title { display: none; }
+      .side-list { display: flex; flex-wrap: wrap; gap: 4px 13px; }
+      .side-list li { margin: 0; }
+      .content { padding: 13px 12px 16px; }
+      .hero-heading { align-items: flex-start; flex-direction: column; gap: 8px; }
+      .hero { grid-template-columns: 1fr; }
+      .hero-copy { padding: 14px; }
+      .system-diagram { min-height: 315px; }
+      .section-grid { grid-template-columns: 1fr; }
+      .section-block.wide { grid-column: auto; }
+      .contact-panel { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 460px) {
+      .brand-logo { width: min(220px,70vw); }
+      .contact-links { width: 100%; gap: 9px; flex-wrap: wrap; }
+      .hero-heading h1 { font-size: 28px; }
+      .system-diagram { min-height: 255px; }
+      .architecture-mini { grid-template-columns: 1fr; }
+      .steps-mini { grid-template-columns: repeat(3,1fr); }
+      .milestones { grid-template-columns: repeat(2,1fr); }
+      .docs-list { grid-template-columns: 1fr; }
+      .comparison { grid-template-columns: 1fr; }
+      .contact-actions { align-items: flex-start; flex-direction: column; }
+      .footer { align-items: flex-start; flex-direction: column; }
     }
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
-      *, *:before, *:after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+      *,*::before,*::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
     }
   </style>
 </head>
 <body>
-  <div class="shell">
-    <div class="topline"></div>
+  <div class="site" id="top">
     <header class="masthead">
-      <div class="brand">
-        <img src="./fellows-logo.svg" alt="Fellows">
-        <span class="brand-divider" aria-hidden="true"></span>
-        <span class="brand-caption">Open-source systems research<br>Project 001 · 2026</span>
+      <div class="identity">
+        <a href="#top" aria-label="Fellows home"><img class="brand-logo" src="./fellows-logo.svg" alt="Fellows"></a>
+        <div class="tagline">Independent agents.<br>Shared direction.</div>
       </div>
-      <div class="mast-actions">
-        <span class="pill"><span class="pill-dot"></span> Design &amp; research</span>
-        <a class="plain-link" href="https://github.com/kaxokaze/fellows">Repository ↗</a>
-        <a href="mailto:okay.fellows@gmail.com">Contact</a>
+      <div class="head-actions">
+        <div class="contact-links" aria-label="Contact Fellows">
+          <a href="mailto:okay.fellows@gmail.com"><span class="contact-icon" aria-hidden="true">@</span>okay.fellows@gmail.com</a>
+          <a href="https://www.instagram.com/okay.fellows/" target="_blank" rel="noopener noreferrer"><span class="contact-icon" aria-hidden="true">◎</span>@okay.fellows</a>
+        </div>
+        <form class="search" action="https://github.com/kaxokaze/fellows/search" method="get">
+          <input type="search" name="q" aria-label="Search the Fellows repository" placeholder="Search project files…">
+          <button class="button" type="submit">Search</button>
+        </form>
       </div>
     </header>
-    <nav class="main-nav" aria-label="Primary navigation">
-      <a href="#overview">Overview</a>
-      <a href="#problem">Problem</a>
-      <a href="#model">Design model</a>
-      <a href="#workflow">Workflow</a>
+
+    <nav class="main-nav" aria-label="Main navigation">
+      <a href="#top" aria-current="page">Overview</a>
+      <a href="#architecture">Architecture</a>
+      <a href="#operation">How it works</a>
+      <a href="#protocol">Protocol</a>
       <a href="#evaluation">Evaluation</a>
-      <a href="#status">Status</a>
-      <a href="#funding">Funding</a>
-      <a href="#documentation">Documentation</a>
+      <a href="#roadmap">Roadmap</a>
+      <a href="#support">Funding</a>
+      <a href="#contact">Contact</a>
+      <a href="https://github.com/kaxokaze/fellows/issues">Contribute</a>
     </nav>
 
-    <section class="hero" id="overview">
-      <div class="hero-copy">
-        <div class="eyebrow">FELLOWS / INDEPENDENT AGENT COLLABORATION</div>
-        <h1>Independent agents.<br>Shared direction.</h1>
-        <p class="hero-lede">A peer-first approach to AI collaboration—where agents communicate as equals and a deterministic control plane keeps shared work coherent.</p>
-        <div class="hero-statement">The research question: can independent agents coordinate, challenge, and integrate work more effectively without relying on one model as the permanent supervisor?</div>
-        <div class="hero-links">
-          <a class="button primary" href="https://github.com/kaxokaze/fellows">Explore the repository ↗</a>
-          <a class="button" href="#model">Read the approach ↓</a>
+    <div class="layout">
+      <aside class="sidebar" aria-label="Project navigation">
+        <nav class="side-group">
+          <h2 class="side-title">FELLOWS / CONTENTS</h2>
+          <ul class="side-list">
+            <li><a href="#problem">The coordination problem</a></li>
+            <li><a href="#architecture">System architecture</a></li>
+            <li><a href="#operation">Operating model</a></li>
+            <li><a href="#protocol">Collaboration protocol</a></li>
+            <li><a href="#evaluation">Evaluation</a></li>
+            <li><a href="#roadmap">Development status</a></li>
+            <li><a href="#support">Funding</a></li>
+            <li><a href="#resources">Documentation</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </nav>
+        <nav class="side-group">
+          <h2 class="side-title">PROJECT LINKS</h2>
+          <ul class="side-list">
+            <li><a href="https://github.com/kaxokaze/fellows">GitHub repository</a></li>
+            <li><a href="https://github.com/kaxokaze/fellows/blob/main/README.md">README</a></li>
+            <li><a href="https://github.com/kaxokaze/fellows/blob/main/ROADMAP.md">Full roadmap</a></li>
+            <li><a href="https://github.com/kaxokaze/fellows/blob/main/CONTRIBUTING.md">Contributing guide</a></li>
+            <li><a href="https://github.com/kaxokaze/fellows/blob/main/LICENSE">MIT License</a></li>
+          </ul>
+        </nav>
+        <div class="side-status">
+          <strong>Current status</strong><br>
+          Design &amp; research<br>
+          Runtime not started<br>
+          Open source · MIT
         </div>
-      </div>
-      <div class="hero-visual" aria-label="Conceptual Fellows architecture">
-        <div class="visual-head"><span>FIG. 01 / COLLABORATION MODEL</span><span>CONCEPTUAL</span></div>
-        <svg class="architecture-svg" viewBox="0 0 680 360" role="img" aria-labelledby="architecture-title architecture-desc">
-          <title id="architecture-title">Fellows peer collaboration architecture</title>
-          <desc id="architecture-desc">Three independent agents exchange peer messages around shared project state. A deterministic control plane validates decisions and coordinates verified work.</desc>
-          <defs>
-            <linearGradient id="node" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2c739f"/><stop offset="1" stop-color="#174767"/></linearGradient>
-            <linearGradient id="core" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#d4e7f2"/><stop offset="1" stop-color="#a9cada"/></linearGradient>
-            <marker id="arrow" markerWidth="7" markerHeight="7" refX="5.6" refY="3.5" orient="auto"><path d="M0 0L7 3.5L0 7Z" fill="#9bc8e2"/></marker>
-          </defs>
-          <g fill="none" stroke="#8bb9d5" stroke-width="1.6" opacity=".85" marker-end="url(#arrow)">
-            <path d="M145 95 C215 80 245 94 286 136"/>
-            <path d="M535 95 C465 80 435 94 394 136"/>
-            <path d="M340 178 L340 226"/>
-            <path d="M145 95 C95 180 160 243 275 255" stroke-dasharray="5 5" opacity=".55"/>
-            <path d="M535 95 C585 180 520 243 405 255" stroke-dasharray="5 5" opacity=".55"/>
-          </g>
-          <g>
-            <rect x="36" y="33" width="218" height="74" rx="4" fill="url(#node)" stroke="#8ebbd6"/>
-            <circle cx="58" cy="57" r="6" fill="#c8e4f4"/>
-            <text x="74" y="61" fill="#fff" font-size="13" font-family="Segoe UI,Arial" font-weight="600">Agent A</text>
-            <text x="55" y="85" fill="#c9deeb" font-size="10" font-family="Consolas,monospace">RESEARCH / PROPOSE</text>
-          </g>
-          <g>
-            <rect x="426" y="33" width="218" height="74" rx="4" fill="url(#node)" stroke="#8ebbd6"/>
-            <circle cx="448" cy="57" r="6" fill="#c8e4f4"/>
-            <text x="464" y="61" fill="#fff" font-size="13" font-family="Segoe UI,Arial" font-weight="600">Agent B</text>
-            <text x="445" y="85" fill="#c9deeb" font-size="10" font-family="Consolas,monospace">BUILD / CHALLENGE</text>
-          </g>
-          <g>
-            <rect x="231" y="123" width="218" height="60" rx="4" fill="url(#core)" stroke="#e2f1f8"/>
-            <text x="340" y="148" text-anchor="middle" fill="#183c57" font-size="13" font-family="Segoe UI,Arial" font-weight="700">Shared project state</text>
-            <text x="340" y="166" text-anchor="middle" fill="#42647b" font-size="9" font-family="Consolas,monospace">TASKS · DECISIONS · ARTIFACTS</text>
-          </g>
-          <g>
-            <rect x="36" y="247" width="218" height="74" rx="4" fill="url(#node)" stroke="#8ebbd6"/>
-            <circle cx="58" cy="271" r="6" fill="#c8e4f4"/>
-            <text x="74" y="275" fill="#fff" font-size="13" font-family="Segoe UI,Arial" font-weight="600">Agent C</text>
-            <text x="55" y="299" fill="#c9deeb" font-size="10" font-family="Consolas,monospace">REVIEW / VERIFY</text>
-          </g>
-          <g>
-            <rect x="426" y="247" width="218" height="74" rx="4" fill="#eee5d4" stroke="#d7c294"/>
-            <text x="535" y="274" text-anchor="middle" fill="#4c493e" font-size="12" font-family="Segoe UI,Arial" font-weight="700">Deterministic control</text>
-            <text x="535" y="291" text-anchor="middle" fill="#746d5a" font-size="9" font-family="Consolas,monospace">VALIDATE · AUTHORIZE</text>
-            <text x="535" y="305" text-anchor="middle" fill="#746d5a" font-size="9" font-family="Consolas,monospace">PERSIST · INTEGRATE</text>
-          </g>
-          <text x="340" y="208" text-anchor="middle" fill="#d5e8f3" font-size="9" font-family="Consolas,monospace" letter-spacing="1.5">PEER COMMUNICATION</text>
-          <text x="340" y="345" text-anchor="middle" fill="#a9cde2" font-size="9" font-family="Consolas,monospace">PROPOSED SYSTEM · NOT IMPLEMENTED</text>
-        </svg>
-        <div class="hero-legend">
-          <span class="legend-item"><i class="legend-mark"></i> Independent agents</span>
-          <span class="legend-item"><i class="legend-mark gold"></i> Deterministic control</span>
-        </div>
-      </div>
-    </section>
-
-    <div class="statusbar">
-      <p><strong>Current state:</strong> design and research. The repository contains specifications and plans; no runnable runtime, SDK, CLI, or benchmark exists yet.</p>
-      <span class="status-meta">MIT LICENSE &nbsp;·&nbsp; PUBLIC REPOSITORY</span>
-    </div>
-
-    <div class="body-layout">
-      <aside class="toc" aria-label="On this page">
-        <h2 class="toc-title">On this page</h2>
-        <a href="#problem">01 — The problem</a>
-        <a href="#model">02 — Design model</a>
-        <a href="#workflow">03 — Collaboration flow</a>
-        <a href="#evaluation">04 — First experiment</a>
-        <a href="#status">05 — Project status</a>
-        <a href="#funding">06 — Funding</a>
-        <a href="#documentation">07 — Documentation</a>
-        <div class="toc-note">A research proposal, not a product announcement. Claims on this page reflect the current repository state.</div>
       </aside>
 
-      <main>
-        <section class="section" id="problem">
-          <div class="section-kicker">01 / THE PROBLEM</div>
-          <h2>Parallel agents do not automatically make a team.</h2>
-          <p class="section-intro">Multiple model sessions can work at once, but parallel execution creates its own coordination problems. Context drifts, tasks overlap, decisions disappear, and individually plausible changes can fail when combined.</p>
-          <div class="three-grid">
-            <article class="info-card">
-              <span class="card-index">01 / CONTEXT</span>
-              <h3>Shared understanding</h3>
-              <p>Agents need a consistent view of the objective, current state, dependencies, and decisions—not just a copied prompt.</p>
-            </article>
-            <article class="info-card">
-              <span class="card-index">02 / OWNERSHIP</span>
-              <h3>Coordinated work</h3>
-              <p>Work must be divided without duplicate effort, conflicting claims, or hidden blockers.</p>
-            </article>
-            <article class="info-card">
-              <span class="card-index">03 / TRUST</span>
-              <h3>Verifiable outcomes</h3>
-              <p>Changes need provenance, permission boundaries, integration rules, and evidence that the result meets the request.</p>
-            </article>
-          </div>
-        </section>
-
-        <section class="section" id="model">
-          <div class="section-kicker">02 / DESIGN MODEL</div>
-          <h2>Peers for reasoning. Rules for shared state.</h2>
-          <p class="section-intro">Fellows separates the freedom to reason from the authority to change project state. Agents can disagree and exchange ideas directly; the control plane validates the actions that affect the project.</p>
-          <div class="two-grid">
-            <article class="principle primary">
-              <span class="number">LAYER A</span>
-              <h3>Peer reasoning</h3>
-              <p>Independent sessions share findings, propose approaches, ask questions, challenge assumptions, negotiate tasks, and review artifacts.</p>
-            </article>
-            <article class="principle">
-              <span class="number">LAYER B</span>
-              <h3>Deterministic coordination</h3>
-              <p>A control plane validates messages and state transitions, manages task ownership, applies permissions, records events, and coordinates integration.</p>
-            </article>
-          </div>
-          <div class="architecture-list">
-            <div class="architecture-item"><h3>Agent sessions</h3><p>Separate model contexts with declared capabilities, responsibilities, and provider configuration.</p></div>
-            <div class="architecture-item"><h3>Collaboration protocol</h3><p>Typed, attributable messages for proposals, findings, task claims, decisions, and reviews.</p></div>
-            <div class="architecture-item"><h3>Shared project state</h3><p>A durable record of goals, requirements, tasks, dependencies, decisions, artifacts, and events.</p></div>
-            <div class="architecture-item"><h3>Control and execution</h3><p>Explicit authorization, bounded actions, attributable changes, integration, and verification.</p></div>
-          </div>
-        </section>
-
-        <section class="section" id="workflow">
-          <div class="section-kicker">03 / COLLABORATION FLOW</div>
-          <h2>A proposed lifecycle, not a fixed agent script.</h2>
-          <p class="section-intro">The system should adapt the amount of collaboration to the task. A short request should not trigger unnecessary debate; a risky change should not skip review and verification.</p>
-          <div class="steps">
-            <article class="step"><h3>Understand</h3><p>Establish the goal, constraints, deliverables, and acceptance criteria.</p></article>
-            <article class="step"><h3>Exchange</h3><p>Agents interpret the task independently and share evidence, proposals, and objections.</p></article>
-            <article class="step"><h3>Decide</h3><p>Record outcomes and unresolved risks under an explicit decision policy.</p></article>
-            <article class="step"><h3>Negotiate</h3><p>Offer work, validate task claims, and make dependencies visible.</p></article>
-            <article class="step"><h3>Execute</h3><p>Perform approved work through scoped capabilities and attributable changes.</p></article>
-            <article class="step"><h3>Verify</h3><p>Integrate, test against acceptance criteria, and report evidence and limitations.</p></article>
-          </div>
-        </section>
-
-        <section class="section" id="evaluation">
-          <div class="section-kicker">04 / FIRST EXPERIMENT</div>
-          <h2>Prove the coordination model before expanding it.</h2>
-          <p class="section-intro">The initial experiment is one bounded software task completed under three conditions: a single agent, a conventional orchestrated team, and Fellows. Model versions, prompts, permissions, and spending limits should be comparable.</p>
-          <div class="three-grid">
-            <article class="info-card"><span class="card-index">BASELINE A</span><h3>Single agent</h3><p>One model session receives the task and produces the result.</p></article>
-            <article class="info-card"><span class="card-index">BASELINE B</span><h3>Orchestrated team</h3><p>A primary agent plans and delegates work to other sessions.</p></article>
-            <article class="info-card"><span class="card-index">TEST C</span><h3>Fellows</h3><p>Independent agents communicate directly through shared project state and deterministic coordination.</p></article>
-          </div>
-          <div class="metric-list">
-            <div class="metric">Result quality: acceptance tests, requirement coverage, review findings.</div>
-            <div class="metric">Model cost: input/output tokens and provider-reported API spend.</div>
-            <div class="metric">Efficiency: completion time and cost per accepted result.</div>
-            <div class="metric">Coordination: duplicated work, conflicts, rework, and human interventions.</div>
-          </div>
-          <p style="margin-top:13px;font-size:10px;">A positive result is not assumed. If peer collaboration does not justify its added cost and complexity, the design should change.</p>
-        </section>
-
-        <section class="section" id="status">
-          <div class="section-kicker">05 / PROJECT STATUS</div>
-          <h2>What exists today.</h2>
-          <p class="section-intro">The current repository is a design record. It should remain clear about the difference between a proposed component and working software.</p>
-          <table class="status-table">
-            <thead><tr><th>Area</th><th>Current state</th></tr></thead>
-            <tbody>
-              <tr><td>Problem framing</td><td>Drafted</td></tr>
-              <tr><td>Architecture overview</td><td>Proposed</td></tr>
-              <tr><td>Coordination protocol</td><td>Proposed</td></tr>
-              <tr><td>First experiment</td><td>Planned</td></tr>
-              <tr><td>Runtime and provider adapters</td><td>Not started</td></tr>
-              <tr><td>CLI and developer API</td><td>Not started</td></tr>
-              <tr><td>Benchmarks and measured results</td><td>Not started</td></tr>
-            </tbody>
-          </table>
-        </section>
-
-        <section class="section" id="funding">
-          <div class="section-kicker">06 / FUNDING</div>
-          <h2>Support the first implementation.</h2>
-          <p class="section-intro">Fellows is currently looking for two forms of support. Requests are limited to model access and funding that directly helps move the research into an initial implementation.</p>
-          <div class="funding-panel">
-            <div class="two-grid">
-              <article class="info-card">
-                <span class="card-index">REQUEST 01</span>
-                <h3>AI model and API credits</h3>
-                <p>Capped inference credits or research API quotas to build independent agent sessions and run controlled comparisons across model providers.</p>
-              </article>
-              <article class="info-card">
-                <span class="card-index">REQUEST 02</span>
-                <h3>Financial funding</h3>
-                <p>Open-source grants, one-time contributions, recurring sponsorships, and suitable investment discussions, including potential equity arrangements.</p>
-              </article>
-            </div>
-            <p class="funding-note">Financial support would fund maintainer time, the initial runtime, API usage, and controlled evaluation. Bank-transfer details are available on request. No GPU, compute, hosting, infrastructure, developer-tool, or mentorship support is being requested.</p>
-            <div class="hero-links" style="margin-top:14px;">
-              <a class="button" style="color:#174768;border-color:#aabfcc;background:#fff;" href="https://raw.githubusercontent.com/kaxokaze/fellows/main/docs/funding.json">Read funding manifest ↗</a>
-              <a class="button" style="color:#174768;border-color:#aabfcc;background:#fff;" href="mailto:okay.fellows@gmail.com?subject=Fellows%20%E2%80%94%20Funding%20and%20AI%20API%20credits">Discuss support</a>
-            </div>
-          </div>
-        </section>
-
-        <section class="section" id="documentation">
-          <div class="section-kicker">07 / DOCUMENTATION</div>
-          <h2>Read the project record.</h2>
-          <p class="section-intro">Design documents are proposals until implemented and tested. The repository is the canonical source for updates.</p>
-          <div class="doc-links">
-            <a class="doc-link" href="https://github.com/kaxokaze/fellows/blob/main/README.md"><strong>Project README ↗</strong><span>Project thesis, current scope, and status.</span></a>
-            <a class="doc-link" href="https://github.com/kaxokaze/fellows/blob/main/docs/architecture/OVERVIEW.md"><strong>Architecture overview ↗</strong><span>System boundaries and responsibilities.</span></a>
-            <a class="doc-link" href="https://github.com/kaxokaze/fellows/blob/main/docs/architecture/COORDINATION.md"><strong>Coordination protocol ↗</strong><span>Messages, task ownership, and state consistency.</span></a>
-            <a class="doc-link" href="https://github.com/kaxokaze/fellows/blob/main/docs/evaluation/PLAN.md"><strong>Evaluation plan ↗</strong><span>Baselines, measurements, and decision criteria.</span></a>
-            <a class="doc-link" href="https://github.com/kaxokaze/fellows/blob/main/ROADMAP.md"><strong>Development roadmap ↗</strong><span>Research and implementation sequence.</span></a>
-            <a class="doc-link" href="https://github.com/kaxokaze/fellows/blob/main/LICENSE"><strong>MIT License ↗</strong><span>Open-source license terms.</span></a>
-          </div>
-        </section>
-
-        <section class="contact" id="contact">
+      <main class="content">
+        <div class="breadcrumb"><a href="#top">Fellows</a> &nbsp;›&nbsp; Project overview</div>
+        <div class="hero-heading">
           <div>
-            <h2>Build the next layer with Fellows.</h2>
-            <p>For AI API credits, project funding, sponsorships, or investment discussions.</p>
+            <div class="eyebrow">OPEN-SOURCE SYSTEMS RESEARCH / 001</div>
+            <h1>Independent agents. Shared direction.</h1>
+            <p>A peer-first approach to collaboration between autonomous AI agents.</p>
+          </div>
+          <div class="hero-actions">
+            <a class="button primary" href="https://github.com/kaxokaze/fellows">Explore the repository ↗</a>
+            <a class="button" href="https://github.com/kaxokaze/fellows/issues">Discuss the design</a>
+          </div>
+        </div>
+
+        <section class="hero" aria-label="Fellows introduction and system diagram">
+          <div class="hero-copy">
+            <h2>Coordination without a permanent supervisor.</h2>
+            <p>Fellows explores how independent agents can exchange evidence, negotiate tasks and integrate results as peers. A deterministic control plane keeps shared state, permissions and execution accountable.</p>
+            <p>Agents remain independent participants. The system—not another model—validates authoritative changes.</p>
+            <div class="project-status">
+              <span class="status-dot" aria-hidden="true"></span>
+              <div><strong>Research stage.</strong> This repository contains specifications and planning documents. There is no runnable runtime, SDK, CLI or benchmark implementation yet.</div>
+            </div>
+          </div>
+
+          <div>
+            <div class="system-diagram">
+              <div class="diagram-caption"><span>FELLOWS / COLLABORATION MODEL</span><span>PEER NETWORK → VERIFIED WORK</span></div>
+              <svg viewBox="0 0 1000 420" role="img" aria-labelledby="diagram-title diagram-desc" preserveAspectRatio="xMidYMid meet">
+                <title id="diagram-title">Fellows peer collaboration architecture</title>
+                <desc id="diagram-desc">Independent research, review and execution agents exchange proposals and findings. They share requirements, decisions, tasks and artifacts. A deterministic control plane validates permissions and task transitions before work enters a scoped execution environment.</desc>
+                <defs>
+                  <linearGradient id="peerFill" x1="0" y1="0" x2="0.9" y2="1"><stop offset="0" stop-color="#2c638d"/><stop offset="1" stop-color="#143956"/></linearGradient>
+                  <linearGradient id="stateFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#276b9c"/><stop offset="1" stop-color="#16456f"/></linearGradient>
+                  <linearGradient id="planeFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#28638f"/><stop offset="1" stop-color="#153b5d"/></linearGradient>
+                  <pattern id="grid" width="28" height="28" patternUnits="userSpaceOnUse"><path d="M28 0H0V28" fill="none" stroke="#8eb8d8" stroke-opacity=".18" stroke-width="1"/></pattern>
+                  <filter id="shadow" x="-30%" y="-30%" width="160%" height="170%"><feGaussianBlur in="SourceAlpha" stdDeviation="6"/><feOffset dy="4"/><feComponentTransfer><feFuncA type="linear" slope=".25"/></feComponentTransfer><feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+                  <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#8ccfff"/></marker>
+                </defs>
+                <rect width="1000" height="420" fill="url(#grid)" opacity=".32"/>
+                <path d="M175 128 C255 164 360 145 425 178 M500 125 L500 176 M825 128 C742 164 636 145 575 178" class="network-line flow-dash"/>
+                <path d="M252 75 C390 14 610 14 748 75" class="network-line flow-dash" opacity=".48"/>
+                <g class="float-one" filter="url(#shadow)">
+                  <rect class="peer-card" x="66" y="47" width="208" height="82" rx="5"/>
+                  <circle class="peer-symbol" cx="91" cy="75" r="10"/>
+                  <path d="M85 75h12M91 69v12" stroke="#143c5c" stroke-width="1.5"/>
+                  <text class="peer-title" x="111" y="75">Research agent</text>
+                  <text class="peer-sub" x="85" y="105">01 / PROPOSE &amp; DISCOVER</text>
+                  <circle class="node-pulse" cx="253" cy="62" r="3" fill="#a2e1ff"/>
+                </g>
+                <g class="float-two" filter="url(#shadow)">
+                  <rect class="peer-card" x="396" y="31" width="208" height="82" rx="5"/>
+                  <circle class="peer-symbol" cx="421" cy="59" r="10"/>
+                  <path d="M415 59h12M421 53v12" stroke="#143c5c" stroke-width="1.5"/>
+                  <text class="peer-title" x="441" y="59">Review agent</text>
+                  <text class="peer-sub" x="415" y="87">02 / CHALLENGE &amp; REFINE</text>
+                  <circle class="node-pulse" cx="583" cy="46" r="3" fill="#a2e1ff"/>
+                </g>
+                <g class="float-three" filter="url(#shadow)">
+                  <rect class="peer-card" x="726" y="47" width="208" height="82" rx="5"/>
+                  <circle class="peer-symbol" cx="751" cy="75" r="10"/>
+                  <path d="M745 75h12M751 69v12" stroke="#143c5c" stroke-width="1.5"/>
+                  <text class="peer-title" x="771" y="75">Execution agent</text>
+                  <text class="peer-sub" x="745" y="105">03 / BUILD &amp; VERIFY</text>
+                  <circle class="node-pulse" cx="913" cy="62" r="3" fill="#a2e1ff"/>
+                </g>
+                <path d="M500 115 L500 158" stroke="#8ccfff" stroke-width="1.5" stroke-dasharray="4 5" marker-end="url(#arrow)" class="flow-dash"/>
+                <path d="M274 118 C305 146 348 154 383 178 M726 118 C695 146 652 154 617 178" fill="none" stroke="#78b8e6" stroke-width="1.5" stroke-dasharray="4 5" marker-end="url(#arrow)" class="flow-dash"/>
+                <g filter="url(#shadow)">
+                  <path fill="#174b73" stroke="#75b0d8" d="M305 196L352 174H695L648 196Z"/>
+                  <path fill="#16456f" stroke="#75b0d8" d="M648 196L695 174V270L648 292Z"/>
+                  <rect fill="url(#stateFill)" stroke="#8cc3e7" x="305" y="196" width="343" height="96" rx="2"/>
+                  <text class="state-label" x="326" y="221">SHARED PROJECT STATE</text>
+                  <path d="M326 233H627" stroke="#8fc4e6" stroke-opacity=".55"/>
+                  <text class="state-index" x="329" y="253">01</text><text class="state-item" x="352" y="253">Requirements</text>
+                  <text class="state-index" x="482" y="253">02</text><text class="state-item" x="505" y="253">Decisions</text>
+                  <text class="state-index" x="329" y="277">03</text><text class="state-item" x="352" y="277">Tasks &amp; ownership</text>
+                  <text class="state-index" x="482" y="277">04</text><text class="state-item" x="505" y="277">Artifacts</text>
+                </g>
+                <path d="M477 293L477 318" stroke="#9bd3f8" stroke-width="1.7" marker-end="url(#arrow)"/>
+                <path d="M648 246C710 246 733 267 764 288" stroke="#9bd3f8" stroke-width="1.7" fill="none" marker-end="url(#arrow)"/>
+                <g filter="url(#shadow)">
+                  <rect fill="url(#planeFill)" stroke="#85b4d7" x="272" y="321" width="410" height="67" rx="4"/>
+                  <text class="plane-title" x="292" y="346">DETERMINISTIC CONTROL PLANE</text>
+                  <text class="plane-sub" x="292" y="366">Validate transitions · enforce permissions · record events · manage budgets</text>
+                  <path d="M660 331V378" stroke="#8fc4e6" stroke-opacity=".35"/>
+                  <text class="plane-sub" x="670" y="345" text-anchor="end">POLICY</text>
+                  <text class="plane-sub" x="670" y="363" text-anchor="end">STATE</text>
+                </g>
+                <g filter="url(#shadow)">
+                  <rect fill="#193e5d" stroke="#7caccf" x="750" y="282" width="185" height="94" rx="4"/>
+                  <text class="execution-title" x="768" y="307">SCOPED EXECUTION</text>
+                  <text class="execution-sub" x="768" y="329">Isolated workspace</text>
+                  <text class="execution-sub" x="768" y="345">Controlled tools</text>
+                  <text class="execution-sub" x="768" y="361">Tests &amp; verification</text>
+                </g>
+              </svg>
+            </div>
+            <div class="diagram-legend">
+              <span class="legend-item"><i class="legend-dot"></i> Independent agents</span>
+              <span class="legend-item"><i class="legend-line"></i> Peer messages and proposals</span>
+              <span class="legend-item"><i class="legend-dot" style="background:#4e9bcf"></i> Shared project state</span>
+            </div>
+          </div>
+        </section>
+
+        <div class="section-grid">
+          <section class="section-block" id="problem">
+            <h2><small>01</small> The coordination problem</h2>
+            <p>Parallel model sessions do not automatically form a reliable team. Without shared context and explicit coordination, they can create duplicated work, stale information and costly integration.</p>
+            <ul>
+              <li>Context drifts between sessions.</li>
+              <li>Ownership and dependencies become unclear.</li>
+              <li>Conflicts and decisions go unrecorded.</li>
+              <li>Completion lacks verifiable evidence.</li>
+            </ul>
+          </section>
+
+          <section class="section-block" id="architecture">
+            <h2><small>02</small> Three cooperating planes</h2>
+            <p>Reasoning stays peer-to-peer. The control plane—not a lead model—owns authoritative state and validates operations.</p>
+            <div class="architecture-mini">
+              <div><strong>Peer layer</strong><span>Messages, proposals, challenges and reviews.</span></div>
+              <div><strong>Control plane</strong><span>State, ownership, policy and recovery.</span></div>
+              <div><strong>Execution plane</strong><span>Scoped tools, workspaces and verification.</span></div>
+            </div>
+            <a href="https://github.com/kaxokaze/fellows/blob/main/docs/architecture/OVERVIEW.md">Architecture specification ↗</a>
+          </section>
+
+          <section class="section-block" id="operation">
+            <h2><small>03</small> How collaboration works</h2>
+            <p>Work patterns adapt to the task; exploration, parallel execution, pairing and independent review are options rather than a fixed pipeline.</p>
+            <div class="steps-mini">
+              <div><b>01</b><span>Interpret</span></div>
+              <div><b>02</b><span>Exchange</span></div>
+              <div><b>03</b><span>Organise</span></div>
+              <div><b>04</b><span>Build</span></div>
+              <div><b>05</b><span>Verify</span></div>
+            </div>
+          </section>
+
+          <section class="section-block" id="protocol">
+            <h2><small>04</small> A protocol with boundaries</h2>
+            <p>Messages express intent. The runtime validates requests before changing project state, granting task ownership or allowing execution.</p>
+            <div class="message-list">
+              <div><strong>Proposal</strong><span>Approach, rationale and expected result.</span></div>
+              <div><strong>Challenge</strong><span>Evidence, risk or an alternative.</span></div>
+              <div><strong>Decision</strong><span>Outcome and unresolved disagreement.</span></div>
+              <div><strong>Task claim</strong><span>Availability and policy check.</span></div>
+            </div>
+            <a href="https://github.com/kaxokaze/fellows/blob/main/docs/architecture/COORDINATION.md">Coordination protocol ↗</a>
+          </section>
+
+          <section class="section-block" id="evaluation">
+            <h2><small>05</small> Evidence before claims</h2>
+            <p>The proposed experiment compares peer-first collaboration with simpler baselines.</p>
+            <div class="comparison">
+              <div><b>A / BASELINE</b><span>Single model session.</span></div>
+              <div><b>B / BASELINE</b><span>Supervisor and delegates.</span></div>
+              <div class="featured"><b>C / FELLOWS</b><span>Independent peers and shared state.</span></div>
+            </div>
+            <p>Measures include outcome quality, latency and compute cost, duplicated work, conflicts and human interventions.</p>
+            <a href="https://github.com/kaxokaze/fellows/blob/main/docs/evaluation/PLAN.md">Evaluation plan ↗</a>
+          </section>
+
+          <section class="section-block" id="roadmap">
+            <h2><small>06</small> Development status</h2>
+            <p><strong class="current">Current focus · M0</strong> — research, architecture, protocol and experiment definition. The runtime has not started.</p>
+            <div class="milestones">
+              <div class="milestone"><strong>M0 · NOW</strong><span>Research &amp; system definition</span></div>
+              <div class="milestone"><strong>M1</strong><span>Collaboration kernel</span></div>
+              <div class="milestone"><strong>M2</strong><span>Work coordination</span></div>
+              <div class="milestone"><strong>M3</strong><span>Controlled execution</span></div>
+              <div class="milestone"><strong>M4</strong><span>Comparative evaluation</span></div>
+              <div class="milestone"><strong>M5</strong><span>Developer experience</span></div>
+            </div>
+            <a href="https://github.com/kaxokaze/fellows/blob/main/ROADMAP.md">Full roadmap ↗</a>
+          </section>
+
+          <section class="section-block wide" id="support">
+            <h2><small>07</small> Funding &amp; AI API credits</h2>
+            <p>Fellows is seeking two forms of support to move from design and research toward its first small, reproducible implementation.</p>
+            <div class="support-grid">
+              <div class="support-item">
+                <strong>AI model &amp; API credits</strong>
+                <p>Capped inference credits or API quotas from model providers to develop independent agent sessions and run controlled comparisons.</p>
+              </div>
+              <div class="support-item">
+                <strong>Financial funding</strong>
+                <p>Open-source grants, one-time contributions, recurring sponsorships, and suitable investment discussions to support maintainer time, implementation, API usage, and evaluation.</p>
+              </div>
+            </div>
+            <div class="support-foot">
+              <span>For grants or sponsorships, bank-transfer details can be shared privately. Potential equity arrangements can be discussed case by case.</span>
+              <div class="support-actions">
+                <a class="button primary" href="./funding.json">View funding manifest (JSON) ↗</a>
+                <a class="button" href="mailto:okay.fellows@gmail.com?subject=Fellows%20%E2%80%94%20Funding%20and%20API%20credits">Discuss funding or API credits</a>
+              </div>
+            </div>
+          </section>
+
+          <section class="section-block" id="resources">
+            <h2><small>08</small> Project resources</h2>
+            <div class="docs-list">
+              <div><a href="https://github.com/kaxokaze/fellows/blob/main/README.md">README</a><span>Project direction and overview.</span></div>
+              <div><a href="https://github.com/kaxokaze/fellows/blob/main/docs/architecture/OVERVIEW.md">Architecture</a><span>System boundaries and components.</span></div>
+              <div><a href="https://github.com/kaxokaze/fellows/blob/main/docs/architecture/COORDINATION.md">Protocol</a><span>Messages and task negotiation.</span></div>
+              <div><a href="https://github.com/kaxokaze/fellows/blob/main/docs/evaluation/PLAN.md">Evaluation</a><span>Proposed experiments.</span></div>
+            </div>
+          </section>
+
+          <section class="section-block" id="contribute">
+            <h2><small>09</small> Contribute to the research</h2>
+            <p>Useful contributions now: architecture review, protocol critique, failure-mode analysis, security feedback and reproducible evaluation ideas.</p>
+            <div style="display:flex;gap:7px;flex-wrap:wrap;margin-top:8px">
+              <a class="button primary" href="https://github.com/kaxokaze/fellows/issues">Discuss an issue ↗</a>
+              <a class="button" href="https://github.com/kaxokaze/fellows/blob/main/CONTRIBUTING.md">Contributing guide</a>
+            </div>
+          </section>
+        </div>
+
+        <section class="contact-panel" id="contact" aria-labelledby="contact-title">
+          <div>
+            <h2 id="contact-title">Get in touch with Fellows</h2>
+            <p>For AI API credits, financial funding, investment discussions or project enquiries.</p>
           </div>
           <div class="contact-actions">
-            <a href="mailto:okay.fellows@gmail.com">okay.fellows@gmail.com</a>
-            <a href="https://github.com/kaxokaze/fellows">GitHub ↗</a>
-            <a href="https://www.instagram.com/okay.fellows/">Instagram ↗</a>
+            <a class="contact-button" href="mailto:okay.fellows@gmail.com"><span aria-hidden="true">✉</span> okay.fellows@gmail.com</a>
+            <a class="contact-button" href="https://www.instagram.com/okay.fellows/" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">◎</span> Instagram · @okay.fellows</a>
           </div>
         </section>
+
+        <footer class="footer">
+          <span>Fellows · Open-source systems research · MIT License · Design and research stage</span>
+          <div class="footer-links">
+            <a href="https://github.com/kaxokaze/fellows">GitHub</a>
+            <a href="mailto:okay.fellows@gmail.com">Email</a>
+            <a href="https://www.instagram.com/okay.fellows/" target="_blank" rel="noopener noreferrer">Instagram</a>
+            <a href="https://github.com/kaxokaze/fellows/blob/main/LICENSE">License</a>
+            <a href="#top">Back to top ↑</a>
+          </div>
+        </footer>
       </main>
     </div>
-
-    <footer>
-      <span>Fellows · Open-source research · MIT License · Design and research stage</span>
-      <div class="footer-links">
-        <a href="https://github.com/kaxokaze/fellows">Repository</a>
-        <a href="mailto:okay.fellows@gmail.com">Email</a>
-        <a href="https://www.instagram.com/okay.fellows/">Instagram</a>
-        <a href="https://github.com/kaxokaze/fellows/blob/main/LICENSE">License</a>
-      </div>
-    </footer>
   </div>
 </body>
 </html>
