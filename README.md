@@ -83,7 +83,7 @@ The design material is organized under [docs/](docs/README.md). Start with the [
 
 ## Project site
 
-The project landing page is available at [kaxokaze.github.io/fellows](https://kaxokaze.github.io/fellows/) once GitHub Pages is enabled for the `/docs` directory. The source is [docs/index.html](docs/index.html).
+The project landing page is published at [okay-fellows.netlify.app](https://okay-fellows.netlify.app/). The static site source is [docs/index.html](docs/index.html), deployed from the `/docs` directory.
 
 ## Visibility and community
 
