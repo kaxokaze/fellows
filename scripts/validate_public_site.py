@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate the public Fellows documentation site and support manifest.
+"""Validate the public Fellows site and its current funding manifest.
 
 This check uses only the Python standard library and makes no network calls.
 """
@@ -67,26 +67,51 @@ def main() -> None:
     if any("kaxokaze.github.io/fellows" in url for url in inspector.links):
         fail("A stale GitHub Pages link remains in the landing page")
 
+    support_section = html.split('id="support"', 1)[-1].split("</section>", 1)[0]
+    for obsolete in ("Technical support — in kind, not cash", "Compute &amp; infrastructure",
+                     "Developer tools", "Research guidance", "not asking for money"):
+        if obsolete.lower() in support_section.lower():
+            fail(f"An obsolete support request remains on the site: {obsolete}")
+
     try:
         manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
     except json.JSONDecodeError as exc:
         fail(f"docs/funding.json is invalid JSON: {exc}")
 
-    if manifest.get("projects", [{}])[0].get("licenses") != ["spdx:MIT"]:
-        fail("The support manifest does not identify the project as MIT licensed")
-    contact = manifest.get("nonFinancialSupport", {}).get("contact", {})
-    if contact.get("website") != SITE_URL:
-        fail("The support manifest website does not match the Netlify site")
-    support = manifest.get("nonFinancialSupport", {})
-    if support.get("cashRequested") is not False:
-        fail("The support manifest must explicitly say cashRequested is false")
-    if support.get("financialSponsorshipRequested") is not False:
-        fail("The support manifest must explicitly say financialSponsorshipRequested is false")
+    projects = manifest.get("projects", [])
+    if not projects or projects[0].get("licenses") != ["spdx:MIT"]:
+        fail("The funding manifest does not identify the project as MIT licensed")
+
+    requests = manifest.get("additionalSupportRequests", {})
+    if "nonFinancialSupport" in manifest:
+        fail("The obsolete nonFinancialSupport policy is still present")
+    if requests.get("scope") != "Fellows is seeking only AI model/API credits and financial funding.":
+        fail("The manifest does not state the current API-credit and financial-funding scope")
+    if requests.get("aiApiCredits", {}).get("status") != "actively-seeking":
+        fail("The manifest does not actively request AI API credits")
+    if requests.get("financialFunding", {}).get("status") != "actively-seeking":
+        fail("The manifest does not actively request financial funding")
+    if requests.get("contact", {}).get("website") != SITE_URL:
+        fail("The manifest contact website does not match the Netlify site")
+
+    funding = manifest.get("funding", {})
+    channels = funding.get("channels", [])
+    plans = funding.get("plans", [])
+    if not channels or not plans:
+        fail("The funding manifest must contain at least one channel and one plan")
+    channel_ids = {channel.get("guid") for channel in channels}
+    if "bank-transfer" not in channel_ids:
+        fail("The funding manifest must include the stated bank-transfer contact route")
+    for plan in plans:
+        if plan.get("status") != "active":
+            fail(f"Funding plan is not active: {plan.get('guid', 'unknown')}")
+        if not plan.get("channels") or any(channel_id not in channel_ids for channel_id in plan["channels"]):
+            fail(f"Funding plan references a missing channel: {plan.get('guid', 'unknown')}")
 
     print("PASS: Fellows public-site validation")
     print("- MIT licence and root Code of Conduct exist")
     print("- Netlify attribution, canonical URL, and social URL are correct")
-    print("- Funding manifest is valid and consistently describes non-financial support")
+    print("- Funding manifest requests AI API credits and active financial support plans")
 
 
 if __name__ == "__main__":
