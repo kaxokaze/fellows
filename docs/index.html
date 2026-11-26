@@ -255,6 +255,12 @@
     .docs-list { display: grid; grid-template-columns: repeat(2,1fr); gap: 7px 16px; margin: 7px 0; }
     .docs-list a { display: block; }
     .docs-list span { display: block; color: #697782; font-size: 9px; line-height: 1.4; }
+    .support-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:7px; margin:8px 0; }
+    .support-item { min-width:0; padding:8px 9px; border:1px solid #c5d3df; background:linear-gradient(#fff,#f2f7fb); }
+    .support-item strong { display:block; color:#2c5577; font-size:10px; }
+    .support-item p { margin:4px 0 0; color:#5b6874; font-size:9.5px; line-height:1.45; }
+    .support-foot { display:flex; align-items:center; justify-content:space-between; gap:12px; padding-top:7px; border-top:1px solid #d4dde5; color:#647481; font-size:9.5px; }
+    .support-actions { display:flex; flex-wrap:wrap; gap:6px; flex:0 0 auto; }
     .contact-panel {
       display: grid; grid-template-columns: minmax(0,1fr) auto; align-items: center;
       gap: 18px; margin-top: 12px; padding: 13px 15px;
@@ -292,6 +298,8 @@
       .milestones { grid-template-columns: repeat(3,1fr); }
     }
     @media (max-width: 760px) {
+      .support-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+      .support-foot { align-items:flex-start; flex-direction:column; }
       .masthead { align-items: flex-start; flex-direction: column; gap: 9px; padding: 12px 14px; }
       .brand-logo { width: min(245px,65vw); }
       .tagline { max-width: none; }
@@ -361,6 +369,7 @@
       <a href="#protocol">Protocol</a>
       <a href="#evaluation">Evaluation</a>
       <a href="#roadmap">Roadmap</a>
+      <a href="#support">Technical support</a>
       <a href="#contact">Contact</a>
       <a href="https://github.com/kaxokaze/fellows/issues">Contribute</a>
     </nav>
@@ -376,6 +385,7 @@
             <li><a href="#protocol">Collaboration protocol</a></li>
             <li><a href="#evaluation">Evaluation</a></li>
             <li><a href="#roadmap">Development status</a></li>
+            <li><a href="#support">Technical support</a></li>
             <li><a href="#resources">Documentation</a></li>
             <li><a href="#contact">Contact</a></li>
           </ul>
@@ -577,8 +587,38 @@
             <a href="https://github.com/kaxokaze/fellows/blob/main/ROADMAP.md">Full roadmap ↗</a>
           </section>
 
+          <section class="section-block wide" id="support">
+            <h2><small>07</small> Technical support — in kind, not cash</h2>
+            <p>Fellows is looking for practical technical support to move from research definition toward a small, reproducible prototype. We are <strong>not asking for money, investment, equity, loans or financial sponsorship</strong>.</p>
+            <div class="support-grid">
+              <div class="support-item">
+                <strong>AI models &amp; API access</strong>
+                <p>Limited research access or capped inference quota to test independent agent sessions and comparative baselines.</p>
+              </div>
+              <div class="support-item">
+                <strong>Compute &amp; infrastructure</strong>
+                <p>Scoped GPU, cloud, storage or isolated execution resources for prototype development and repeatable runs.</p>
+              </div>
+              <div class="support-item">
+                <strong>Developer tools</strong>
+                <p>Coding, observability, tracing, testing and evaluation tools to inspect agent activity and system behavior.</p>
+              </div>
+              <div class="support-item">
+                <strong>Research guidance</strong>
+                <p>Architecture reviews, security feedback, failure-mode analysis and evaluation-methodology input.</p>
+              </div>
+            </div>
+            <div class="support-foot">
+              <span>Any support would be scoped to research and used under the provider's terms. No exclusivity or endorsement is implied.</span>
+              <div class="support-actions">
+                <a class="button primary" href="./funding.json">View support request (JSON) ↗</a>
+                <a class="button" href="mailto:okay.fellows@gmail.com?subject=Fellows%20%E2%80%94%20Technical%20support">Discuss technical support</a>
+              </div>
+            </div>
+          </section>
+
           <section class="section-block" id="resources">
-            <h2><small>07</small> Project resources</h2>
+            <h2><small>08</small> Project resources</h2>
             <div class="docs-list">
               <div><a href="https://github.com/kaxokaze/fellows/blob/main/README.md">README</a><span>Project direction and overview.</span></div>
               <div><a href="https://github.com/kaxokaze/fellows/blob/main/docs/architecture/OVERVIEW.md">Architecture</a><span>System boundaries and components.</span></div>
@@ -588,7 +628,7 @@
           </section>
 
           <section class="section-block" id="contribute">
-            <h2><small>08</small> Contribute to the research</h2>
+            <h2><small>09</small> Contribute to the research</h2>
             <p>Useful contributions now: architecture review, protocol critique, failure-mode analysis, security feedback and reproducible evaluation ideas.</p>
             <div style="display:flex;gap:7px;flex-wrap:wrap;margin-top:8px">
               <a class="button primary" href="https://github.com/kaxokaze/fellows/issues">Discuss an issue ↗</a>
