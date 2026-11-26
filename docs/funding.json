@@ -1,0 +1,137 @@
+{
+  "schema_version": "1.0.0",
+  "document_type": "technical_support_request",
+  "last_updated": "2026-11-26",
+  "project": {
+    "name": "Fellows",
+    "tagline": "Independent agents. Shared direction.",
+    "description": "An open-source research project exploring peer-first collaboration between independent AI agents.",
+    "repository": "https://github.com/kaxokaze/fellows",
+    "website": "https://kaxokaze.github.io/fellows/",
+    "license": "MIT",
+    "stage": "design_and_research",
+    "implementation_status": {
+      "architecture": "proposed",
+      "coordination_protocol": "proposed",
+      "runtime": "not_started",
+      "sdk": "not_started",
+      "cli": "not_started",
+      "benchmarks": "not_started"
+    }
+  },
+  "request": {
+    "type": "in_kind_technical_support",
+    "status": "seeking_partners",
+    "summary": "Fellows is seeking practical, non-financial technical support to help research, prototype and evaluate peer-first collaboration between autonomous AI agents.",
+    "cash_requested": false,
+    "financial_sponsorship_requested": false,
+    "investment_requested": false,
+    "equity_offered": false,
+    "loans_requested": false,
+    "statement": "We are not asking for money, investment, equity or financial sponsorship. We are seeking technical resources, product access and expert guidance that can directly support the research and future prototype."
+  },
+  "support_areas": [
+    {
+      "id": "model_and_api_access",
+      "name": "AI model and API access",
+      "support_examples": [
+        "Research or developer access to capable language models",
+        "Capped API credits or inference quota for controlled experiments",
+        "Access to multiple model families for comparative evaluation"
+      ],
+      "intended_use": "Experiment with independent model sessions, agent-to-agent communication and comparable single-agent, orchestrated and peer-first baselines.",
+      "relevant_work": [
+        "M1 — Collaboration kernel",
+        "M4 — Comparative evaluation"
+      ]
+    },
+    {
+      "id": "compute_and_infrastructure",
+      "name": "Compute and infrastructure",
+      "support_examples": [
+        "Limited GPU or cloud compute access",
+        "Development and test environments",
+        "Storage, hosting or isolated execution resources"
+      ],
+      "intended_use": "Support prototype development, controlled agent execution, repeatable test runs and artifact integration.",
+      "relevant_work": [
+        "M1 — Collaboration kernel",
+        "M3 — Controlled execution and integration",
+        "M4 — Comparative evaluation"
+      ]
+    },
+    {
+      "id": "developer_tools",
+      "name": "Developer tools",
+      "support_examples": [
+        "Coding assistants and developer-product access",
+        "Agent tracing, observability and evaluation tools",
+        "Testing, monitoring and workflow tooling"
+      ],
+      "intended_use": "Improve the development workflow and make agent activity, state transitions, failures and evaluation results easier to inspect.",
+      "relevant_work": [
+        "M0 — Research and system definition",
+        "M1 — Collaboration kernel",
+        "M4 — Comparative evaluation"
+      ]
+    },
+    {
+      "id": "technical_guidance",
+      "name": "Technical and research guidance",
+      "support_examples": [
+        "Architecture and protocol reviews",
+        "Research feedback on peer-based agent coordination",
+        "Security, isolation and evaluation methodology feedback",
+        "Introductions to relevant open-source and research communities"
+      ],
+      "intended_use": "Pressure-test the design, identify failure modes and define a small, measurable first prototype before implementation expands.",
+      "relevant_work": [
+        "M0 — Research and system definition"
+      ]
+    }
+  ],
+  "research_scope": {
+    "initial_prototype": "A small team of three independent agents working on one bounded software-engineering task, using shared project state and measurable acceptance criteria.",
+    "planned_comparisons": [
+      "Single-agent baseline",
+      "Conventional orchestrated multi-agent baseline",
+      "Fellows peer-first collaboration approach"
+    ],
+    "proposed_measurements": [
+      "Task success and acceptance-test results",
+      "Wall-clock completion time",
+      "Model and compute cost per accepted result",
+      "Duplicated work and unresolved dependencies",
+      "Merge conflicts and integration failures",
+      "Human interventions and recovery effort"
+    ],
+    "note": "This is a proposed research plan. No benchmark results or performance claims are being made at this stage."
+  },
+  "support_principles": [
+    "Support should be scoped to research, development or evaluation use.",
+    "Any access or credits will be used subject to the provider's terms and limits.",
+    "Project status, limitations and experimental results will be represented accurately.",
+    "Partner attribution or acknowledgment will be discussed and handled according to partner preference and applicable terms.",
+    "No exclusivity, endorsement or product outcome is implied by a support relationship."
+  ],
+  "not_requested": [
+    "Cash donations or cash grants",
+    "Equity investment or venture funding",
+    "Loans or debt financing",
+    "Paid sponsorship"
+  ],
+  "contact": {
+    "email": "okay.fellows@gmail.com",
+    "github_issues": "https://github.com/kaxokaze/fellows/issues",
+    "instagram": "https://www.instagram.com/okay.fellows/",
+    "preferred_channel": "email"
+  },
+  "documentation": {
+    "readme": "https://github.com/kaxokaze/fellows/blob/main/README.md",
+    "roadmap": "https://github.com/kaxokaze/fellows/blob/main/ROADMAP.md",
+    "architecture": "https://github.com/kaxokaze/fellows/blob/main/docs/architecture/OVERVIEW.md",
+    "coordination_protocol": "https://github.com/kaxokaze/fellows/blob/main/docs/architecture/COORDINATION.md",
+    "evaluation_plan": "https://github.com/kaxokaze/fellows/blob/main/docs/evaluation/PLAN.md"
+  },
+  "disclaimer": "This file describes the project's current in-kind technical support interests. It is not a financial prospectus, grant application, investment offer or commitment to deliver a particular product."
+}
