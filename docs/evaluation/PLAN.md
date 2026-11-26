@@ -1,105 +1,89 @@
-# Evaluation Plan
+# Evaluation plan
 
 **Status:** Proposed  
-**Purpose:** Test whether peer-first collaboration improves software-task outcomes enough to justify its coordination overhead.
+**Purpose:** Test whether peer-first collaboration improves software-task outcomes enough to justify its added coordination cost.
 
-Fellows should be evaluated against simpler alternatives. A successful demonstration is not enough to establish that the architecture is useful.
+A working demonstration is not sufficient evidence. Fellows should be compared with simpler alternatives under controlled conditions.
 
 ## 1. Research question
 
-For a bounded software-engineering task, does a peer-first team of independent agents produce a better result, or a better quality/cost trade-off, than a single agent or a conventional orchestrated multi-agent workflow?
+For a bounded software-engineering task, does a peer-first team of independent agents produce a better result—or a better quality-to-cost trade-off—than a single agent or a conventional orchestrated team?
 
 ## 2. Experimental conditions
 
-Run the same task under three conditions:
-
 | Condition | Description |
 | --- | --- |
-| A — Single agent | One model session receives the task and produces the result |
-| B — Orchestrated team | A primary agent decomposes work and delegates to other agents |
-| C — Fellows | Independent agents exchange messages and coordinate through shared project state without a permanent supervisory model |
+| A — Single agent | One model session completes the task |
+| B — Orchestrated team | A primary agent decomposes and delegates the work |
+| C — Fellows | Independent agents communicate directly and coordinate through shared project state |
 
-The comparison should use the same model family and versions where practical. If different models are necessary, record the difference and do not treat the result as a clean architecture-only comparison.
+Use the same model family and versions where practical. If this is not possible, record the differences and avoid attributing the outcome solely to architecture.
 
 ## 3. Task selection
 
-Use small, reproducible software tasks with:
+Choose a small, reproducible software task with:
 
 - a pinned starting repository or fixture;
-- an explicit user request;
+- a clear request and bounded scope;
 - machine-checkable acceptance tests where possible;
-- bounded scope and expected artifacts;
-- a clear definition of completion.
+- separable work and at least one integration dependency;
+- an explicit definition of completion.
 
-Avoid tasks that depend heavily on subjective preference unless an independent review rubric is defined.
-
-The first task should be complex enough to contain separable work and at least one integration dependency, but small enough to inspect manually.
+Avoid tasks that rely mainly on subjective preference unless an independent review rubric is defined.
 
 ## 4. Controls
 
-For each condition, record and keep comparable:
+Keep or record the following for each condition:
 
-- task prompt and repository revision;
+- task prompt and starting revision;
 - model provider, model identifier, and version;
-- system instructions and relevant agent configuration;
+- system instructions and agent configuration;
 - available tools and permissions;
-- maximum token and compute budget;
+- token and spending limits;
 - timeout and retry policy;
 - environment and dependency versions.
 
-Do not compare an unlimited multi-agent run against a constrained single-agent run.
+Do not compare an unlimited multi-agent run with a constrained single-agent run.
 
 ## 5. Measurements
 
-### Outcome quality
+### Result quality
 
 - Acceptance-test pass rate
-- Independent code-review findings
+- Independent review findings
 - Requirement coverage
 - Regression count
 
-### Efficiency
+### Model usage and efficiency
 
-- Wall-clock time
 - Input and output tokens
-- Provider-reported cost
-- Compute time, where available
+- Provider-reported API cost
+- Wall-clock completion time
 - Cost per accepted result
 
 ### Coordination overhead
 
-- Duplicate work
+- Duplicated work
 - Unresolved dependencies
 - Failed or expired claims
-- Merge conflicts
-- Rework after integration
-- Number of agent messages and tool calls
+- Conflicting edits and integration rework
+- Agent messages and tool calls
 
 ### Human effort
 
-- Number of clarifications requested
-- Number of manual interventions
+- Clarifications requested
+- Manual interventions
 - Time spent resolving blockers
-- Number of approval checkpoints
+- Approval checkpoints
 
 ## 6. Reporting
 
-Each evaluation report should include:
+Each report should include the task, starting revision, experimental conditions, model configuration, spending limits, number of runs, raw measurements, acceptance-test output, independent review, failures, deviations, and limitations.
 
-1. Task specification and starting revision
-2. Experimental conditions and model configuration
-3. Resource budgets and environment
-4. Number of runs
-5. Raw measurements or machine-readable results
-6. Acceptance-test output
-7. Independent review summary
-8. Failures and deviations from protocol
-9. Limitations and interpretation
-
-Report unsuccessful runs. Do not remove outliers without a stated, reproducible reason.
+Report unsuccessful runs. Do not remove outliers without a stated and reproducible reason.
 
 ## 7. Decision criteria
 
-The peer-first architecture should be retained only if it demonstrates a measurable benefit for at least one relevant outcome without unacceptable regressions in cost, reliability, or human effort.
+Retain the peer-first approach only if it demonstrates a measurable benefit in at least one relevant outcome without unacceptable regressions in quality, cost, reliability, or human effort.
 
-The first experiment is exploratory. It should establish whether the evaluation method works and identify where coordination breaks down; it should not be used to make broad performance claims.
+The first experiment is exploratory. It should validate the measurement method and expose failure modes; it should not be used to make broad performance claims.
