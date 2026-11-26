@@ -256,7 +256,7 @@
     .docs-list { display: grid; grid-template-columns: repeat(2,1fr); gap: 7px 16px; margin: 7px 0; }
     .docs-list a { display: block; }
     .docs-list span { display: block; color: #697782; font-size: 9px; line-height: 1.4; }
-    .support-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:7px; margin:8px 0; }
+    .support-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:7px; margin:8px 0; }
     .support-item { min-width:0; padding:8px 9px; border:1px solid #c5d3df; background:linear-gradient(#fff,#f2f7fb); }
     .support-item strong { display:block; color:#2c5577; font-size:10px; }
     .support-item p { margin:4px 0 0; color:#5b6874; font-size:9.5px; line-height:1.45; }
@@ -299,7 +299,7 @@
       .milestones { grid-template-columns: repeat(3,1fr); }
     }
     @media (max-width: 760px) {
-      .support-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+      .support-grid { grid-template-columns:1fr; }
       .support-foot { align-items:flex-start; flex-direction:column; }
       .masthead { align-items: flex-start; flex-direction: column; gap: 9px; padding: 12px 14px; }
       .brand-logo { width: min(245px,65vw); }
@@ -370,7 +370,7 @@
       <a href="#protocol">Protocol</a>
       <a href="#evaluation">Evaluation</a>
       <a href="#roadmap">Roadmap</a>
-      <a href="#support">Technical support</a>
+      <a href="#support">Funding</a>
       <a href="#contact">Contact</a>
       <a href="https://github.com/kaxokaze/fellows/issues">Contribute</a>
     </nav>
@@ -386,7 +386,7 @@
             <li><a href="#protocol">Collaboration protocol</a></li>
             <li><a href="#evaluation">Evaluation</a></li>
             <li><a href="#roadmap">Development status</a></li>
-            <li><a href="#support">Technical support</a></li>
+            <li><a href="#support">Funding</a></li>
             <li><a href="#resources">Documentation</a></li>
             <li><a href="#contact">Contact</a></li>
           </ul>
@@ -589,31 +589,23 @@
           </section>
 
           <section class="section-block wide" id="support">
-            <h2><small>07</small> Technical support — in kind, not cash</h2>
-            <p>Fellows is looking for practical technical support to move from research definition toward a small, reproducible prototype. We are <strong>not asking for money, investment, equity, loans or financial sponsorship</strong>.</p>
+            <h2><small>07</small> Funding &amp; AI API credits</h2>
+            <p>Fellows is seeking two forms of support to move from design and research toward its first small, reproducible implementation.</p>
             <div class="support-grid">
               <div class="support-item">
-                <strong>AI models &amp; API access</strong>
-                <p>Limited research access or capped inference quota to test independent agent sessions and comparative baselines.</p>
+                <strong>AI model &amp; API credits</strong>
+                <p>Capped inference credits or API quotas from model providers to develop independent agent sessions and run controlled comparisons.</p>
               </div>
               <div class="support-item">
-                <strong>Compute &amp; infrastructure</strong>
-                <p>Scoped GPU, cloud, storage or isolated execution resources for prototype development and repeatable runs.</p>
-              </div>
-              <div class="support-item">
-                <strong>Developer tools</strong>
-                <p>Coding, observability, tracing, testing and evaluation tools to inspect agent activity and system behavior.</p>
-              </div>
-              <div class="support-item">
-                <strong>Research guidance</strong>
-                <p>Architecture reviews, security feedback, failure-mode analysis and evaluation-methodology input.</p>
+                <strong>Financial funding</strong>
+                <p>Open-source grants, one-time contributions, recurring sponsorships, and suitable investment discussions to support maintainer time, implementation, API usage, and evaluation.</p>
               </div>
             </div>
             <div class="support-foot">
-              <span>Any support would be scoped to research and used under the provider's terms. No exclusivity or endorsement is implied.</span>
+              <span>For grants or sponsorships, bank-transfer details can be shared privately. Potential equity arrangements can be discussed case by case.</span>
               <div class="support-actions">
-                <a class="button primary" href="./funding.json">View support request (JSON) ↗</a>
-                <a class="button" href="mailto:okay.fellows@gmail.com?subject=Fellows%20%E2%80%94%20Technical%20support">Discuss technical support</a>
+                <a class="button primary" href="./funding.json">View funding manifest (JSON) ↗</a>
+                <a class="button" href="mailto:okay.fellows@gmail.com?subject=Fellows%20%E2%80%94%20Funding%20and%20API%20credits">Discuss funding or API credits</a>
               </div>
             </div>
           </section>
@@ -641,7 +633,7 @@
         <section class="contact-panel" id="contact" aria-labelledby="contact-title">
           <div>
             <h2 id="contact-title">Get in touch with Fellows</h2>
-            <p>For technical feedback, collaboration, provider support or project enquiries.</p>
+            <p>For AI API credits, financial funding, investment discussions or project enquiries.</p>
           </div>
           <div class="contact-actions">
             <a class="contact-button" href="mailto:okay.fellows@gmail.com"><span aria-hidden="true">✉</span> okay.fellows@gmail.com</a>
