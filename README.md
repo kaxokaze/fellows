@@ -1,6 +1,6 @@
 # Fellows
 
-**Peer-first collaboration runtime for autonomous AI agents.**
+**An open-source design project exploring peer-first collaboration between independent AI agents.**
 
 Fellows is an open-source project investigating how independent AI agents can reason, coordinate, and deliver work as a team—without making one model the permanent authority over every other agent.
 
