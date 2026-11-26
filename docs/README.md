@@ -13,6 +13,10 @@ This section contains the design material for Fellows. All architecture document
 - [Project landing page](index.html) — static site source deployed on Netlify from the `/docs` directory: https://okay-fellows.netlify.app/.
 - [Distribution notes](launch/DISTRIBUTION.md) — launch copy and suitable channels for the current research stage.
 
+## Funding
+
+- [Funding manifest](funding.json) — current request for AI model/API credits and financial funding through grants, contributions, and sponsorships. Investment discussions, including potential equity arrangements, are handled separately.
+
 ## Evaluation
 
 - [Evaluation plan](evaluation/PLAN.md) — proposed comparison against single-agent and orchestrated multi-agent baselines.
