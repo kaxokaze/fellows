@@ -1,91 +1,89 @@
 # Development Roadmap
 
-This roadmap is organized around evidence and deliverables. A milestone is complete when its exit criteria are met—not when the planned tasks have merely been discussed.
+This roadmap describes the sequence of research and engineering work required to test the Fellows collaboration model. Every milestone is a proposal until its exit criteria are demonstrated.
 
-## M0 — Research and system definition
+## Phase 0 — Research definition
 
-**Objective:** establish what Fellows is trying to prove and what it will not attempt in the first release.
+**Goal:** define a small, falsifiable first experiment.
 
-- [ ] Review relevant peer-based, orchestrated, and shared-workspace agent systems.
-- [ ] Define the first software-engineering task and acceptance criteria.
-- [ ] Finalize the initial project-state model and message envelope.
-- [ ] Define trust boundaries and tool-permission requirements.
-- [ ] Specify single-agent and orchestrated multi-agent baselines.
-- [ ] Set a fixed model and resource budget for comparisons.
+- [ ] Review relevant agent collaboration, orchestration, and shared-workspace systems.
+- [ ] Select a bounded software-engineering task.
+- [ ] Define task requirements and machine-checkable acceptance criteria.
+- [ ] Review the project-state model and message envelope.
+- [ ] Define trust boundaries and user-approval points.
+- [ ] Specify comparable single-agent and orchestrated baselines.
 
-**Exit criteria:** reviewed architecture, protocol proposal, threat boundaries, and repeatable experiment definition.
+**Exit criteria:** an agreed architecture, protocol proposal, threat model, and repeatable experiment specification.
 
-## M1 — Collaboration kernel
+## Phase 1 — Shared state and messaging
 
-**Objective:** demonstrate communication and shared state between a small number of independent agent sessions.
+**Goal:** let independent agent sessions communicate through an inspectable project record.
 
-- [ ] Start and stop independent agent sessions.
-- [ ] Persist typed messages with sender, recipient/scope, timestamp, and correlation metadata.
-- [ ] Maintain a versioned project state.
-- [ ] Record proposals, findings, challenges, and decisions.
-- [ ] Expose an inspectable event history.
-- [ ] Handle retries and duplicate message delivery safely.
+- [ ] Define project, agent, task, message, decision, and artifact records.
+- [ ] Persist typed messages with sender, scope, timestamp, and correlation metadata.
+- [ ] Support direct agent-to-agent and task-scoped communication.
+- [ ] Record proposals, findings, questions, challenges, and decisions.
+- [ ] Detect stale project revisions and duplicate message delivery.
 
-**Exit criteria:** three agents can exchange messages and update a shared project without losing attribution or silently overwriting conflicting state.
+**Exit criteria:** three independent sessions can exchange attributed messages and interact with shared state without silent overwrites.
 
-## M2 — Work coordination
+## Phase 2 — Work negotiation
 
-**Objective:** coordinate bounded work without a permanent supervisory model.
+**Goal:** coordinate bounded tasks without a permanent lead model.
 
-- [ ] Represent work items and dependency relationships.
-- [ ] Support task offers, claims, leases, and completion reports.
-- [ ] Prevent conflicting claims on exclusive work.
-- [ ] Detect blocked tasks and dependency cycles.
-- [ ] Define timeout, retry, and reassignment behavior.
-- [ ] Make disagreement and unresolved decisions visible.
+- [ ] Represent tasks, dependencies, acceptance criteria, and required capabilities.
+- [ ] Support task offers, atomic claims, bounded leases, and completion reports.
+- [ ] Prevent conflicting ownership of exclusive tasks.
+- [ ] Detect blocked work and dependency cycles.
+- [ ] Define timeout, cancellation, retry, and reassignment behavior.
+- [ ] Make disagreements and unresolved decisions visible.
 
-**Exit criteria:** agents can divide a project into bounded tasks, claim work, and recover from a stalled or failed task.
+**Exit criteria:** agents can negotiate ownership and recover from stalled or failed work.
 
-## M3 — Controlled execution and integration
+## Phase 3 — Controlled execution
 
-**Objective:** allow agents to change project artifacts without making the workspace unsafe or unreviewable.
+**Goal:** make agent work attributable and safe to integrate.
 
-- [ ] Define isolated workspace and change-set behavior.
-- [ ] Scope filesystem, shell, network, and provider-tool access.
-- [ ] Track artifact ownership and changed paths.
-- [ ] Detect overlapping changes.
-- [ ] Integrate changes through a controlled path.
-- [ ] Run acceptance and regression checks before completion.
+- [ ] Define scoped tool permissions and approval boundaries.
+- [ ] Track the agent responsible for each action and artifact.
+- [ ] Define isolated or otherwise controlled change sets.
+- [ ] Detect overlapping edits and stale changes.
+- [ ] Integrate changes through an explicit review path.
+- [ ] Run acceptance checks before marking work complete.
 
-**Exit criteria:** a small team can deliver an integrated software change with an auditable record and reproducible checks.
+**Exit criteria:** a small team can deliver a tested change with an auditable history.
 
-## M4 — Comparative evaluation
+## Phase 4 — Comparative evaluation
 
-**Objective:** determine whether the peer-first approach is worth its additional coordination cost.
+**Goal:** determine whether peer-first collaboration offers a useful trade-off.
 
-- [ ] Run the same tasks with a single-agent baseline.
-- [ ] Run the same tasks with a conventional orchestrated baseline.
-- [ ] Run the same tasks with Fellows.
+- [ ] Run the task with a single-agent baseline.
+- [ ] Run the task with a conventional orchestrated team.
+- [ ] Run the task with Fellows.
 - [ ] Keep model versions, prompts, tools, and budgets comparable.
-- [ ] Repeat runs and report variance.
-- [ ] Publish task definitions, configurations, raw measurements, and limitations.
+- [ ] Repeat trials and record variance.
+- [ ] Publish task definitions, configurations, measurements, and limitations.
 
-**Exit criteria:** a reproducible report covering quality, latency, cost, coordination overhead, and human intervention.
+**Exit criteria:** a reproducible report covering outcome quality, latency, model usage, cost, coordination overhead, and human intervention.
 
-## M5 — Developer experience
+## Phase 5 — Developer interface
 
-**Objective:** make the collaboration kernel usable by developers.
+**Goal:** expose the smallest useful interface after the core behavior is validated.
 
-- [ ] Define a stable developer API.
-- [ ] Add provider adapters based on demonstrated requirements.
-- [ ] Add CLI workflows for creating and inspecting projects.
-- [ ] Add local execution and configuration documentation.
+- [ ] Define a stable project and agent API.
+- [ ] Add provider adapters based on measured requirements.
+- [ ] Add a CLI for creating and inspecting projects.
+- [ ] Document configuration and local operation.
 - [ ] Add examples and integration tests.
-- [ ] Document supported environments and limitations.
+- [ ] Publish supported behavior and known limitations.
 
-**Exit criteria:** an external developer can install the project, configure a supported model provider, run the example, and inspect the result.
-
----
+**Exit criteria:** an external developer can configure a supported model provider, run the example, and inspect the resulting project history.
 
 ## Prioritization rules
 
-- Do not add a subsystem until a prototype or evaluation justifies it.
-- Prefer explicit state transitions over hidden model-driven state.
-- Keep provider-specific behavior behind adapters.
-- Treat security, cost, and recovery as runtime requirements.
-- Do not mark a milestone complete without evidence in the repository.
+- Prefer a small testable mechanism over a broad platform feature.
+- Do not add a subsystem without a demonstrated requirement.
+- Keep model-provider behavior behind adapters.
+- Treat privacy, permissions, cost, and recovery as core requirements.
+- Do not claim performance improvements without controlled comparisons.
+- Do not mark a milestone complete without repository evidence.
