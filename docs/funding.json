@@ -73,66 +73,7 @@
       }
     ]
   },
-  "nonFinancialSupport": {
-    "requestType": "in-kind-technical-support",
-    "cashRequested": false,
-    "financialSponsorshipRequested": false,
-    "investmentRequested": false,
-    "equityOffered": false,
-    "summary": "Fellows is not seeking donations, cash grants, investment, loans or equity financing. The project is seeking practical technical support to help move from research definition toward a small, reproducible prototype.",
-    "supportAreas": [
-      {
-        "id": "ai-model-and-api-access",
-        "name": "AI model and API access",
-        "examples": [
-          "Capped research API quotas",
-          "Access to multiple model families for controlled experiments"
-        ],
-        "intendedUse": "Test independent agent sessions and compare peer-first collaboration with single-agent and orchestrated baselines."
-      },
-      {
-        "id": "compute-and-infrastructure",
-        "name": "Compute and infrastructure",
-        "examples": [
-          "Limited GPU or cloud compute",
-          "Storage and isolated execution environments"
-        ],
-        "intendedUse": "Support prototype development, controlled execution and repeatable evaluation runs."
-      },
-      {
-        "id": "developer-tools",
-        "name": "Developer tools",
-        "examples": [
-          "Coding assistants",
-          "Agent tracing, observability, testing and evaluation tools"
-        ],
-        "intendedUse": "Make agent activity, state transitions, failures and evaluation results inspectable."
-      },
-      {
-        "id": "technical-and-research-guidance",
-        "name": "Technical and research guidance",
-        "examples": [
-          "Architecture and protocol reviews",
-          "Security feedback and failure-mode analysis",
-          "Evaluation methodology feedback"
-        ],
-        "intendedUse": "Pressure-test the design and define a small, measurable first prototype."
-      }
-    ],
-    "terms": [
-      "Any access or credits will be scoped to research and used under the provider's terms.",
-      "No exclusivity, endorsement or product outcome is implied by a support relationship.",
-      "Project status and experimental results will be represented accurately."
-    ],
-    "contact": {
-      "email": "okay.fellows@gmail.com",
-      "website": "https://okay-fellows.netlify.app/",
-      "github": "https://github.com/kaxokaze/fellows",
-      "instagram": "https://www.instagram.com/okay.fellows/"
-    },
-    "manifestCompatibilityNote": "The directory validator requires at least one funding channel and plan. The included channel has no payment address and the only plan is inactive; they are compatibility placeholders, not an active request for money."
-  },
-  "disclaimer": "This manifest requests financial grants, contributions, and sponsorships through the listed funding plans. It separately records the project's request for AI model/API credits. No GPU, compute, cloud hosting, storage, infrastructure, developer-tool, or mentorship support is being requested. Investment and potential equity arrangements are open for separate discussion and are not an offer of securities.",
+  "disclaimer": "This manifest records Fellows' current requests for financial grants, contributions, and sponsorships through the standard funding plans, alongside a separate request for AI model/API credits. Investment discussions, including potential equity arrangements, are handled separately and are not an offer of securities.",
   "additionalSupportRequests": {
     "scope": "Fellows is seeking only AI model/API credits and financial funding.",
     "aiApiCredits": {
