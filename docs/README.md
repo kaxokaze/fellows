@@ -10,7 +10,7 @@ This section contains the design material for Fellows. All architecture document
 
 ## Project site and distribution
 
-- [Project landing page](index.html) — static site source deployed on Netlify from the `/docs` directory: https://okay-fellows.netlify.app/.
+- [Project landing page](index.html) — static site source published on GitHub Pages from the `/docs` directory: https://kaxokaze.github.io/fellows/.
 - [Distribution notes](launch/DISTRIBUTION.md) — launch copy and suitable channels for the current research stage.
 
 ## Funding
