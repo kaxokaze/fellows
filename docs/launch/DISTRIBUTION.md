@@ -5,7 +5,7 @@ This is a working distribution plan for the current stage of the project. Fellow
 ## Canonical links
 
 - Repository: https://github.com/kaxokaze/fellows
-- Project page (after GitHub Pages is enabled): https://kaxokaze.github.io/fellows/
+- Project site: https://okay-fellows.netlify.app/
 - Architecture: https://github.com/kaxokaze/fellows/blob/main/docs/architecture/OVERVIEW.md
 - Coordination protocol: https://github.com/kaxokaze/fellows/blob/main/docs/architecture/COORDINATION.md
 - Evaluation plan: https://github.com/kaxokaze/fellows/blob/main/docs/evaluation/PLAN.md
@@ -95,7 +95,7 @@ Repository: https://github.com/kaxokaze/fellows
 
 ## Publishing checklist
 
-- [ ] Enable GitHub Pages from the `main` branch and `/docs` folder.
+- [x] Deploy the project site on Netlify from the `main` branch and `/docs` folder.
 - [ ] Set the GitHub repository description.
 - [ ] Add accurate repository topics.
 - [ ] Upload a custom social preview image (recommended 1280 × 640, under 1 MB).
