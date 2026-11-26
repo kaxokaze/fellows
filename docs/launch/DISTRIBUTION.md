@@ -26,7 +26,7 @@ The idea: independent agents should be able to share project context, talk direc
 
 The hard parts are state consistency, task ownership, conflicts, permissions, and proving the approach is worth its cost.
 
-It's at the design stage. I'm looking for engineers and researchers to critique the architecture and help shape a small, measurable prototype.
+It's at the design stage. I'm looking for AI model/API credits and financial support through open-source grants, project sponsorships, and contributions to help build and evaluate the first prototype. I'm also open to suitable investment discussions, including potential equity arrangements.
 
 https://github.com/kaxokaze/fellows
 
@@ -42,7 +42,7 @@ Fellows explores a peer-first reasoning layer backed by deterministic runtime in
 
 The project is currently at the architecture and research stage. There is no working runtime yet. The next step is a small three-agent software task, evaluated against single-agent and conventional orchestrated baselines.
 
-I'm interested in feedback from people working on agent systems, distributed systems, developer infrastructure, and evaluation.
+I'm currently seeking AI model/API credits and financial support through open-source grants, sponsorships, and contributions. I'm also open to suitable investment discussions, including potential equity arrangements, where appropriate.
 
 Project: https://github.com/kaxokaze/fellows
 
@@ -58,11 +58,7 @@ I don't think "more agents" is a useful goal by itself. Coordination has costs: 
 
 Fellows is a design-stage open-source project. I've published an architecture proposal, a coordination protocol draft, and an evaluation plan. The first prototype is intended to use three agents on one bounded software task and compare the result with a single agent and a conventional orchestrated team.
 
-I'd value feedback on:
-- whether the peer/control-plane boundary is sound;
-- how task claims, decision finalization, and shared state should work;
-- what existing systems or research I should study more closely;
-- which task would make a fair first evaluation.
+For the next step, I'm seeking AI model/API credits for controlled agent experiments and financial support through open-source grants, one-time contributions, or recurring sponsorships. I'm also open to discussing suitable investment and potential equity arrangements separately.
 
 Repository: https://github.com/kaxokaze/fellows
 
