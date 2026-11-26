@@ -6,7 +6,7 @@
     "role": "maintainer",
     "name": "kaxokaze",
     "email": "okay.fellows@gmail.com",
-    "description": "Independent maintainer of Fellows, an open-source research project exploring peer-first collaboration between autonomous AI agents. Fellows is currently in the design and research stage.",
+    "description": "Independent maintainer of Fellows, an MIT-licensed open-source project exploring peer-first collaboration between autonomous AI agents. Fellows is currently in the design and research stage.",
     "webpageUrl": {
       "url": "https://github.com/kaxokaze",
       "wellKnown": "https://github.com/kaxokaze/fellows/blob/main/.well-known/funding-manifest-urls"
@@ -18,7 +18,7 @@
       "name": "Fellows",
       "description": "Fellows is an open-source systems research project exploring peer-first collaboration between independent AI agents. It investigates agent-to-agent communication, task negotiation, shared project state, deterministic coordination, controlled execution and verifiable integration. The project is in the design and research stage. There is no runnable runtime, SDK, CLI or benchmark implementation yet.",
       "webpageUrl": {
-        "url": "https://okay-fellows.netlify.app/",
+        "url": "https://github.com/kaxokaze/fellows",
         "wellKnown": "https://github.com/kaxokaze/fellows/blob/main/.well-known/funding-manifest-urls"
       },
       "repositoryUrl": {
@@ -41,22 +41,35 @@
   "funding": {
     "channels": [
       {
-        "guid": "no-payment-channel",
-        "type": "other",
-        "address": "",
-        "description": "Inactive schema placeholder only. No payment address is configured. Fellows is not requesting or accepting monetary contributions; contact is for in-kind technical support discussions only."
+        "guid": "bank-transfer",
+        "type": "bank",
+        "description": "Bank-transfer details for grants, sponsorships, or project contributions are available on request. Contact okay.fellows@gmail.com."
       }
     ],
     "plans": [
       {
-        "guid": "no-financial-plan",
-        "status": "inactive",
-        "name": "No financial funding requested",
-        "description": "Inactive compatibility placeholder required by the FLOSS/Fund directory validator. This is not an active funding plan, donation request or payment offer. Fellows seeks only non-financial technical support described in nonFinancialSupport.",
+        "guid": "one-time-project-funding",
+        "status": "active",
+        "name": "One-time project grant or contribution",
+        "description": "Flexible one-time financial support for Fellows. Funding would support maintainer time, the initial runtime implementation, AI model/API usage, controlled comparative evaluation, and release preparation. Contact okay.fellows@gmail.com for bank-transfer details.",
         "amount": 0,
-        "currency": "USD",
-        "frequency": "other",
-        "channels": []
+        "currency": "INR",
+        "frequency": "one-time",
+        "channels": [
+          "bank-transfer"
+        ]
+      },
+      {
+        "guid": "monthly-project-sponsorship",
+        "status": "active",
+        "name": "Monthly project sponsorship",
+        "description": "Flexible recurring financial sponsorship to support continued Fellows development, maintainer time, model API usage, and evaluation. Contact okay.fellows@gmail.com for bank-transfer details.",
+        "amount": 0,
+        "currency": "INR",
+        "frequency": "monthly",
+        "channels": [
+          "bank-transfer"
+        ]
       }
     ]
   },
@@ -119,5 +132,38 @@
     },
     "manifestCompatibilityNote": "The directory validator requires at least one funding channel and plan. The included channel has no payment address and the only plan is inactive; they are compatibility placeholders, not an active request for money."
   },
-  "disclaimer": "This manifest describes the project's current in-kind technical support interests. No monetary payment channel or financial funding plan is being requested. The nonFinancialSupport field is a project-specific extension; funding.json v1.1.0 standard fields remain available for financial funding metadata if the project's policy changes."
+  "disclaimer": "This manifest requests financial grants, contributions, and sponsorships through the listed funding plans. It separately records the project's request for AI model/API credits. No GPU, compute, cloud hosting, storage, infrastructure, developer-tool, or mentorship support is being requested. Investment and potential equity arrangements are open for separate discussion and are not an offer of securities.",
+  "additionalSupportRequests": {
+    "scope": "Fellows is seeking only AI model/API credits and financial funding.",
+    "aiApiCredits": {
+      "status": "actively-seeking",
+      "type": "in-kind",
+      "description": "Capped AI model/API credits or developer/research API quotas from model providers.",
+      "intendedUse": [
+        "Develop and test independent agent sessions for the first prototype",
+        "Compare peer-first collaboration with single-agent and conventional orchestrated baselines",
+        "Measure model usage, quality, latency, and cost in controlled experiments"
+      ]
+    },
+    "financialFunding": {
+      "status": "actively-seeking",
+      "forms": [
+        "Open-source project grants",
+        "One-time financial contributions",
+        "Recurring project sponsorships"
+      ],
+      "intendedUse": [
+        "Maintainer time and initial runtime implementation",
+        "AI model/API usage for development and evaluation",
+        "Controlled comparative evaluation and release preparation"
+      ],
+      "investmentDiscussions": "Open to suitable investment discussions, including potential equity arrangements, on a case-by-case basis. This manifest does not set investment terms or make a specific equity offer."
+    },
+    "contact": {
+      "email": "okay.fellows@gmail.com",
+      "website": "https://okay-fellows.netlify.app/",
+      "github": "https://github.com/kaxokaze/fellows",
+      "instagram": "https://www.instagram.com/okay.fellows/"
+    }
+  }
 }
