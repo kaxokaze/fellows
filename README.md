@@ -117,8 +117,6 @@ Fellows is seeking only two forms of support:
 
 Bank-transfer details for grants or sponsorships are available on request by emailing [okay.fellows@gmail.com](mailto:okay.fellows@gmail.com). No payment details or funding target are published yet.
 
-Fellows is **not requesting GPUs, compute, cloud hosting, storage, infrastructure, developer-tool licenses, or mentorship**.
-
 See the [funding and API credits manifest](docs/funding.json) for the machine-readable request and contact details.
 
 ## License
